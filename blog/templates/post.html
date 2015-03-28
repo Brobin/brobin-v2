@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="content">
+        <div class="row">
+             <div class="col-sm-3-4">
+                <h2>{{ post.title }}</h2>
+                {{ post.created  }}
+                <hr>
+                {{ post.content | safe }}
+                <hr>
+            </div>
+            {% include "partials/blog_menu.html" %}
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

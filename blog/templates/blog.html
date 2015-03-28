@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <div class="content">
+
+        <div class="col-sm-3-4">
+            {% for post in posts %}
+                <h4>{% include 'partials/link_post.html' %}</h4>
+                <span>{{ post.created  }}</span>
+                <p>{{ post.preview | safe }}</p>
+                <hr>
+            {% endfor %}
+            <br>
+            <center>
+                <div class="pagination">
+                    <span class="step-links">
+                        {% if posts.has_previous %}
+                            <a href="?page={{ posts.previous_page_number }}">previous</a>
+                        {% endif %}
+
+                        <span class="current">
+                            Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
+                        </span>
+
+                        {% if posts.has_next %}
+                            <a href="?page={{ posts.next_page_number }}">next</a>
+                        {% endif %}
+                    </span>
+                </div>
+            </center>
+        </div>
+        {% include "partials/blog_menu.html" %}
+
+    </div>
+</div>
+
+{% endblock %}

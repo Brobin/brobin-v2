@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="content">
+        <div class="row">
+            <div class="col-sm-3-4">
+                <h1>Page Not Found</h1>
+                {% load staticfiles %}
+                <img src="{% static 'images/404.jpg' %}">
+            </div>
+            {% include 'partials/blog_menu.html' %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

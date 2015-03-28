@@ -1,0 +1,4 @@
+
+{% with post.created as x %}
+<a href="/blog/{{ x.year }}/{{x.month}}/{{ post.slug }}">{{ post.title }}</a>
+{% endwith %}

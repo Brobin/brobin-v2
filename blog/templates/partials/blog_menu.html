@@ -1,0 +1,14 @@
+
+<div class="col-sm-1-4">
+    <h2>Tags</h2>
+    <p>
+    {% for tag in tags %}
+        {% include 'partials/link_tag.html' %},
+    {% endfor %}
+    </p>
+    <hr>
+    <h2>Recent</h2>
+    {% for post in recent %}
+        <p>{% include 'partials/link_post.html' %}</p>
+    {% endfor %}
+</div>

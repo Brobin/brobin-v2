@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 from taggit.managers import TaggableManager
-import re
+from django.utils.html import strip_tags
 
 
 class Post(models.Model):
@@ -23,12 +23,15 @@ class Post(models.Model):
 
     def preview(self):
         try:
-            preview = re.findall('<p>(.*?)<\/p>', self.content)[0][:600]
+            preview = strip_tags(self.content)[:400]
         except:
             preview = ''
-        if len(preview) == 600:
-            preview += '...'
-        return preview
+        return preview + '...'
+    preview.short_description = 'content'
+
+    def get_date(self):
+        return self.created
+    get_date.short_description = 'date'
 
 class Page(models.Model):
     title = models.CharField(max_length=128)

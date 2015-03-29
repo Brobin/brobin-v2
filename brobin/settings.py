@@ -25,6 +25,7 @@ TEMPLATE_DEBUG = LOCAL_TEMPLATE_DEBUG
 ALLOWED_HOSTS = LOCAL_ALLOWED_HOSTS
 
 INSTALLED_APPS = (
+    'flat',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

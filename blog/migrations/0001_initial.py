@@ -15,16 +15,33 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
+            name='Page',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', auto_created=True, primary_key=True, serialize=False)),
+                ('title', models.CharField(max_length=128)),
+                ('slug', models.SlugField(blank=True, max_length=128, default='')),
+                ('created', models.DateTimeField(auto_now_add=True)),
+                ('updated', models.DateTimeField(auto_now=True)),
+                ('content', models.TextField()),
+                ('script', models.TextField(blank=True, default='')),
+                ('style', models.TextField(blank=True, default='')),
+                ('author', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
+            ],
+            options={
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
             name='Post',
             fields=[
-                ('id', models.AutoField(primary_key=True, verbose_name='ID', serialize=False, auto_created=True)),
-                ('title', models.CharField(max_length=64)),
-                ('slug', models.SlugField(default='', blank=True)),
+                ('id', models.AutoField(verbose_name='ID', auto_created=True, primary_key=True, serialize=False)),
+                ('title', models.CharField(max_length=128)),
+                ('slug', models.SlugField(blank=True, max_length=128, default='')),
                 ('created', models.DateTimeField(auto_now_add=True)),
                 ('updated', models.DateTimeField(auto_now=True)),
                 ('content', models.TextField()),
                 ('author', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
-                ('tags', taggit.managers.TaggableManager(help_text='A comma-separated list of tags.', verbose_name='Tags', to='taggit.Tag', through='taggit.TaggedItem')),
+                ('tags', taggit.managers.TaggableManager(through='taggit.TaggedItem', verbose_name='Tags', help_text='A comma-separated list of tags.', to='taggit.Tag')),
             ],
             options={
             },

@@ -33,9 +33,9 @@ class Post(models.Model):
         return self.created
     get_date.short_description = 'date'
 
-    def get_absolute_url(self):
-        return '/blog/{0}/{1}/{2}/{3}'.format(self.created.year,
-                self.created.month, self.created.day, self.slug)
+    @property
+    def url(self):
+        return '<a href="/blog/{0}/{1}/{2}/{3}">{4}</a>'.format(self.created.year, self.created.month, self.created.day, self.slug, self.title)
 
 
 class Page(models.Model):
@@ -51,5 +51,6 @@ class Page(models.Model):
     def __str__(self):
         return self.title
 
-    def get_absolute_url(self):
+    @property
+    def url(self):
         return '/{0}'.format(self.slug)

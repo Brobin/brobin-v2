@@ -44,7 +44,10 @@ def blog_post(request, slug):
                   'tags': all_tags(), 'recent': recent()})
 
 def all_tags():
-    return Tag.objects.all()
+    tags = Tag.objects.all()
+    tags = ['<a href="/blog/tag/{0}">{1}</a>'.format(t.slug, t) for t in tags]
+    return ', '.join(tags)
+        
 
 def recent():
     return Post.objects.all().order_by('-created')[:5]

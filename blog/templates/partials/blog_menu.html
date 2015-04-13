@@ -2,13 +2,11 @@
 <div class="col-sm-1-4">
     <h2>Tags</h2>
     <p>
-    {% for tag in tags %}
-        {% include 'partials/link_tag.html' %},
-    {% endfor %}
+    {{ tags | safe }}
     </p>
     <hr>
     <h2>Recent</h2>
     {% for post in recent %}
-        <p>{% include 'partials/link_post.html' %}</p>
+        <p>{{ post.url | safe }}</p>
     {% endfor %}
 </div>

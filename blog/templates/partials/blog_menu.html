@@ -7,6 +7,6 @@
     <hr>
     <h2>Recent</h2>
     {% for post in recent %}
-        <p>{{ post.url | safe }}</p>
+        <p>{{ post.html_url | safe }}</p>
     {% endfor %}
 </div>

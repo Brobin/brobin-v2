@@ -35,7 +35,11 @@ class Post(models.Model):
 
     @property
     def url(self):
-        return '<a href="/blog/{0}/{1}/{2}/{3}">{4}</a>'.format(self.created.year, self.created.month, self.created.day, self.slug, self.title)
+        return '/blog/{0}/{1}/{2}/{3}'.format(self.created.year,  self.created.month,self.created.day, self.slug)
+
+    @property
+    def html_url(self):
+        return '<a href="{0}>{1}</a>'.format(self.url, self.title)
 
 
 class Page(models.Model):

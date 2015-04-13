@@ -9,7 +9,7 @@
 
         <div class="col-sm-3-4">
             {% for post in posts %}
-                <h4><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h4>
+                <h4><a href="{{ post.url }}">{{ post.title }}</a></h4>
                 <span>{{ post.created  }}</span>
                 <p>{{ post.preview | safe }}</p>
                 <hr>

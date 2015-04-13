@@ -41,6 +41,9 @@ class Post(models.Model):
     def html_url(self):
         return '<a href="{0}">{1}</a>'.format(self.url, self.title)
 
+    def get_absolute_url(self):
+        return self.url
+
 
 class Page(models.Model):
     title = models.CharField(max_length=128)
@@ -58,3 +61,6 @@ class Page(models.Model):
     @property
     def url(self):
         return '/{0}'.format(self.slug)
+
+    def get_absolute_url(self):
+        return self.url

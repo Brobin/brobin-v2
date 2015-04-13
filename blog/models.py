@@ -39,7 +39,7 @@ class Post(models.Model):
 
     @property
     def html_url(self):
-        return '<a href="{0}>{1}</a>'.format(self.url, self.title)
+        return '<a href="{0}">{1}</a>'.format(self.url, self.title)
 
 
 class Page(models.Model):

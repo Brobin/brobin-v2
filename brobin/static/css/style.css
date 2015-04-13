@@ -173,6 +173,11 @@ a:hover {
     margin-top: 15px;
     margin-bottom: 15px;
 }
+hr {
+    border: none;
+    height: 1px;
+    background-color: #777; /* Modern Browsers */
+}
 
 
 pre {

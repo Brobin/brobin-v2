@@ -8,16 +8,11 @@
 <div class="container">
 
     <div class="content">
-        <div class="row">
-             <div class="col-sm-3-4">
-                <h2>{{ post.title }}</h2>
-                {{ post.created  }}
-                <br>
-                {{ post.content | safe }}
-                <br>
-            </div>
-            {% include "partials/blog_menu.html" %}
-        </div>
+        <h2>{{ post.title }}</h2>
+        {{ post.created  }}
+        <br>
+        {{ post.content | safe }}
+        <br>
     </div>
 
 </div>

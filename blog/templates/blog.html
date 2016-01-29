@@ -1,40 +1,45 @@
 {% extends "base.html" %}
 
-{% block title %}Blog | Brobin{% endblock %}
+{% block title %}Blog{% endblock %}
 
 {% block content %}
 
-<div class="container">
-    <div class="content">
+<div class="row">
 
-        <div class="col-sm-1-1">
-            {% for post in posts %}
-                <div class="post">
-                    <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
-                    <span>{{ post.created  }}</span>
-                    <p>{{ post.preview | safe }}</p>
-                </div>
-            {% endfor %}
-            <br>
-            <center>
-                <div class="pagination">
-                    <span class="step-links">
-                        {% if posts.has_previous %}
-                            <a href="?page={{ posts.previous_page_number }}">previous</a>
-                        {% endif %}
+    <div class="col-sm-9">
+        {% for post in posts %}
+            <div class="post">
+                <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
+                <span>{{ post.created  }}</span>
+                <p>{{ post.preview | safe }}</p>
+            </div>
+        {% endfor %}
+        <br>
+        <center>
+            <ul class="pagination">
+                {% if posts.has_previous %}
+                    <li><a href="?page={{posts.previous_page_number}}">&laquo;</a></li>
+                {% else %}
+                    <li class="disabled"><a href="">&laquo;</a></li>
+                {% endif %}
 
-                        <span class="current">
-                            Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
-                        </span>
+                {% for i in posts.paginator.page_range %}
+                    <li {% if posts.number == i %} class="active" {% endif %}><a href="?page={{i}}">{{i}}</a></li>
+                {% endfor %}
 
-                        {% if posts.has_next %}
-                            <a href="?page={{ posts.next_page_number }}">next</a>
-                        {% endif %}
-                    </span>
-                </div>
-            </center>
-        </div>
+                {% if posts.has_next %}
+                    <li><a href="?page={{posts.next_page_number}}">&raquo;</a></li>
+                {% else %}
+                    <li class="disabled"><a href="#">&raquo;</a></li>
+                {% endif %}
+            </ul>
+        </center>
     </div>
+
+    <div class="col-sm-3">
+        {% include "_sidebar.html" %}
+    </div>
+
 </div>
 
 {% endblock %}

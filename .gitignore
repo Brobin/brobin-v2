@@ -7,3 +7,4 @@ deploy_settings.py
 initial_data.json
 data.json
 brobin/static/images
+*/fixtures/*.json

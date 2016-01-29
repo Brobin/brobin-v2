@@ -1,26 +1,6 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.shortcuts import render
-from blog.models import Post, Page
-from taggit.models import Tag
-
-
-def home(request):
-    return page(request, 'home')
-
-
-def page(request, slug):
-    try:
-        page = Page.objects.get(slug=slug)
-        return render(request, 'page.html', {'page': page, 
-                      'tags': all_tags(), 'recent': recent()})
-    except:
-        return not_found(request)
-
-
-def not_found(request):
-    page = Page.objects.get(slug='404')
-    return render(request, 'page.html', {'page': page, 
-                 'tags': all_tags(), 'recent': recent()})
+from django.shortcuts import render, get_object_or_404
+from blog.models import Category, Post
 
 
 def blog(request):
@@ -28,8 +8,10 @@ def blog(request):
     return paginate_posts(posts, request)
 
 
-def blog_tag(request, tag):
-    posts = Post.objects.filter(tags__slug__in=[tag]).order_by('-created')
+def category(request, slug):
+    category = get_object_or_404(Category, slug=slug)
+    categories = category.get_children()
+    posts = Post.objects.filter(category__in=categories).order_by('-created')
     return paginate_posts(posts, request)
 
 
@@ -42,21 +24,17 @@ def paginate_posts(posts, request):
         posts = paginator.page(1)
     except EmptyPage:
         posts = paginator.page(paginator.num_pages)
-    return render(request, 'blog.html', {'posts': posts,
-                  'tags': all_tags(), 'recent': recent()})
+    return render_with_sidebar(request, 'blog.html', {'posts': posts})
 
 
 def blog_post(request, slug):
-    post = Post.objects.get(slug=slug)
-    return render(request, 'post.html', {'post': post,
-                  'tags': all_tags(), 'recent': recent()})
+    post = get_object_or_404(Post, slug=slug)
+    return render_with_sidebar(request, 'post.html', {'post': post})
 
 
-def all_tags():
-    tags = Tag.objects.all()
-    tags = ['<a href="/blog/tag/{0}">{1}</a>'.format(t.slug, t) for t in tags]
-    return ', '.join(tags)
-
-
-def recent():
-    return Post.objects.all().order_by('-created')[:5]
+def render_with_sidebar(request, template, content):
+    categories = Category.objects.all()
+    recent = Post.objects.order_by('-created')[:5]
+    content['categories'] = categories
+    content['recent'] = recent
+    return render(request, template, content)

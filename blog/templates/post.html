@@ -1,20 +1,21 @@
 {% extends "base.html" %}
 
-{% block title %}{{ post.title}} | Brobin{% endblock %}
+{% block title %}{{ post.title}}{% endblock %}
 
 
 {% block content %}
 
-<div class="container">
-
-    <div class="content">
+<div class="row">
+    <div class="col-sm-9">
         <h2>{{ post.title }}</h2>
         {{ post.created  }}
-        <br>
+        <hr/>
         {{ post.content | safe }}
-        <br>
+        <br/>
     </div>
-
+    <div class="col-sm-3">
+        {% include "_sidebar.html" %}
+    </div>
 </div>
 
 {% endblock %}

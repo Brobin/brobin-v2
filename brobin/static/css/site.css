@@ -2,16 +2,14 @@ html {
     position: relative;
     min-height: 100%;
 }
-body {
-    margin-bottom: 60px;
-}
-.footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-}
 .container {
     max-width: 900px;
+}
+footer {
+    margin-top:10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #042029;
 }
 img {
     max-width: 100%;

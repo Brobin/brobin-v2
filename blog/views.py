@@ -24,17 +24,9 @@ def paginate_posts(posts, request):
         posts = paginator.page(1)
     except EmptyPage:
         posts = paginator.page(paginator.num_pages)
-    return render_with_sidebar(request, 'blog.html', {'posts': posts})
+    return render(request, 'blog.html', {'posts': posts})
 
 
 def blog_post(request, slug):
     post = get_object_or_404(Post, slug=slug)
-    return render_with_sidebar(request, 'post.html', {'post': post})
-
-
-def render_with_sidebar(request, template, content):
-    categories = Category.objects.all()
-    recent = Post.objects.order_by('-created')[:5]
-    content['categories'] = categories
-    content['recent'] = recent
-    return render(request, template, content)
+    return render(request, 'post.html', {'post': post})

@@ -1,16 +1,9 @@
 <div class="row">
+   {% load blog_tags %}
     <div class="col-sm-12 col-xs-6">
-        <h2>Categories</h2>
-        {% for cat in categories %}
-            <a href="{{cat.url}}">{{cat.title}}</a>
-            <br/>
-        {% endfor %}
+        {% blog_categories %}
     </div>
     <div class="col-sm-12 col-xs-6">
-        <h2>Recent Posts</h2>
-        {% for post in recent %}
-            <a href="{{post.url}}">{{post.title}}</a>
-            <br/>
-        {% endfor %}
+       {% recent_posts %}
     </div>
 </div>

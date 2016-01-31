@@ -42,6 +42,9 @@ class Post(models.Model):
     author = models.ForeignKey(User)
     category = models.ForeignKey(Category)
 
+    def __str__(self):
+        return self.title
+
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
         super().save(*args, **kwargs)

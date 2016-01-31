@@ -12,4 +12,4 @@ def recent_posts():
 
 @register.inclusion_tag('tags/_blog_categories.html')
 def blog_categories():
-    return {'categories': Category.objects.all()}    
+    return {'categories': Category.objects.all()}

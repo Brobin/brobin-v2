@@ -1,9 +1,9 @@
 from django.contrib.flatpages.models import FlatPage
 from django.contrib.sitemaps import Sitemap
-from blog.models import Post
+from blog.models import Post, Category
 
 
-class BlogSitemap(Sitemap):
+class BlogPostSitemap(Sitemap):
     changefreq = "never"
     priority = 0.5
 
@@ -12,6 +12,14 @@ class BlogSitemap(Sitemap):
 
     def lastmod(self, obj):
         return obj.created
+
+
+class BlogCategorySitemap(Sitemap):
+    changefreq = "never"
+    priority = 0.5
+
+    def items(self):
+        return Category.objects.all()
 
 
 class PageSitemap(Sitemap):

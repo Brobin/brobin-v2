@@ -8,7 +8,7 @@ class BaseMenuItem(models.Model):
     base_url = models.CharField(max_length=100, blank=True, null=True)
     login_required = models.BooleanField(default=False)
     anonymous_only = models.BooleanField(default=False)
-    order = models.IntegerField(default=10)
+    order = models.PositiveIntegerField(default=10)
 
     class Meta:
         abstract = True

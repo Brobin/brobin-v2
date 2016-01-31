@@ -19,7 +19,7 @@ class NavigationTestCase(TestCase):
 
     def test_correct_ordering(self):
         blog = MenuItem.objects.get(title='Blog')
-        order = 0
+        order = -1
         for item in blog.sub_menu_items:
             self.assertTrue(item.order > order)
             order = item.order

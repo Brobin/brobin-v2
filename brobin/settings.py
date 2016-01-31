@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     'django.contrib.redirects',
     'blog',
+    'navigation',
 ]
 
 MIDDLEWARE_CLASSES = [

@@ -28,11 +28,9 @@
                 <a class="navbar-brand" href="/"><span id="brand-name">Brobin</span></a>
             </div>
 
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/blog" class="large-text">Blog</a></li>
-                    <li><a href="/projects" class="large-text">Projects</a></li>
-                </ul> 
+            <div class="collapse navbar-collapse"  id="bs-example-navbar-collapse-1">
+                {% load navigation %}
+                {% build_navigation %}
             </div>
         </div>
     </nav>

@@ -30,8 +30,12 @@ class MenuItem(BaseMenuItem):
         return self.submenuitem_set.all().order_by('order')
 
     @property
+    def num_sub_menu_items(self):
+        return len(self.sub_menu_items)
+
+    @property
     def has_sub_items(self):
-        return len(self.sub_menu_items) > 0
+        return self.num_sub_menu_items > 0
 
 
 class SubMenuItem(BaseMenuItem):

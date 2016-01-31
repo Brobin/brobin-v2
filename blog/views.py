@@ -24,9 +24,9 @@ def paginate_posts(posts, request):
         posts = paginator.page(1)
     except EmptyPage:
         posts = paginator.page(paginator.num_pages)
-    return render(request, 'blog.html', {'posts': posts})
+    return render(request, 'blog/blog.html', {'posts': posts})
 
 
 def blog_post(request, slug):
     post = get_object_or_404(Post, slug=slug)
-    return render(request, 'post.html', {'post': post})
+    return render(request, 'blog/post.html', {'post': post})

@@ -5,7 +5,7 @@ from navigation.models import MenuItem, SubMenuItem
 register = template.Library()
 
 
-@register.inclusion_tag('navigation.html', takes_context=True)
+@register.inclusion_tag('navigation/tags/navigation.html', takes_context=True)
 def build_navigation(context):
     request = context['request']
     items = MenuItem.objects.all()

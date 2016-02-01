@@ -18,5 +18,5 @@ def blog_categories():
 @register.inclusion_tag('blog/tags/_blog_archive.html')
 def blog_archive():
     years = [p.created.year for p in Post.objects.all()]
-    years = set(years)
+    years = sorted(set(years))
     return {'years': years}

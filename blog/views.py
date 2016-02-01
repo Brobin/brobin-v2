@@ -1,4 +1,5 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
 from blog.models import Category, Post
 
@@ -22,7 +23,17 @@ def category(request, slug):
     return paginate_posts(posts, request)
 
 
-def paginate_posts(posts, request):
+def search(request):
+    query = request.GET.get('q')
+    posts = Post.objects.filter(
+        Q(content__icontains=query) | 
+        Q(title__icontains=query)
+    )
+    posts = posts.order_by('-created')
+    return paginate_posts(posts, request, query)
+
+
+def paginate_posts(posts, request, search=None):
     paginator = Paginator(posts, 10)
     page = request.GET.get('page')
     try:
@@ -31,7 +42,8 @@ def paginate_posts(posts, request):
         posts = paginator.page(1)
     except EmptyPage:
         posts = paginator.page(paginator.num_pages)
-    return render(request, 'blog/blog.html', {'posts': posts})
+    payload = {'posts': posts, 'search': search}
+    return render(request, 'blog/blog.html', payload)
 
 
 def blog_post(request, slug):

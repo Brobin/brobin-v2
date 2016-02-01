@@ -4,6 +4,10 @@
 
 {% block content %}
 
+{% if search %}
+<h2>Seach Results for "{{search}}"</h2>
+{% endif %}
+
 {% for post in posts %}
     <div class="post">
         <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>

@@ -7,7 +7,7 @@ class BlogPostSitemap(Sitemap):
     priority = 0.5
 
     def items(self):
-        return Post.objects.all()
+        return Post.visible_posts.all()
 
     def lastmod(self, obj):
         return obj.created

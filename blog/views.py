@@ -25,10 +25,13 @@ def category(request, slug):
 
 def search(request):
     query = request.GET.get('q')
-    posts = Post.objects.filter(
-        Q(content__icontains=query) | 
-        Q(title__icontains=query)
-    )
+    if query:
+        posts = Post.objects.filter(
+            Q(content__icontains=query) | 
+            Q(title__icontains=query)
+        )
+    else:
+        posts = Post.objects.all()
     posts = posts.order_by('-created')
     return paginate_posts(posts, request, query)
 

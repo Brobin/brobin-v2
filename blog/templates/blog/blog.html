@@ -25,7 +25,9 @@
         {% endif %}
 
         {% for i in posts.paginator.page_range %}
-            <li {% if posts.number == i %} class="active" {% endif %}><a href="?page={{i}}">{{i}}</a></li>
+            <li {% if posts.number == i %} class="active" {% endif %}>
+                <a href="?page={{i}}{% if search %}&q={{search}}{% endif %}">{{i}}</a>
+            </li>
         {% endfor %}
 
         {% if posts.has_next %}

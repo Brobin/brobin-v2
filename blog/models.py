@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 from django.utils.html import strip_tags
+from blog.managers import PostManager, VisiblePostManager
 
 
 class Category(models.Model):
@@ -38,9 +39,13 @@ class Post(models.Model):
     slug = models.SlugField(default='', blank=True, max_length=128)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    visible = models.BooleanField(default=True)
     content = models.TextField()
     author = models.ForeignKey(User)
     category = models.ForeignKey(Category)
+
+    objects = PostManager()
+    visible_posts = VisiblePostManager()
 
     def __str__(self):
         return self.title

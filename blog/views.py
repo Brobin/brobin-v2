@@ -2,37 +2,35 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
 from blog.models import Category, Post
+from blog.managers import PostManager
 
 
 def blog(request):
-    posts = Post.objects.all().order_by('-created')
+    posts = Post.visible_posts.all()
     return paginate_posts(posts, request)
 
 
 def archive(request, year):
-    posts = Post.objects.filter(created__year=year)
-    posts = posts.order_by('-created')
+    posts = Post.visible_posts.filter(created__year=year)
     return paginate_posts(posts, request)
 
 
 def category(request, slug):
     category = get_object_or_404(Category, slug=slug)
     categories = category.get_children()
-    posts = Post.objects.filter(category__in=categories)
-    posts = posts.order_by('-created')
+    posts = Post.visible_posts.filter(category__in=categories)
     return paginate_posts(posts, request)
 
 
 def search(request):
     query = request.GET.get('q')
     if query:
-        posts = Post.objects.filter(
+        posts = Post.visible_posts.filter(
             Q(content__icontains=query) | 
             Q(title__icontains=query)
         )
     else:
-        posts = Post.objects.all()
-    posts = posts.order_by('-created')
+        posts = Post.visible_posts.all()
     return paginate_posts(posts, request, query)
 
 

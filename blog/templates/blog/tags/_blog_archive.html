@@ -1,5 +1,6 @@
 <h2>Archive</h2>
-{% for year in years %}
-    <a href="/blog/archive/{{year}}">{{year}}</a>
+{% regroup posts by created.year as archives %}
+{% for archive in archives %}
+    <a href="/blog/archive/{{archive.grouper}}">{{archive.grouper}} <span class="badge">{{archive.list|length}}</span></a>
     <br/>
 {% endfor %}

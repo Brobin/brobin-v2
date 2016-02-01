@@ -25,3 +25,7 @@ img {
 .navbar-default {
     background-color: #042029;
 }
+
+.badge {
+    border-radius: 50%;
+}

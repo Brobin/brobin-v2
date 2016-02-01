@@ -8,10 +8,17 @@ def blog(request):
     return paginate_posts(posts, request)
 
 
+def archive(request, year):
+    posts = Post.objects.filter(created__year=year)
+    posts = posts.order_by('-created')
+    return paginate_posts(posts, request)
+
+
 def category(request, slug):
     category = get_object_or_404(Category, slug=slug)
     categories = category.get_children()
-    posts = Post.objects.filter(category__in=categories).order_by('-created')
+    posts = Post.objects.filter(category__in=categories)
+    posts = posts.order_by('-created')
     return paginate_posts(posts, request)
 
 

@@ -37,7 +37,24 @@
     {% endblock %}
     </div>
 
-    <footer class="footer">
+    <footer class="footer-primary">
+        <div class="container">
+            <div class="row">
+               {% load blog_tags %}
+                <div class="col-sm-4 col-xs-6">
+                   {% blog_recent %}
+                </div>
+                <div class="col-sm-4 col-xs-6">
+                    {% blog_categories %}
+                </div>
+                <div class="col-sm-4 col-xs-6">
+                   {% blog_archive %}
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <footer class="footer-secondary">
         <div class="container text-center">
             {% load staticfiles %}
             <a href="//www.facebook.com/tobinjbrown" target="_blank" title="Tobin on Facebook">

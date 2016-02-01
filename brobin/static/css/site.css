@@ -2,15 +2,26 @@ html {
     position: relative;
     min-height: 100%;
 }
+
 .container {
-    max-width: 900px;
+    max-width: 800px;
 }
-footer {
-    margin-top:10px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    background-color: #042029;
-}
+
 img {
     max-width: 100%;
+}
+
+.footer-primary {
+    background-color: #042029;
+    padding-bottom: 10px;
+}
+
+.footer-secondary {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #020E12;
+}
+
+.navbar-default {
+    background-color: #042029;
 }

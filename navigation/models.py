@@ -1,11 +1,13 @@
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
+from urllib.parse import urljoin
 
 
 class BaseMenuItem(models.Model):
     title = models.CharField(max_length=32)
     link = models.CharField(max_length=64)
     base_url = models.CharField(max_length=100, blank=True, null=True)
+    new_tab = models.BooleanField(default=False)
     login_required = models.BooleanField(default=False)
     anonymous_only = models.BooleanField(default=False)
     order = models.PositiveIntegerField(default=10)
@@ -16,7 +18,7 @@ class BaseMenuItem(models.Model):
     @property
     def url(self):
         if self.base_url:
-            return self.base_url + self.link
+            return urljoin(self.base_url, self.link)
         return self.link
 
 

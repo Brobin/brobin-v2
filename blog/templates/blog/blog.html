@@ -11,7 +11,7 @@
 {% for post in posts %}
     <div class="post">
         <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
-        <span>{{ post.created  }}</span>
+        <span>{{ post.created | date  }}</span>
         <p>{{ post.preview | safe }}</p>
     </div>
 {% endfor %}

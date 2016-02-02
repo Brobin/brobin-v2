@@ -7,7 +7,7 @@ register = template.Library()
 
 @register.inclusion_tag('blog/tags/_blog_recent.html')
 def blog_recent():
-    return {'recent': Post.visible_psots.order_by('-created')[:5]}
+    return {'recent': Post.visible_posts.order_by('-created')[:5]}
 
 
 @register.inclusion_tag('blog/tags/_blog_categories.html')

@@ -29,3 +29,15 @@ img {
 .badge {
     border-radius: 50%;
 }
+
+.content {
+    font-size: 12pt;
+}
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
+    background-color: #91a0a2;
+    color: #020E12;
+}
+
+.badge {
+    color: #042029;
+}

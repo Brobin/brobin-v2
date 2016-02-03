@@ -3,7 +3,7 @@ from django.contrib.flatpages import views
 from django.contrib.sitemaps.views import sitemap
 from django.conf.urls import url, include
 from django.contrib import admin
-from blog.sitemap import BlogPostSitemap, BlogCategorySitemap
+from blog.sitemaps import BlogPostSitemap, BlogCategorySitemap
 
 
 sitemaps = {

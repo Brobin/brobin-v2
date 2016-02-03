@@ -41,3 +41,8 @@ img {
 .badge {
     color: #042029;
 }
+
+.code {
+    background-color: #042029;
+    font-family: monospace;
+}

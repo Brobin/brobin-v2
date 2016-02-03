@@ -46,3 +46,9 @@ img {
     background-color: #042029;
     font-family: monospace;
 }
+
+pre {
+    overflow: auto;
+    word-wrap: normal;
+    white-space: pre;
+}

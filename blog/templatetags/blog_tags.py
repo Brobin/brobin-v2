@@ -12,7 +12,7 @@ def blog_recent():
 
 @register.inclusion_tag('blog/tags/_blog_categories.html')
 def blog_categories():
-    return {'categories': Category.objects.all()}
+    return {'categories': Category.objects.order_by('title')}
 
 
 @register.inclusion_tag('blog/tags/_blog_archive.html')

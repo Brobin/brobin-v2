@@ -9,7 +9,10 @@ https://docs.djangoproject.com/en/1.9/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.9/ref/settings/
 """
-from brobin.local_settings import *
+try:
+    from brobin.local_settings import *
+except:
+    from brobin.test_settings import *
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)

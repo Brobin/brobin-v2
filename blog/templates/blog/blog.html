@@ -5,7 +5,7 @@
 {% block content %}
 
 {% if search %}
-<h2>Seach Results for "{{search}}"</h2>
+<h2>Seach Results for "{{ search }}"</h2>
 {% endif %}
 
 {% for post in posts %}
@@ -19,19 +19,19 @@
 <center>
     <ul class="pagination">
         {% if posts.has_previous %}
-            <li><a href="?page={{posts.previous_page_number}}">&laquo;</a></li>
+            <li><a href="?page={{ posts.previous_page_number }}">&laquo;</a></li>
         {% else %}
             <li class="disabled"><a href="">&laquo;</a></li>
         {% endif %}
 
         {% for i in posts.paginator.page_range %}
             <li {% if posts.number == i %} class="active" {% endif %}>
-                <a href="?page={{i}}{% if search %}&q={{search}}{% endif %}">{{i}}</a>
+                <a href="?page={{ i }}{% if search %}&q={{ search }{% endif %}">{{ i }}</a>
             </li>
         {% endfor %}
 
         {% if posts.has_next %}
-            <li><a href="?page={{posts.next_page_number}}">&raquo;</a></li>
+            <li><a href="?page={{ posts.next_page_number }}">&raquo;</a></li>
         {% else %}
             <li class="disabled"><a href="#">&raquo;</a></li>
         {% endif %}

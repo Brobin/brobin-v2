@@ -26,7 +26,7 @@ def search(request):
     query = request.GET.get('q')
     if query:
         posts = Post.visible_posts.filter(
-            Q(content__icontains=query) | 
+            Q(content__icontains=query) |
             Q(title__icontains=query)
         )
     else:

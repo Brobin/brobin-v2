@@ -7,11 +7,26 @@ class NavigationTestCase(TestCase):
     def setUp(self):
         MenuItem.objects.create(title='Projects', link='/projects', order=2)
         MenuItem.objects.create(title='Admin', link='/admin', order=3)
-        blog_menu = MenuItem.objects.create(title='Blog', link='/blog', order=1)
+        blog_menu = MenuItem.objects.create(title='Blog', link='/', order=1)
 
-        SubMenuItem.objects.create(title='Something1', link='/blog/something1', order=1, menu=blog_menu)
-        SubMenuItem.objects.create(title='Something2', link='/blog/something2', order=2, menu=blog_menu)
-        SubMenuItem.objects.create(title='Something3', link='/blog/something3', order=3, menu=blog_menu)
+        SubMenuItem.objects.create(
+            title='Something1',
+            link='/blog/something1',
+            order=1,
+            menu=blog_menu
+        )
+        SubMenuItem.objects.create(
+            title='Something2',
+            link='/blog/something2',
+            order=2,
+            menu=blog_menu
+        )
+        SubMenuItem.objects.create(
+            title='Something3',
+            link='/blog/something3',
+            order=3,
+            menu=blog_menu
+        )
 
     def test_sub_menu_items(self):
         blog = MenuItem.objects.get(title='Blog')

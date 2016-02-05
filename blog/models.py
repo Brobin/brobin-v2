@@ -68,7 +68,11 @@ class Post(models.Model):
 
     @property
     def url(self):
-        return '/blog/{0}/{1:02d}/{2}/'.format(self.created.year, self.created.month, self.slug)
+        return '/blog/{0}/{1:02d}/{2}/'.format(
+            self.created.year,
+            self.created.month,
+            self.slug
+        )
 
     def get_absolute_url(self):
         return self.url

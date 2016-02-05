@@ -1,16 +1,20 @@
-import sys, os
+from django.core.wsgi import get_wsgi_application
+import sys
+import os
+
+
 cwd = os.getcwd()
 sys.path.append(cwd)
 sys.path.append(cwd + '/brobin')
 
-INTERP = os.path.expanduser("~/venv/bin/python")
+INTERP = os.path.expanduser("~/brobin.me/venv/bin/python")
 
-if sys.executable != INTERP: os.execl(INTERP, INTERP, *sys.argv)
+if sys.executable != INTERP:
+    os.execl(INTERP, INTERP, *sys.argv)
 
-sys.path.insert(0,'$HOME/venv/bin')
-sys.path.insert(0,'$HOME/venv/lib/python3.4/site-packages/django')
-sys.path.insert(0,'$HOME/venv/lib/python3.4/site-packages')
+sys.path.insert(0, '$HOME/brobin.me/venv/bin')
+sys.path.insert(0, '$HOME/brobin.me/venv/lib/python3.4/site-packages/django')
+sys.path.insert(0, '$HOME/brobin.me/venv/lib/python3.4/site-packages')
 
 os.environ['DJANGO_SETTINGS_MODULE'] = "brobin.settings"
-from django.core.wsgi import get_wsgi_application
 application = get_wsgi_application()

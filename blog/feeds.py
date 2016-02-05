@@ -15,7 +15,7 @@ class BlogPostRssFeed(Feed):
         return item.title
 
     def item_description(self, item):
-        return item.preview().replace('\r\n',' ')
+        return item.preview().replace('\r\n', ' ')
 
 
 class BlogPostAtomFeed(BlogPostRssFeed):

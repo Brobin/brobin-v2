@@ -19,18 +19,6 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = LOCAL_SECRET_KEY
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = LOCAL_DEBUG
-
-ALLOWED_HOSTS = LOCAL_ALLOWED_HOSTS
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -85,12 +73,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'brobin.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/1.9/ref/settings/#databases
-
-DATABASES = LOCAL_DATABASES
-
-
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
 
@@ -122,16 +104,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.9/howto/static-files/
-
-STATIC_URL = LOCAL_STATIC_URL
-
-STATIC_ROOT = LOCAL_STATIC_ROOT
-
-STATICFILES_DIRS = LOCAL_STATICFILES_DIRS
 
 SITE_ID = 1
 

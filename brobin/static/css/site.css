@@ -52,3 +52,6 @@ pre {
     word-wrap: normal;
     white-space: pre;
 }
+p {
+    margin: 15px 0 15px 0;
+}

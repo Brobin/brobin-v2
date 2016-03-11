@@ -3,6 +3,7 @@ from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from datetime import date, datetime
+from blog.feeds import BlogPostRssFeed
 from blog.models import Category, Post
 
 
@@ -29,6 +30,11 @@ class BlogTestCase(TestCase):
         post = Post.objects.get(title='test')
         queryset = Post.visible_posts.all()
         self.assertTrue(post not in queryset)
+
+    def test_blog_feed(self):
+        feed = BlogPostRssFeed()
+        items = feed.items()
+        self.assertTrue( len(items) <= 20)
 
 
 class BlogRequestTestCase(TestCase):
@@ -63,5 +69,15 @@ class BlogRequestTestCase(TestCase):
 
     def test_blog_search(self):
         url = reverse('blog_search')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+
+    def test_blog_search_query(self):
+        url = reverse('blog_search') + '?q=test'
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+
+    def test_blog_invalid_page(self):
+        url = reverse('blog_index') + '?page=69'
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)

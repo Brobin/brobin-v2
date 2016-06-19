@@ -1,5 +1,5 @@
 import pygal
-from pygal.style import DarkSolarizedStyle
+from pygal.style import DarkStyle as Style
 
 from .models import Day, Year
 
@@ -15,16 +15,16 @@ def _year_compare_data():
 
 
 def year_compare_bar():
-    chart = pygal.Bar(style=DarkSolarizedStyle)
-    chart.x_labels = [x[0] for x in Day.DAYS]
+    chart = pygal.Bar(style=Style)
+    chart.x_labels = [x[1] for x in Day.DAYS]
     for year, datum in _year_compare_data():
         chart.add(year, datum)
     return chart.render(is_unicode=True)
 
 
 def year_compare_punchcard():
-    chart = pygal.Dot(style=DarkSolarizedStyle)
-    chart.x_labels = [x[0] for x in Day.DAYS]
+    chart = pygal.Dot(style=Style)
+    chart.x_labels = [x[1] for x in Day.DAYS]
     for year, datum in _year_compare_data():
         chart.add(year, datum)
     return chart.render(is_unicode=True)
@@ -35,7 +35,7 @@ def daily_species_chart(year, chart_type="Dot"):
         "Dot": pygal.Dot,
         "Pie": pygal.Pie,
         "StackedBar": pygal.StackedBar,
-    }[chart_type](style=DarkSolarizedStyle)
+    }[chart_type](style=Style)
     chart.x_labels = [x[0] for x in Day.DAYS]
     bass, crappie, northern, walleye = [], [], [], []
     for day in year.days.order_by("day"):
@@ -51,7 +51,7 @@ def daily_species_chart(year, chart_type="Dot"):
 
 
 def year_size_scatter(year):
-    chart = pygal.XY(stroke=False, style=DarkSolarizedStyle)
+    chart = pygal.XY(stroke=False, style=Style)
     chart.x_label = ["Weight (pounds)"]
     chart.y_label = ["Length (inches)"]
     chart.add("Bass", year.bass)

@@ -55,6 +55,15 @@ pre {
 p {
     margin: 15px 0 15px 0;
 }
+
+/** Fish graph styles **/
 .chart-caption {
     margin-bottom: 50px;
+}
+.background {
+    fill: #042029 !important;
+}
+text {
+    font-family:'Helvetica Neue',Helvetica,Arial !important;
+    font-size: 10pt !important;
 }

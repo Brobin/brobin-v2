@@ -16,6 +16,7 @@ sitemaps = {
 urlpatterns = [
     url(r'^$', views.flatpage, {'url': '/'}),
     url(r'^blog/', include('blog.urls')),
+    url(r'^fishing/', include('fishing.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps},
         name='django.contrib.sitemaps.views.sitemap'),

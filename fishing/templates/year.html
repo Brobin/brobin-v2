@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}{{ year.year }} Fishing{% endblock %}
+
+{% block content %}
+{% load staticfiles %}
+<div class="row">
+    <div class="col-sm-6">
+        <figure type="image/svg+xml">
+            {{ punchcard | safe }}
+        </figure>
+        <div class="content">
+            <span><b>Figure 1.1</b>: Species of fish caught all week.</span>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <figure type="image/svg+xml">
+            {{ chart | safe }}
+        </figure>
+        <div class="content">
+            <span><b>Figure 2.1</b>: Length and Weight of the largest fish caught all week. Each species followed a rough line that represents the length/weight ratio for that species.</span>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

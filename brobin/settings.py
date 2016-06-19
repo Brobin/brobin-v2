@@ -34,7 +34,7 @@ INSTALLED_APPS = [
     'django.contrib.redirects',
     'blog',
     'navigation',
-    'django_nose',
+    'fishing',
 ]
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'

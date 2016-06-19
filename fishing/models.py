@@ -53,9 +53,13 @@ class Day(models.Model):
     def __str__(self):
         return "{0} {1}".format(self.day, self.year)
 
+    @property
+    def total(self):
+        return self.bass + self.crappie + self.northern + self.walleye
+
 
 class Year(models.Model):
-    year = models.IntegerField()
+    year = models.IntegerField(unique=True, db_index=True)
 
     def __str__(self):
         return str(self.year)
@@ -71,3 +75,15 @@ class Year(models.Model):
     @property
     def big_walleye(self):
         return self.big_fish.filter(species=BigFish.WALLEYE)
+
+    @property
+    def bass(self):
+        return [(n.weight, n.length) for n in self.big_bass]
+
+    @property
+    def northern(self):
+        return [(n.weight, n.length) for n in self.big_northern]
+
+    @property
+    def walleye(self):
+        return [(n.weight, n.length) for n in self.big_walleye]

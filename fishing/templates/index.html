@@ -4,4 +4,23 @@
 
 {% block content %}
 
+<div class="row">
+    <div class="col-sm-10 col-sm-offset-1">
+        <figure type="image/svg+xml">
+            {{ bar | safe }}
+        </figure>
+        <div class="chart-caption">
+            <span><b>Figure 1.1</b>: Toal fish caugh each day.</span>
+        </div>
+    </div>
+    <div class="col-sm-10 col-sm-offset-1">
+        <figure type="image/svg+xml">
+            {{ punchcard | safe }}
+        </figure>
+        <div class="chart-caption">
+            <span><b>Figure 1.1</b>: Frequency of fish caight each year on each day</span>
+        </div>
+    </div>
+</div>
+
 {% endblock %}

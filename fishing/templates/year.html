@@ -5,19 +5,35 @@
 {% block content %}
 {% load staticfiles %}
 <div class="row">
-    <div class="col-sm-6">
+    <div class="col-sm-10 col-sm-offset-1">
+        <figure type="image/svg+xml">
+            {{ pie | safe }}
+        </figure>
+        <div class="chart-caption">
+            <span><b>Figure 1.1</b>: Pie chart of species of fish caught all week.</span>
+        </div>
+    </div>
+    <div class="col-sm-10 col-sm-offset-1">
+        <figure type="image/svg+xml">
+            {{ bar | safe }}
+        </figure>
+        <div class="chart-caption">
+            <span><b>Figure 1.1</b>: Total fish caught each day. Each color represents a different species of fish.</span>
+        </div>
+    </div>
+    <div class="col-sm-10 col-sm-offset-1">
         <figure type="image/svg+xml">
             {{ punchcard | safe }}
         </figure>
-        <div class="content">
+        <div class="chart-caption">
             <span><b>Figure 1.1</b>: Species of fish caught all week.</span>
         </div>
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-10 col-sm-offset-1">
         <figure type="image/svg+xml">
-            {{ chart | safe }}
+            {{ scatter | safe }}
         </figure>
-        <div class="content">
+        <div class="chart-caption">
             <span><b>Figure 2.1</b>: Length and Weight of the largest fish caught all week. Each species followed a rough line that represents the length/weight ratio for that species.</span>
         </div>
     </div>

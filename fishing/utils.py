@@ -1,7 +1,10 @@
 import pygal
 from pygal.style import DarkStyle as Style
 
-from .models import Day, Year
+from .models import BigFish, Day, Year
+
+
+DAY_LABELS = [x[1] for x in Day.DAYS]
 
 
 def _year_compare_data():
@@ -16,7 +19,7 @@ def _year_compare_data():
 
 def year_compare_bar():
     chart = pygal.Bar(style=Style)
-    chart.x_labels = [x[1] for x in Day.DAYS]
+    chart.x_labels = DAY_LABELS
     for year, datum in _year_compare_data():
         chart.add(year, datum)
     return chart.render(is_unicode=True)
@@ -24,7 +27,7 @@ def year_compare_bar():
 
 def year_compare_punchcard():
     chart = pygal.Dot(style=Style)
-    chart.x_labels = [x[1] for x in Day.DAYS]
+    chart.x_labels = DAY_LABELS
     for year, datum in _year_compare_data():
         chart.add(year, datum)
     return chart.render(is_unicode=True)
@@ -36,7 +39,7 @@ def daily_species_chart(year, chart_type="Dot"):
         "Pie": pygal.Pie,
         "StackedBar": pygal.StackedBar,
     }[chart_type](style=Style)
-    chart.x_labels = [x[0] for x in Day.DAYS]
+    chart.x_labels = DAY_LABELS
     bass, crappie, northern, walleye = [], [], [], []
     for day in year.days.order_by("day"):
         bass.append(day.bass)
@@ -57,4 +60,15 @@ def year_size_scatter(year):
     chart.add("Bass", year.bass)
     chart.add("Northern", year.northern)
     chart.add("Walleye", year.walleye)
+    return chart.render(is_unicode=True)
+
+
+def all_years_scatter():
+    fish = BigFish.objects.all()
+    chart = pygal.XY(stroke=False, style=Style)
+    chart.x_label = ["Weight (pounds)"]
+    chart.y_label = ["Length (inches)"]
+    chart.add("Bass", [f.stats for f in BigFish.objects.filter(species=BigFish.BASS)])
+    chart.add("Northern", [f.stats for f in BigFish.objects.filter(species=BigFish.NORTHERN)])
+    chart.add("Walleye", [f.stats for f in BigFish.objects.filter(species=BigFish.WALLEYE)])
     return chart.render(is_unicode=True)

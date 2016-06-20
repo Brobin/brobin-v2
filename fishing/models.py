@@ -17,6 +17,10 @@ class BigFish(models.Model):
     length = models.FloatField()
     weight = models.FloatField()
 
+    @property
+    def stats(self):
+        return (self.length, self.weight)
+
     def __str__(self):
         string = "{0}lb. {1}\" {2}"
         species = self.SPECIES[self.species - 1][1]
@@ -78,12 +82,12 @@ class Year(models.Model):
 
     @property
     def bass(self):
-        return [(n.weight, n.length) for n in self.big_bass]
+        return [n.stats for n in self.big_bass]
 
     @property
     def northern(self):
-        return [(n.weight, n.length) for n in self.big_northern]
+        return [n.stats for n in self.big_northern]
 
     @property
     def walleye(self):
-        return [(n.weight, n.length) for n in self.big_walleye]
+        return [n.stats for n in self.big_walleye]

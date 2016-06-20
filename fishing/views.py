@@ -7,6 +7,7 @@ from .utils import *
 def index(request):
     bar = year_compare_bar()
     punchcard = year_compare_punchcard()
+    scatter = all_years_scatter()
     return render(request, "index.html", locals())
 
 

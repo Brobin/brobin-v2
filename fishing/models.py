@@ -27,7 +27,8 @@ class BigFish(models.Model):
         return string.format(self.weight, self.length, species)
 
     class Meta:
-        verbose_name_plural = "Big fish"
+        verbose_name = "Fish"
+        verbose_name_plural = "Fish"
 
 
 class Day(models.Model):

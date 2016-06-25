@@ -4,8 +4,12 @@
 
 {% block content %}
 
+{% load fishing %}
+<h2 class="text-center">{{ year.year }} Brown Family Fishing Trip</h2>
+{% fishing_year_buttons %}
+
 <div class="row">
-    <div class="col-sm-10 col-sm-offset-1">
+    <div class="col-sm-12">
         <figure type="image/svg+xml">
             {{ bar | safe }}
         </figure>
@@ -13,7 +17,7 @@
             <span><b>Figure 1.1</b>: Total fish caugh each day.</span>
         </div>
     </div>
-    <div class="col-sm-10 col-sm-offset-1">
+    <div class="col-sm-12">
         <figure type="image/svg+xml">
             {{ punchcard | safe }}
         </figure>
@@ -21,7 +25,7 @@
             <span><b>Figure 1.2</b>: Frequency of fish caught each year on each day</span>
         </div>
     </div>
-    <div class="col-sm-10 col-sm-offset-1">
+    <div class="col-sm-12">
         <figure type="image/svg+xml">
             {{ scatter | safe }}
         </figure>

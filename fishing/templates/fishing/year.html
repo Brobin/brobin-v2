@@ -3,9 +3,14 @@
 {% block title %}{{ year.year }} Fishing{% endblock %}
 
 {% block content %}
+
+{% load fishing %}
+<h2 class="text-center">{{ year.year }} Brown Family Fishing Trip</h2>
+{% fishing_year_buttons %}
+
 {% load staticfiles %}
 <div class="row">
-    <div class="col-sm-10 col-sm-offset-1">
+    <div class="col-sm-12">
         <figure type="image/svg+xml">
             {{ pie | safe }}
         </figure>
@@ -13,7 +18,7 @@
             <span><b>Figure 1.1</b>: Pie chart of species of fish caught all week.</span>
         </div>
     </div>
-    <div class="col-sm-10 col-sm-offset-1">
+    <div class="col-sm-12">
         <figure type="image/svg+xml">
             {{ bar | safe }}
         </figure>
@@ -21,7 +26,7 @@
             <span><b>Figure 1.1</b>: Total fish caught each day. Each color represents a different species of fish.</span>
         </div>
     </div>
-    <div class="col-sm-10 col-sm-offset-1">
+    <div class="col-sm-12">
         <figure type="image/svg+xml">
             {{ punchcard | safe }}
         </figure>
@@ -29,7 +34,7 @@
             <span><b>Figure 1.1</b>: Species of fish caught all week.</span>
         </div>
     </div>
-    <div class="col-sm-10 col-sm-offset-1">
+    <div class="col-sm-12">
         <figure type="image/svg+xml">
             {{ scatter | safe }}
         </figure>

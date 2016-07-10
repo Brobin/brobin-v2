@@ -7,9 +7,15 @@
     <meta name="google-site-verification" content="0UeIbuWxCWdOcvFokfLXxuDlNDJ2vhaz_FIXU-Xg6pQ" />
     <title>{% block title %}{% endblock %} | Brobin</title>
     {% load staticfiles %}
-    <link rel="stylesheet" href="{% static "css/bootstrap.css" %}"/>
-    <link rel="stylesheet" href="{% static "css/site.css" %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/site.css' %}"/>
     <link href="https://fonts.googleapis.com/css?family=Droid+Sans|Droid+Sans+Mono" rel="stylesheet">
+    <link href='//cdn.jsdelivr.net/devicons/1.8.0/css/devicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"/>
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"/>
+    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.js"></script>
 </head>
 <body>
 
@@ -38,6 +44,59 @@
             </div>
         </div>
     </nav>
+    {% if request.path == '/' %}
+    <img src="{% static 'img/brobin.jpg' %}" style="width:100%;margin-top:-20px">
+    <div class="skills-container" style="background-color:#042029;">
+        <div class="container" style="padding: 10px 40px 10px 40px;">
+            <style>
+            #skills {
+                font-size: 6em;
+            }
+            </style>
+            <div id="skills">
+                <span class="devicons devicons-python"></span>
+                <span class="devicons devicons-django"></span>
+                <span class="devicons devicons-jquery"></span>
+                <span class="devicons devicons-sass"></span>
+                <span class="devicons devicons-mysql"></span>
+                <span class="devicons devicons-javascript"></span>
+                <span class="devicons devicons-php"></span>
+                <span class="devicons devicons-linux"></span>
+                <span class="devicons devicons-dotnet"></span>
+                <span class="devicons devicons-magento"></span>
+            </div>
+            <script>
+            $('#skills').slick({
+                dots: false,
+                infinite: true,
+                speed: 300,
+                slidesToShow: 7,
+                slidesToScroll: 2,
+                responsive: [
+                    {
+                    breakpoint: 1024,
+                        settings: {
+                        slidesToShow: 5
+                        }
+                    },
+                    {
+                    breakpoint: 600,
+                        settings: {
+                        slidesToShow: 4
+                        }
+                    },
+                    {
+                    breakpoint: 480,
+                        settings: {
+                        slidesToShow: 3
+                        }
+                    }
+                ]
+                });
+            </script>
+        </div>
+    </div>
+    {% endif %}
 
     <div class="container content">
     {% block content %}

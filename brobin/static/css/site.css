@@ -75,3 +75,17 @@ text {
     font-family:'Droid Sans', sans-serif !important;
     font-size: 10pt !important;
 }
+
+/** Skills carousel styles **/
+.slick-slide:focus {
+    outline: none;
+}
+#skills {
+    font-size: 6em;
+}
+.skills-container {
+    background-color:#042029;
+}
+.skills-container > .container {
+    padding: 10px 40px 10px 40px;
+}

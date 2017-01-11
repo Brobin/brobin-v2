@@ -66,10 +66,19 @@ img {
   background-color: $dark-blue;
   border-color: $dark-blue;
   border-radius: 0;
+  .navbar-collapse, .navbar-form {
+    border-color: $dark-blue;
+  }
   .navbar-brand {
     color: $text;
     &:hover {
       color: $text-hover;
+    }
+  }
+  .navbar-toggle {
+    border-color: $darker-blue;
+    &:hover {
+      background-color: $blue;
     }
   }
   .navbar-nav {

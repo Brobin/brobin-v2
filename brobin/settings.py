@@ -32,6 +32,9 @@ INSTALLED_APPS = [
     'django.contrib.flatpages',
     'django.contrib.sitemaps',
     'django.contrib.redirects',
+
+    'compressor',
+
     'blog',
     'navigation',
     'fishing',
@@ -116,3 +119,17 @@ USE_TZ = True
 SITE_ID = 1
 
 DATE_FORMAT = "F j, Y"
+
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
+]
+
+COMPRESS_PRECOMPILERS = (
+    ('text/x-scss', 'django_libsass.SassCompiler'),
+)
+
+LIBSASS_OUTPUT_STYLE = 'compressed'
+
+LIBSASS_SOURCE_COMMENTS = False

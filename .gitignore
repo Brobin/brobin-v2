@@ -10,4 +10,5 @@ data.json
 brobin/static/img
 */fixtures/*.json
 deploy
+static/CACHE
 .coverage

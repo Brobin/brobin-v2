@@ -6,13 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="google-site-verification" content="0UeIbuWxCWdOcvFokfLXxuDlNDJ2vhaz_FIXU-Xg6pQ" />
     <title>{% block title %}{% endblock %} | Brobin</title>
-    {% load staticfiles %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}"/>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/site.css' %}"/>
     <link href="https://fonts.googleapis.com/css?family=Droid+Sans|Droid+Sans+Mono" rel="stylesheet">
     <link href='//cdn.jsdelivr.net/devicons/1.8.0/css/devicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"/>
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"/>
+    {% load compress staticfiles %}
+    {% compress css %}
+    <link rel="stylesheet" type="text/x-scss" href="{% static 'css/site.scss' %}"/>
+    {% endcompress %}
 </head>
 <body>
 
@@ -118,7 +119,6 @@
     <script src="{% static "js/pygal.min.js" %}"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/prettify/r298/run_prettify.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.js"></script>
-    <link rel="stylesheet" href="{% static "css/prettyprint.css" %}"/>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

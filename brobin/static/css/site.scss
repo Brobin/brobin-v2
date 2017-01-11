@@ -1,0 +1,207 @@
+@import 'bootstrap';
+@import 'prettyprint';
+
+
+/** Variables **/
+$font: "Droid Sans", sans-serif;
+$font-code: "Droid Sans Mono", monospace;
+
+$text: #839496;
+$text-hover: lighten($text, 5%);
+
+$blue: #002b36;
+$dark-blue: #042029;
+$darker-blue: #020E12;
+
+$turquoise: #2aa198;
+
+$link: #428bca;
+$link-hover: #2a6496;
+
+
+/** Page styles **/
+html, body {
+  font-family: $font;
+  background: $blue;
+  color: $text;
+}
+
+.container {
+  max-width: 800px;
+}
+
+
+/** Common Element Styles **/
+p {
+  font-size: 12pt;
+  margin: 15px 0 15px 0;
+}
+
+pre, code {
+  font-family: $font-code;
+  background-color: $dark-blue;
+  overflow: auto;
+  word-wrap: normal;
+  white-space: pre;
+}
+
+hr {
+  border-color: $text;
+}
+
+a {
+  color: $link;
+  &:hover {
+    color: $link-hover;
+  }
+}
+
+img {
+    max-width: 100%;
+}
+
+
+/** Navbar Styles **/
+.navbar-default {
+  background-color: $dark-blue;
+  border-color: $dark-blue;
+  border-radius: 0;
+  .navbar-brand {
+    color: $text;
+    &:hover {
+      color: $text-hover;
+    }
+  }
+  .navbar-nav {
+    li {
+      .dropdown-menu {
+        background-color: $darker-blue;
+        li > a:hover {
+          color: lighten($text, 35%);
+        }
+      }
+      a:hover {
+        color: $text-hover;
+      }
+    }
+    .open  {
+      a, a:hover, a:focus, a:active {
+        background-color: $darker-blue;
+        color: $text-hover;
+      }
+    }
+  }
+}
+
+
+/** Footer Styles **/
+.footer-primary {
+  background: $dark-blue;
+  padding-bottom: 10px;
+}
+
+.footer-secondary {
+  background: $darker-blue;
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+
+.badge {
+  background-color: $darker-blue;
+  color: $text;
+}
+
+#social-links {
+  a:hover {
+    text-decoration: none;
+  }
+}
+
+
+/** Pagination Styles **/
+.pagination {
+  li {
+    a {
+      border-color: $darker-blue;
+      background-color: $darker-blue;
+      color: $link-hover;
+      &:hover, &:focus, &:active {
+        background-color: $dark-blue;
+        border-color: $dark-blue;
+        color: $link;
+      }
+    }
+  }
+  .active {
+    a {
+      background-color: $link;
+      color: $darker-blue;
+      &:hover {
+        color: $dark-blue;
+      }
+    }
+  }
+  .disabled {
+    a {
+      background-color: $dark-blue;
+      border-color: $darker-blue;
+      &:hover {
+        background-color: $dark-blue;
+        border-color: $darker-blue;
+      }
+    }
+  }
+}
+
+
+/** Form and Button Styles **/
+input.form-control{
+  background-color: $blue;
+  border-color: $darker-blue;
+  color: $text;
+}
+
+.btn-default {
+  background-color: $blue;
+  border-color: $darker-blue;
+  color: $text;
+  &:hover, &:active, &:focus, .active {
+    background-color: $darker-blue;
+    border-color: $darker-blue;
+    color: $text;
+  }
+}
+
+
+/** Fish graph styles **/
+.chart-caption {
+  margin-bottom: 50px;
+}
+
+.background {
+  fill: $dark-blue !important;
+}
+
+text {
+  font-family: $font !important;
+  font-size: 10pt !important;
+}
+
+
+/** Skills carousel styles **/
+.slick-slide:focus {
+  outline: none;
+}
+
+#skills {
+  font-size: 6em;
+}
+
+.skills-container {
+  background-color: $dark-blue;
+}
+
+.skills-container > .container {
+  padding: 10px 40px 10px 40px;
+}
+

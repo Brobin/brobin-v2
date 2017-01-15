@@ -174,7 +174,12 @@ input.form-control{
   background-color: $blue;
   border-color: $darker-blue;
   color: $text;
-  &:hover, &:active, &:focus, .active {
+  &:hover, &:active, &:focus, &.active:hover {
+    background-color: darken($blue, 5%);
+    border-color: darken($darker-blue, 5%);
+    color: $text;
+  }
+  &.active {
     background-color: $darker-blue;
     border-color: $darker-blue;
     color: $text;

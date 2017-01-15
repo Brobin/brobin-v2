@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse
 from django.db import models
 
 
@@ -68,6 +69,10 @@ class Year(models.Model):
 
     def __str__(self):
         return str(self.year)
+
+    @property
+    def url(self):
+        return reverse('fishing-year', kwargs={'year': self.year})
 
     @property
     def big_bass(self):

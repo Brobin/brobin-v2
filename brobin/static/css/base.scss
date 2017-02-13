@@ -1,0 +1,205 @@
+/** Page styles **/
+html, body {
+  font-family: $font;
+  background: $base;
+  color: $text;
+}
+
+.container {
+  max-width: 800px;
+}
+
+
+/** Common Element Styles **/
+p {
+  font-size: 12pt;
+  margin: 15px 0 15px 0;
+}
+
+pre, code {
+  font-family: $font-code;
+  background-color: $dark-base;
+  overflow: auto;
+  word-wrap: normal;
+  white-space: pre;
+}
+
+hr {
+  border-color: $darker-base;
+}
+
+a {
+  color: $link;
+  &:hover {
+    color: $link-hover;
+  }
+}
+
+img {
+    max-width: 100%;
+}
+
+
+/** Navbar Styles **/
+.navbar-default {
+  background-color: $dark-base;
+  border-color: $dark-base;
+  border-radius: 0;
+  .navbar-collapse, .navbar-form {
+    border-color: $dark-base;
+  }
+  .navbar-brand {
+    color: $text;
+    &:hover {
+      color: $text-hover;
+    }
+  }
+  .navbar-toggle {
+    border-color: $dark-base;
+    &:hover {
+      background-color: $base;
+    }
+  }
+  .navbar-nav {
+    li {
+      .dropdown-menu {
+        border-shadow: none;
+        border-top: none;
+        background-color: $dark-base;
+        li > a:hover {
+          color: $link-hover;
+        }
+      }
+      a {
+        color: $text;
+      }
+      a:hover {
+        color: $text-hover;
+      }
+    }
+    .open  {
+      a, a:hover, a:focus, a:active {
+        background-color: $dark-base;
+        color: $text-hover;
+      }
+    }
+  }
+}
+
+
+/** Footer Styles **/
+.footer-primary {
+  background: $dark-base;
+  padding-bottom: 10px;
+}
+
+.footer-secondary {
+  background: $darker-base;
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+
+.badge {
+  background-color: $darker-base;
+  color: $text;
+}
+
+#social-links {
+  a:hover {
+    text-decoration: none;
+  }
+}
+
+
+/** Pagination Styles **/
+.pagination {
+  li {
+    a {
+      border-color: $darker-base;
+      background-color: $darker-base;
+      color: $link-hover;
+      &:hover, &:focus, &:active {
+        background-color: $dark-base;
+        border-color: $dark-base;
+        color: $link;
+      }
+    }
+  }
+  .active {
+    a {
+      background-color: $link;
+      color: $darker-base;
+      &:hover {
+        color: $dark-base;
+      }
+    }
+  }
+  .disabled {
+    a {
+      background-color: $dark-base;
+      border-color: $darker-base;
+      &:hover {
+        background-color: $dark-base;
+        border-color: $darker-base;
+      }
+    }
+  }
+}
+
+
+/** Form and Button Styles **/
+input.form-control{
+  background-color: $base;
+  border-color: $darker-base;
+  color: $text;
+}
+
+.btn-default {
+  background-color: $base;
+  border-color: $darker-base;
+  color: $text;
+  &:hover, &:active, &:focus, &.active:hover {
+    background-color: darken($base, 5%);
+    border-color: darken($darker-base, 5%);
+    color: $text;
+  }
+  &.active {
+    background-color: $darker-base;
+    border-color: $darker-base;
+    color: $text;
+  }
+}
+
+
+/** Fish graph styles **/
+.chart-caption {
+  margin-bottom: 50px;
+}
+
+.background {
+  fill: $chart-fill !important;
+}
+
+text {
+  font-family: $font !important;
+  font-size: 10pt !important;
+  color: $text !important;
+}
+
+
+/** Skills carousel styles **/
+.slick-slide:focus {
+  outline: none;
+}
+
+#skills {
+  font-size: 6em;
+}
+
+.skills-container {
+  background-color: $dark-base;
+}
+
+.skills-container > .container {
+  padding: 10px 40px 10px 40px;
+}

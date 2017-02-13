@@ -1,0 +1,18 @@
+/** Variables **/
+$font: "Droid Sans", sans-serif;
+$font-code: "Droid Sans Mono", monospace;
+
+$text: #acb8b9;
+$text-hover: lighten($text, 5%);
+
+$base: #002b36;
+$dark-base: #042029;
+$darker-base: #020E12;
+
+$link: #428bca;
+$link-hover: #2a6496;
+
+$chart-fill: $dark-base;
+
+/** Prettyprint styles **/
+.pln{color:#bd3613}.str{color:#269186}.kwd{color:#859900}.com{color:#586175;font-style:italic}.typ{color:#b58900}.lit{color:#2aa198}.clo,.opn,.pun{color:#839496}.tag{color:#268bd2}.atn{color:#586175}.atv{color:#2aa198}.dec,.var{color:#268bd2}.fun{color:red}pre.prettyprint{background-color:#ddd;padding:10px;border:0;font-family:monospace}ol.linenums{color:#4c666c;margin:0 0 0 40px}ol.linenums li{line-height:18px;padding-left:12px}

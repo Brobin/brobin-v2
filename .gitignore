@@ -12,3 +12,4 @@ brobin/static/img
 deploy
 static/CACHE
 .coverage
+.logs

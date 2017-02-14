@@ -1,50 +1,35 @@
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404
+from blog.decorators import paginate_posts
 from blog.models import Category, Post
-from blog.managers import PostManager
 
 
+@paginate_posts
 def blog(request):
-    posts = Post.visible_posts.all()
-    return paginate_posts(posts, request)
+    return Post.visible_posts.all()
 
 
+@paginate_posts
 def archive(request, year):
-    posts = Post.visible_posts.filter(created__year=year)
-    return paginate_posts(posts, request)
+    return Post.visible_posts.filter(created__year=year)
 
 
+@paginate_posts
 def category(request, slug):
     category = get_object_or_404(Category, slug=slug)
     categories = category.get_children()
-    posts = Post.visible_posts.filter(category__in=categories)
-    return paginate_posts(posts, request)
+    return Post.visible_posts.filter(category__in=categories)
 
 
+@paginate_posts
 def search(request):
     query = request.GET.get('q')
     if query:
-        posts = Post.visible_posts.filter(
+        return Post.visible_posts.filter(
             Q(content__icontains=query) |
             Q(title__icontains=query)
         )
-    else:
-        posts = Post.visible_posts.all()
-    return paginate_posts(posts, request, query)
-
-
-def paginate_posts(posts, request, search=None):
-    paginator = Paginator(posts, 10)
-    page = request.GET.get('page')
-    try:
-        posts = paginator.page(page)
-    except PageNotAnInteger:
-        posts = paginator.page(1)
-    except EmptyPage:
-        posts = paginator.page(paginator.num_pages)
-    payload = {'posts': posts, 'search': search}
-    return render(request, 'blog/blog.html', payload)
+    return Post.visible_posts.all()
 
 
 def blog_post(request, slug):

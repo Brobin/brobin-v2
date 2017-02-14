@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'blog',
     'navigation',
     'fishing',
+    'nhl',
 ]
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'

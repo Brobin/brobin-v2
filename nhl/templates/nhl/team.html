@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block title %}{{ team }} Stats{% endblock %}
+
+{% block content %}
+{% load nhl_tags %}
+<h1><img src="http://cdn.nhle.com/nhl/images/logos/teams/{{ team }}_logo.svgz" style="max-height:39px;padding-right:20px"/>{{ team }} Stats</h1>
+<hr/>
+
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Player</th>
+            <th>Pos</th>
+            <th>GP</th>
+            <th>G</th>
+            <th>A</th>
+            <th>P</th>
+            <th>B</th>
+            <th>H</th>
+            <th>PIM</th>
+            <th>+/-</th>
+            <th>ATOI</th>
+            <th>PPG</th>
+            <th>PPA</th>
+            <th>SOG</th>
+            <th>S%</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for s in skaters %}
+        <tr>
+            {% with s.person.stats.0.splits.0.stat as stats %}
+            <th>#{{ s.jerseyNumber }} {{ s.person.fullName }}</th>
+            <td>{{ s.person.primaryPosition.abbreviation }}</td>
+            <td>{{ stats.games }}</td>
+            <td>{{ stats.goals }}</td>
+            <td>{{ stats.assists }}</td>
+            <td>{{ stats.points }}</td>
+            <td>{{ stats.blocked }}</td>
+            <td>{{ stats.hits }}</td>
+            <td>{{ stats.penaltyMinutes }}</td>
+            <td>{{ stats.plusMinus }}</td>
+            <td>{{ stats.timeOnIcePerGame }}</td>
+            <td>{{ stats.powerPlayGoals }}</td>
+            <td>{{ stats.powerPlayPoints|sub:stats.powerPlayGoals }}</td>
+            <td>{{ stats.shots }}</td>
+            <td>{{ stats.goals|percent:stats.shots }}</td>
+            {% endwith %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h3>Points Leaders</h3>
+<div id="points-chart" class="chart" style="height:400px;"></div>
+
+<h3>+/- Leaders</h3>
+<div id="plus-minus-chart" class="chart" style="height:400px;"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartist/0.10.1/chartist.min.js"></script>
+{% load staticfiles %}
+<script src="{% static 'js/chartist.plugin.tooltip.min.js' %}"></script>
+<script>
+new Chartist.Bar('#points-chart', {
+    series: [
+        [{% for s in skaters %}{'meta': '{{ s.person.fullName }}', 'value': {{ s.person.stats.0.splits.0.stat.goals }}},{% endfor %}],
+        [{% for s in skaters %}{'meta': '{{ s.person.fullName }}', 'value': {{ s.person.stats.0.splits.0.stat.assists }}},{% endfor %}],
+    ],
+    labels: [{% for s in skaters %}'#{{ s.jerseyNumber }}',{% endfor %}],
+},{
+    stackBars: true,
+    axisY: {
+        onlyInteger: true,
+    },
+    plugins:[
+        Chartist.plugins.tooltip({
+            appendToBody: true,
+        }),
+    ],
+});
+new Chartist.Bar('#plus-minus-chart', {
+    series: [
+        [{% for s in skaters %}{'meta': '{{ s.person.fullName }}', 'value': {{ s.person.stats.0.splits.0.stat.plusMinus }}},{% endfor %}],
+    ],
+    labels: [{% for s in skaters %}'#{{ s.jerseyNumber }}',{% endfor %}],
+},{
+    stackBars: true,
+    axisY: {
+        onlyInteger: true,
+    },
+    plugins:[
+        Chartist.plugins.tooltip({
+            appendToBody: true,
+        }),
+    ],
+});
+</script>
+
+{{ skaters }}
+{% endblock %}

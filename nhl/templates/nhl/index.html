@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}NHL Teams{% endblock %}
+
+{% block content %}
+<div class="row">
+    {% for team in teams %}
+    <div class="col-sm-3">
+        <a href="{% url 'nhl-team' team=team %}">
+            <img src="http://cdn.nhle.com/nhl/images/logos/teams/{{ team }}_logo.svgz" style="max-width:100%;padding:20px"/>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

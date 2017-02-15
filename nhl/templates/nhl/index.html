@@ -3,6 +3,7 @@
 {% block title %}NHL Teams{% endblock %}
 
 {% block content %}
+<p>Click on a team to view stats and graphs!</p>
 <div class="row">
     {% for division in divisions %}
     <div class="col-sm-6">
@@ -22,7 +23,7 @@
             <tbody>
                 {% for team in division.teamRecords %}
                 
-                <tr>
+                <tr {% if forloop.counter <= 3 %}class="success"{% endif %}>
                     <th><a href="{% url 'nhl-team' team=team.team.abbreviation %}"><img src="http://cdn.nhle.com/nhl/images/logos/teams/{{ team.team.abbreviation }}_logo.svgz" style="max-height:20px;padding-right:5px"/> {{ team.team.abbreviation }}</a></th>
                     <td>{{ team.gamesPlayed }}</td>
                     <td>{{ team.leagueRecord.losses }}</td>

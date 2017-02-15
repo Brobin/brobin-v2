@@ -4,12 +4,21 @@
 
 {% block content %}
 {% load nhl_tags %}
-<h1><img src="http://cdn.nhle.com/nhl/images/logos/teams/{{ team }}_logo.svgz" style="max-height:39px;padding-right:20px"/>{{ team }} Stats</h1>
+<h1><img src="http://cdn.nhle.com/nhl/images/logos/teams/{{ team }}_logo.svgz" style="max-height:39px;padding-right:5px"/>{{ team }} Stats</h1>
 <hr/>
 
-<table class="table table-striped table-hover">
+<h3>Points Percentage</h3>
+<div id="points-pct-chart" class="chart" style="height:250px;"></div>
+
+<h3>Points Leaders</h3>
+<div id="points-chart" class="chart" style="height:250px;"></div>
+<hr/>
+
+<h3>Skaters</h3>
+<table class="table table-striped table-hover sortable">
     <thead>
         <tr>
+            <th>#</th>
             <th>Player</th>
             <th>Pos</th>
             <th>GP</th>
@@ -31,7 +40,8 @@
         {% for s in skaters %}
         <tr>
             {% with s.person.stats.0.splits.0.stat as stats %}
-            <th>#{{ s.jerseyNumber }} {{ s.person.fullName }}</th>
+            <th>#{{ s.jerseyNumber }}</th>
+            <th>{{ s.person.fullName }}</th>
             <td>{{ s.person.primaryPosition.abbreviation }}</td>
             <td>{{ stats.games }}</td>
             <td>{{ stats.goals }}</td>
@@ -52,12 +62,46 @@
     </tbody>
 </table>
 
-<h3>Points Leaders</h3>
-<div id="points-chart" class="chart" style="height:400px;"></div>
+<hr/>
 
-<h3>+/- Leaders</h3>
-<div id="plus-minus-chart" class="chart" style="height:400px;"></div>
+<h3>Goaltenders</h3>
 
+<table class="table table-striped table-hover sortable">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Player</th>
+            <th>GP</th>
+            <th>W</th>
+            <th>L</th>
+            <th>OT</th>
+            <th>GAA</th>
+            <th>SV%</th>
+            <th>SO</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for s in goalies %}
+        <tr>
+            {% with s.person.stats.0.splits.0.stat as stats %}
+            <th>#{{ s.jerseyNumber }}</th>
+            <th>{{ s.person.fullName }}</th>
+            <td>{{ stats.games }}</td>
+            <td>{{ stats.wins }}</td>
+            <td>{{ stats.losses }}</td>
+            <td>{{ stats.ot }}</td>
+            <td>{{ stats.goalAgainstAverage }}</td>
+            <td>{{ stats.savePercentage }}</td>
+            <td>{{ stats.shutouts }}</td>
+            {% endwith %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<hr/>
+{% endblock %}
+
+{% block scripts %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chartist/0.10.1/chartist.min.js"></script>
 {% load staticfiles %}
 <script src="{% static 'js/chartist.plugin.tooltip.min.js' %}"></script>
@@ -79,23 +123,19 @@ new Chartist.Bar('#points-chart', {
         }),
     ],
 });
-new Chartist.Bar('#plus-minus-chart', {
-    series: [
-        [{% for s in skaters %}{'meta': '{{ s.person.fullName }}', 'value': {{ s.person.stats.0.splits.0.stat.plusMinus }}},{% endfor %}],
-    ],
-    labels: [{% for s in skaters %}'#{{ s.jerseyNumber }}',{% endfor %}],
+
+new Chartist.Line('#points-pct-chart', {
+    series: [{{ points_chart.series|safe }}],
+    labels: {{ points_chart.labels|safe }},
 },{
-    stackBars: true,
-    axisY: {
-        onlyInteger: true,
-    },
     plugins:[
         Chartist.plugins.tooltip({
             appendToBody: true,
+            transformTooltipTextFnc: function(x) {
+                return (x * 100).toFixed(2) + '%';
+            }
         }),
     ],
 });
 </script>
-
-{{ skaters }}
 {% endblock %}

@@ -4,12 +4,41 @@
 
 {% block content %}
 <div class="row">
-    {% for team in teams %}
-    <div class="col-sm-3">
-        <a href="{% url 'nhl-team' team=team %}">
-            <img src="http://cdn.nhle.com/nhl/images/logos/teams/{{ team }}_logo.svgz" style="max-width:100%;padding:20px"/>
-        </a>
+    {% for division in divisions %}
+    <div class="col-sm-6">
+        <h3>{{ division.division.name }} Division</h3>
+        <table class="table table-hover table-striped sortable">
+            <thead>
+                <tr>
+                    <th>Team</th>
+                    <th>GP</th>
+                    <th>W</th>
+                    <th>L</th>
+                    <th>OT</th>
+                    <th>P</th>
+                    <th>Streak</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for team in division.teamRecords %}
+                
+                <tr>
+                    <th><a href="{% url 'nhl-team' team=team.team.abbreviation %}"><img src="http://cdn.nhle.com/nhl/images/logos/teams/{{ team.team.abbreviation }}_logo.svgz" style="max-height:20px;padding-right:5px"/> {{ team.team.abbreviation }}</a></th>
+                    <td>{{ team.gamesPlayed }}</td>
+                    <td>{{ team.leagueRecord.losses }}</td>
+                    <td>{{ team.leagueRecord.ot }}</td>
+                    <td>{{ team.leagueRecord.wins }}</td>
+                    <td>{{ team.points }}</td>
+                    <td>{{ team.streak.streakCode }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
+    {% if forloop.counter == 2 %}
+</div>
+<div class="row">
+    {% endif %}
     {% endfor %}
 </div>
 {% endblock %}

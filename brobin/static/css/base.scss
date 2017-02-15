@@ -249,3 +249,14 @@ text {
 .ct-bar {
   stroke-width: 4%;
 }
+.sortable {
+  thead {
+    tr {
+      th {
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

@@ -30,11 +30,3 @@ TEAMS = {
     'ARI': 53,
     'OTT': 9,
 }
-
-NHL_TEAMS = {team: team for team in TEAMS.keys()}
-NHL_TEAMS['TB'] = 'TBL'
-NHL_TEAMS['LA'] = 'LAK'
-NHL_TEAMS['SJ'] = 'SJS'
-NHL_TEAMS['NJ'] = 'NJD'
-NHL_TEAMS = [(key, team) for key, team in NHL_TEAMS.items()]
-NHL_TEAMS.sort(key=lambda x: x[0])

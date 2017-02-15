@@ -2,8 +2,6 @@
   position: absolute;
   display: block;
   opacity: 0;
-  min-width: 5em;
-  padding: .5em;
   background: #444;
   color: #eee;
   font-family: Lato,sans-serif;
@@ -11,26 +9,29 @@
   text-align: center;
   pointer-events: none;
   z-index: 1;
-  -webkit-transition: opacity .2s linear;
-  -moz-transition: opacity .2s linear;
-  -o-transition: opacity .2s linear;
-  transition: opacity .2s linear;
   p {
     margin: 0;
   }
-}
-.chartist-tooltip:before {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    margin-left: -15px;
-    border: 15px solid transparent;
-    border-top-color: #444; }
-.chartist-tooltip.tooltip-show {
+  &.tooltip-show {
     opacity: 1;
+    min-width: 5em;
+    padding: .5em;
+    -webkit-transition: opacity .2s linear;
+    -moz-transition: opacity .2s linear;
+    -o-transition: opacity .2s linear;
+    transition: opacity .2s linear;
+    &:before {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      margin-left: -15px;
+      border: 15px solid transparent;
+      border-top-color: #444;
+    }
+  }
 }
 .ct-area, .ct-line {
   pointer-events: none;

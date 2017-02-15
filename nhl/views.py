@@ -39,7 +39,7 @@ class NHLTeamView(TemplateView):
         context['skaters'] = self.skaters
         context['goalies'] = self.goalies
         context['team'] = self.team
-        context['points_chart'] = self.get_points_chart()
+        context['chart'] = self.get_points_chart()
         return context
 
     def get_roster(self):
@@ -68,14 +68,24 @@ class NHLTeamView(TemplateView):
             datetime.now().strftime(format),
             2, self.team_id
         )
-        points, points_possible, series, labels = 0, 0, [], []
+        points, points_possible, = 0, 0
+        goals, points_pct, labels = [], [], []
         for game in requests.get(url).json()['data']:
             points += game['wins'] * 2 + game['otLosses']
             points_possible += 2
             label = '{0} vs. {1}'.format(game['gameDate'][:10], game['opponentTeamAbbrev'])
-            series.append({
+            points_pct.append({
                 'value': points / points_possible,
                 'meta': label,
             })
+            goals.append({
+                'value': game['goalsFor'] - game['goalsAgainst'],
+                'meta': label,
+            })
             labels.append(points_possible / 2)
-        return {'series': series, 'labels': labels}
+        return {
+            'points_pct': points_pct[10:],
+            'points_pct_labels': labels[10:],
+            'goals': goals,
+            'goals_labels': labels
+        }

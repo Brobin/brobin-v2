@@ -109,6 +109,10 @@ $nhl: (
 );
 
 @each $team, $colors in $nhl {
+  .bar-nhl-#{$team} {
+    stroke: #555;
+    fill: nth($colors, 2);
+  }
   .nhl-#{$team} {
     .chart {
       .ct-series-a {

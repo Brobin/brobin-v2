@@ -4,10 +4,12 @@
 
 {% block content %}
 <p>Click on a team to view stats and graphs!</p>
-<div class="row">
-    {% for division in divisions %}
-    <div class="col-sm-6">
+{% for division in divisions %}
+<div class="row nhl">
+    <div class="col-sm-12">
         <h3>{{ division.division.name }} Division</h3>
+    </div>
+    <div class="col-sm-6">
         <table class="table table-hover table-striped sortable">
             <thead>
                 <tr>
@@ -36,10 +38,32 @@
             </tbody>
         </table>
     </div>
-    {% if forloop.counter == 2 %}
+    <div class="col-sm-6">
+        <div id="points-pie-{{ division.division.name }}" class="chart" style="height:300px;margin-top:30px;"></div>
+
+    </div>
 </div>
-<div class="row">
-    {% endif %}
-    {% endfor %}
+{% endfor %}
 </div>
+{% endblock %}
+
+
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chartist/0.10.1/chartist.min.js"></script>
+{% load staticfiles %}
+<script src="{% static 'js/chartist.plugin.tooltip.min.js' %}"></script>
+<script>
+{% for division in divisions %}
+new Chartist.Pie('#points-pie-{{ division.division.name }}', {
+    series: [{% for t in division.teamRecords %}{'value': {{ t.points }}, 'className': 'bar-nhl-{{ t.team.abbreviation}}'},{% endfor %}],
+    labels: [{% for t in division.teamRecords %}'{{ t.team.abbreviation }}',{% endfor %}],
+},{
+    plugins:[
+        Chartist.plugins.tooltip({
+            appendToBody: true,
+        }),
+    ],
+});
+{% endfor %}
+</script>
 {% endblock %}

@@ -1,5 +1,5 @@
 import pygal
-from pygal.style import DarkStyle as Style
+from pygal.style import BlueStyle as Style
 
 from .models import BigFish, Day, Year
 
@@ -54,7 +54,11 @@ def daily_species_chart(year, chart_type="Dot"):
 
 
 def year_size_scatter(year):
-    chart = pygal.XY(stroke=False, style=Style)
+    chart = pygal.XY(
+        stroke=False,
+        style=Style,
+        dots_size=7
+    )
     chart.x_label = ["Weight (pounds)"]
     chart.y_label = ["Length (inches)"]
     chart.add("Bass", year.bass)
@@ -65,10 +69,14 @@ def year_size_scatter(year):
 
 def all_years_scatter():
     fish = BigFish.objects.all()
-    chart = pygal.XY(stroke=False, style=Style)
+    chart = pygal.XY(
+        stroke=False,
+        style=Style,
+        dots_size=7,
+    )
     chart.x_label = ["Weight (pounds)"]
     chart.y_label = ["Length (inches)"]
-    chart.add("Bass", [f.stats for f in BigFish.objects.filter(species=BigFish.BASS)])
-    chart.add("Northern", [f.stats for f in BigFish.objects.filter(species=BigFish.NORTHERN)])
-    chart.add("Walleye", [f.stats for f in BigFish.objects.filter(species=BigFish.WALLEYE)])
+    chart.add("Bass", [f.stats for f in fish.filter(species=BigFish.BASS)])
+    chart.add("Northern", [f.stats for f in fish.filter(species=BigFish.NORTHERN)])
+    chart.add("Walleye", [f.stats for f in fish.filter(species=BigFish.WALLEYE)])
     return chart.render(is_unicode=True)

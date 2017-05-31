@@ -56,7 +56,7 @@ class Post(models.Model):
 
     def preview(self):
         try:
-            preview = strip_tags(self.content)[:400]
+            preview = strip_tags(self.content)[:100]
         except:
             preview = ''
         return preview + '...'

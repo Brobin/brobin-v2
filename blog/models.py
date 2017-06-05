@@ -54,13 +54,16 @@ class Post(models.Model):
         self.slug = slugify(self.title)
         super().save(*args, **kwargs)
 
-    def preview(self):
+    def preview(self, length=400):
         try:
-            preview = strip_tags(self.content)[:100]
+            preview = strip_tags(self.content)[:length]
         except:
             preview = ''
         return preview + '...'
-    preview.short_description = 'content'
+
+    def short_preview(self):
+        return self.preview(length=100)
+    short_preview.short_description = 'content'
 
     def get_date(self):
         return self.created

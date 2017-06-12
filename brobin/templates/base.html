@@ -64,8 +64,14 @@
     {% endif %}
 
     <div class="container content">
-    {% block content %}
-    {% endblock %}
+        {% for message in messages %}
+        <div class="alert alert-dismissible alert-{{ message.tags }}">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          <p>{{ message|safe }}</p>
+        </div>
+        {% endfor %}
+        {% block content %}
+        {% endblock %}
     </div>
 
     <footer class="footer-primary">

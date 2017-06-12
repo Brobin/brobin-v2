@@ -1,5 +1,9 @@
+from django.contrib import messages
 from django.shortcuts import render
+from django.core.urlresolvers import reverse
+from django.views.generic.edit import CreateView
 
+from .forms import FishForm
 from .models import Year
 from .utils import *
 
@@ -18,3 +22,18 @@ def year(request, year):
     punchcard = daily_species_chart(year, "Dot")
     scatter = year_size_scatter(year)
     return render(request, "fishing/year.html", locals())
+
+
+class AddFishView(CreateView):
+    model = BigFish
+    template_name = 'fishing/add.html'
+    form_class = FishForm
+
+    def dispatch(self, *args, **kwargs):
+        if not self.request.user.is_authenticated():
+            return redirect('fishing-index')
+        return super(AddFishView, self).dispatch(*args, **kwargs)
+
+    def get_success_url(self):
+        messages.info(self.request, '{0} added!'.format(str(self.object)))
+        return reverse('fishing-add')

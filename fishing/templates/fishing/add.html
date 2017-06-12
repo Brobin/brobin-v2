@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Add a big fish{% endblock %}
+
+{% block content %}
+<style>
+.error {
+  color: red;
+}
+</style>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <form class="form" method="post">
+      <h3>Add a Fish</h3>
+      <div class="well">
+        {% csrf_token %}
+        <div class="form-group">
+          {% if form.year.errors %}{% for error in form.year.errors %}
+          <p class="error">{{ error }}</p>{% endfor %}{% endif %}
+          <label for="{{ form.year.name }}">Year</label>
+          {{ form.year }}
+        </div>
+        <div class="form-group">
+          {% if form.species.errors %}{% for error in form.species.errors %}
+          <p class="error">{{ error }}</p>{% endfor %}{% endif %}
+          <label for="{{ form.species.name }}">Species</label>
+          {{ form.species }}
+        </div>
+        <div class="form-group">
+          {% if form.length.errors %}{% for error in form.length.errors %}
+          <p class="error">{{ error }}</p>{% endfor %}{% endif %}
+          <label for="{{ form.length.name }}">Length (inches)</label>
+          <input class="form-control" name="{{ form.length.name }}" type="number" step="0.01" required {% if form.length.value %}value="{{ form.length.value }}"{% endif %}/>
+        </div>
+        <div class="form-group">
+          {% if form.weight.errors %}{% for error in form.weight.errors %}
+          <p class="error">{{ error }}</p>{% endfor %}{% endif %}
+          <label for="{{ form.weight.name }}">Weight (pounds)</label>
+          <input class="form-control" name="{{ form.weight.name }}" type="number" step="0.01" required  {% if form.weight.value %}value="{{ form.weight.value }}"{% endif %}/>
+        </div>
+        <div class="form-group">
+          <input class="btn btn-primary" type="submit" value="Save"/>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

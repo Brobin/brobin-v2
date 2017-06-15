@@ -116,11 +116,11 @@ img {
   li {
     a {
       border-color: $darker-base;
-      background-color: $darker-base;
+      background-color: $dark-base;
       color: $link-hover;
       &:hover, &:focus, &:active {
-        background-color: $dark-base;
-        border-color: $dark-base;
+        background-color: lighten($dark-base, 10%);
+        border-color: $darker-base;
         color: $link;
       }
     }

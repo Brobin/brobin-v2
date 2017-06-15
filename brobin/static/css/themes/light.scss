@@ -6,11 +6,11 @@ $text: #444;
 $text-hover: lighten($text, 5%);
 
 $base: white;
-$dark-base: #eee;
-$darker-base: #ccc;
+$dark-base: #ddd;
+$darker-base: #bbb;
 
-$link: #428bca;
-$link-hover: #2a6496;
+$link: #2e618d;
+$link-hover: darken($link, 10%);
 
 $chart-fill: #f8f8f8;
 

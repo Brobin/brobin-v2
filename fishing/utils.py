@@ -1,3 +1,5 @@
+from django.db.models import Sum
+
 import pygal
 from pygal.style import BlueStyle as Style
 
@@ -31,6 +33,22 @@ def year_compare_punchcard():
     for year, datum in _year_compare_data():
         chart.add(year, datum)
     return chart.render(is_unicode=True)
+
+
+def year_compare_line():
+    line_chart = pygal.Line(style=Style)
+    years = Year.objects.order_by('year').annotate(
+        total_bass=Sum('days__bass'),
+        total_crappie=Sum('days__crappie'),
+        total_walleye=Sum('days__walleye'),
+        total_northern=Sum('days__northern'),
+    )
+    line_chart.x_labels = [str(y) for y in years]
+    line_chart.add('Bass', [y.total_bass for y in years])
+    line_chart.add('Crappie', [y.total_crappie for y in years])
+    line_chart.add('Northern', [y.total_northern for y in years])
+    line_chart.add('Walleye', [y.total_walleye for y in years])
+    return line_chart.render(is_unicode=True)
 
 
 def daily_species_chart(year, chart_type="Dot"):

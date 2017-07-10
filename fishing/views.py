@@ -10,6 +10,7 @@ from .utils import *
 
 def index(request):
     bar = year_compare_bar()
+    line = year_compare_line()
     punchcard = year_compare_punchcard()
     scatter = all_years_scatter()
     return render(request, "fishing/index.html", locals())

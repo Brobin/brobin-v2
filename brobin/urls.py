@@ -5,6 +5,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 
 from blog.sitemaps import BlogPostSitemap, BlogCategorySitemap
+from gyms.views import lincoln_gyms
 
 
 sitemaps = {
@@ -20,6 +21,7 @@ urlpatterns = [
     url(r'^fishing/', include('fishing.urls')),
     url(r'^nhl/', include('nhl.urls')),
     url(r'^admin/', admin.site.urls),
+    url(r'^gyms\.csv$', lincoln_gyms),
     url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps},
         name='django.contrib.sitemaps.views.sitemap'),
     url(r'^(?P<url>.*/)$', views.flatpage),

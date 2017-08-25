@@ -1,4 +1,6 @@
 import csv
+
+from django.db.models import Avg
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.utils.timezone import localtime
@@ -36,6 +38,9 @@ def gyms_graph(request):
     chart.add("Instinct", instinct)
     context = {
         'chart': chart.render(is_unicode=True),
-        'recent': GymLog.objects.order_by('-created')[:12]
+        'recent': GymLog.objects.order_by('-created')[:12],
+        'mystic_avg': GymLog.objects.aggregate(avg=Avg('mystic'))['avg'],
+        'valor_avg': GymLog.objects.aggregate(avg=Avg('valor'))['avg'],
+        'instinct_avg': GymLog.objects.aggregate(avg=Avg('instinct'))['avg'],
     }
     return render(request, 'gyms/gyms.html', context)

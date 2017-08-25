@@ -1,6 +1,7 @@
 import csv
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.utils.timezone import localtime
 
 import pygal
 
@@ -29,7 +30,7 @@ def gyms_graph(request):
         valor.append(log.valor)
         instinct.append(log.instinct)
     chart = pygal.Line(style=style, stroke_style={'width': 5}, width=1200, show_x_labels=False)
-    chart.x_labels = map(lambda d: d.strftime('%m-%d %I:%M'), labels)
+    chart.x_labels = map(lambda d: localtime(d).strftime('%m-%d %I:%M %p'), labels)
     chart.add("Mystic", mystic)
     chart.add("Valor", valor)
     chart.add("Instinct", instinct)

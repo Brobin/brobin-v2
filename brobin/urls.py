@@ -27,3 +27,12 @@ urlpatterns = [
         name='django.contrib.sitemaps.views.sitemap'),
     url(r'^(?P<url>.*/)$', views.flatpage),
 ]
+
+from django.conf import settings
+from django.conf.urls import include, url
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns = [
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    ] + urlpatterns

@@ -10,3 +10,4 @@ pygal==2.2.3
 rcssmin==1.0.6
 rjsmin==1.0.12
 six==1.10.0
+django-debug-toolbar

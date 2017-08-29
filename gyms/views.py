@@ -2,7 +2,7 @@ import csv
 
 from datetime import timedelta
 
-from django.db.models import Avg, Max, Min
+from django.db.models import Avg, Max, Min, F
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.utils import timezone
@@ -41,6 +41,7 @@ def get_chart(**kwargs):
     chart.add("Mystic", mystic)
     chart.add("Valor", valor)
     chart.add("Instinct", instinct)
+    total = (Avg('mystic') + Avg('valor') + Avg('instinct'))
     data = GymLog.objects.filter(**kwargs).aggregate(
         mystic_avg=Avg('mystic'),
         mystic_min=Min('mystic'),
@@ -51,48 +52,38 @@ def get_chart(**kwargs):
         instinct_avg=Avg('instinct'),
         instinct_min=Min('instinct'),
         instinct_max=Max('instinct'),
+        mystic_pct=Avg('mystic') / total * 100,
+        valor_pct=Avg('valor') / total * 100,
+        instinct_pct=Avg('instinct') / total * 100
     )
-    total = data['mystic_avg'] + data['valor_avg'] + data['instinct_avg']
-    return chart, data, total
+    return chart, data
 
 
 def gyms_graph(request):
-    all_time, at_data, at_total = get_chart(**{})
-    last_day, ld_data, ld_total = get_chart(
+    all_time, at_data = get_chart(**{})
+    last_day, ld_data = get_chart(
         **{'created__gte': timezone.now() - timedelta(days=1)})
-    last_three, lt_data, lt_total = get_chart(
+    last_three, lt_data = get_chart(
         **{'created__gte': timezone.now() - timedelta(days=3)})
-    last_week, lw_data, lw_total = get_chart(
+    last_week, lw_data = get_chart(
         **{'created__gte': timezone.now() - timedelta(days=7)})
 
     context = {
         'all_time': {
             'chart': all_time.render(is_unicode=True),
             'data': at_data,
-            'mystic': at_data['mystic_avg'] / at_total * 100,
-            'valor': at_data['valor_avg'] / at_total * 100,
-            'instinct': at_data['instinct_avg'] / at_total * 100,
         },
         'last_day': {
             'chart': last_day.render(is_unicode=True),
             'data': ld_data,
-            'mystic': ld_data['mystic_avg'] / ld_total * 100,
-            'valor': ld_data['valor_avg'] / ld_total * 100,
-            'instinct': ld_data['instinct_avg'] / ld_total * 100,
         },
         'last_three': {
             'chart': last_three.render(is_unicode=True),
             'data': lt_data,
-            'mystic': lt_data['mystic_avg'] / lt_total * 100,
-            'valor': lt_data['valor_avg'] / lt_total * 100,
-            'instinct': lt_data['instinct_avg'] / lt_total * 100,
         },
         'last_week': {
             'chart': last_week.render(is_unicode=True),
             'data': lw_data,
-            'mystic': lw_data['mystic_avg'] / lw_total * 100,
-            'valor': lw_data['valor_avg'] / lw_total * 100,
-            'instinct': lw_data['instinct_avg'] / lw_total * 100,
         },
         'recent': GymLog.objects.order_by('-created')[:12],
     }

@@ -1,0 +1,25 @@
+
+<figure type="image/svg+xml">
+    {{ period.chart | safe }}
+</figure>
+<br/>
+<div class="row text-center">
+  <div class="col-sm-4">
+      <div class="well">
+          <h5>Mystic</h5>
+          <p style="font-size:40px;">{{ period.mystic|floatformat:2 }}%</p>
+      </div>
+  </div>
+  <div class="col-sm-4">
+      <div class="well" >
+          <h5>Valor</h5>
+          <p style="font-size:40px;">{{ period.valor|floatformat:2 }}%</p>
+      </div>
+  </div>
+  <div class="col-sm-4">
+      <div class="well">
+          <h5>Instinct</h5>
+          <p style="font-size:40px;">{{ period.instinct|floatformat:2 }}%</p>
+      </div>
+  </div>
+</div>

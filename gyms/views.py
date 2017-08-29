@@ -41,28 +41,47 @@ def get_chart(**kwargs):
     chart.add("Mystic", mystic)
     chart.add("Valor", valor)
     chart.add("Instinct", instinct)
-    return chart
+    mystic = GymLog.objects.filter(**kwargs).aggregate(avg=Avg('mystic'))['avg']
+    valor = GymLog.objects.filter(**kwargs).aggregate(avg=Avg('valor'))['avg']
+    instinct = GymLog.objects.filter(**kwargs).aggregate(avg=Avg('instinct'))['avg']
+    total = mystic + valor + instinct
+    return chart, mystic, valor, instinct, total
 
 
 def gyms_graph(request):
-    all_time = get_chart(**{})
-    last_day = get_chart(**{'created__gte': timezone.now() - timedelta(days=1)})
-    last_three = get_chart(**{'created__gte': timezone.now() - timedelta(days=3)})
-    last_week = get_chart(**{'created__gte': timezone.now() - timedelta(days=7)})
-
-    mystic = GymLog.objects.aggregate(avg=Avg('mystic'))['avg']
-    valor = GymLog.objects.aggregate(avg=Avg('valor'))['avg']
-    instinct = GymLog.objects.aggregate(avg=Avg('instinct'))['avg']
-    total = mystic + valor + instinct
+    all_time, at_mystic, at_valor, at_instinct, at_total = get_chart(**{})
+    last_day, ld_mystic, ld_valor, ld_instinct, ld_total = get_chart(
+        **{'created__gte': timezone.now() - timedelta(days=1)})
+    last_three, lt_mystic, lt_valor, lt_instinct, lt_total = get_chart(
+        **{'created__gte': timezone.now() - timedelta(days=3)})
+    last_week, lw_mystic, lw_valor, lw_instinct, lw_total = get_chart(
+        **{'created__gte': timezone.now() - timedelta(days=7)})
 
     context = {
-        'all_time': all_time.render(is_unicode=True),
-        'last_day': last_day.render(is_unicode=True),
-        'last_three': last_three.render(is_unicode=True),
-        'last_week': last_week.render(is_unicode=True),
+        'all_time': {
+            'chart': all_time.render(is_unicode=True),
+            'mystic': at_mystic / at_total * 100,
+            'valor': at_valor / at_total * 100,
+            'instinct': at_instinct / at_total * 100,
+        },
+        'last_day': {
+            'chart': last_day.render(is_unicode=True),
+            'mystic': ld_mystic / ld_total * 100,
+            'valor': ld_valor / ld_total * 100,
+            'instinct': ld_instinct / ld_total * 100,
+        },
+        'last_three': {
+            'chart': last_three.render(is_unicode=True),
+            'mystic': lt_mystic / lt_total * 100,
+            'valor': lt_valor / lt_total * 100,
+            'instinct': lt_instinct / lt_total * 100,
+        },
+        'last_week': {
+            'chart': last_week.render(is_unicode=True),
+            'mystic': lw_mystic / lw_total * 100,
+            'valor': lw_valor / lw_total * 100,
+            'instinct': lw_instinct / lw_total * 100,
+        },
         'recent': GymLog.objects.order_by('-created')[:12],
-        'mystic_pct': mystic / total * 100,
-        'valor_pct': valor / total * 100,
-        'instinct_pct': instinct / total * 100,
     }
     return render(request, 'gyms/gyms.html', context)

@@ -24,6 +24,7 @@ def lincoln_gyms(request):
         writer.writerow([log.created, log.mystic, log.valor, log.instinct])
     return response
 
+
 def gyms_graph(request):
     labels, mystic, valor, instinct = [], [], [], []
     for log in GymLog.objects.order_by('created'):
@@ -31,16 +32,21 @@ def gyms_graph(request):
         mystic.append(log.mystic)
         valor.append(log.valor)
         instinct.append(log.instinct)
-    chart = pygal.Line(style=style, stroke_style={'width': 5}, width=1200, show_x_labels=False)
+    chart = pygal.Line(style=style, stroke_style={'width': 5},
+                       width=1200, show_x_labels=False)
     chart.x_labels = map(lambda d: localtime(d).strftime('%m-%d %I:%M %p'), labels)
     chart.add("Mystic", mystic)
     chart.add("Valor", valor)
     chart.add("Instinct", instinct)
+    mystic = GymLog.objects.aggregate(avg=Avg('mystic'))['avg']
+    valor = GymLog.objects.aggregate(avg=Avg('valor'))['avg']
+    instinct = GymLog.objects.aggregate(avg=Avg('instinct'))['avg']
+    total = mystic + valor + instinct
     context = {
         'chart': chart.render(is_unicode=True),
         'recent': GymLog.objects.order_by('-created')[:12],
-        'mystic_avg': GymLog.objects.aggregate(avg=Avg('mystic'))['avg'],
-        'valor_avg': GymLog.objects.aggregate(avg=Avg('valor'))['avg'],
-        'instinct_avg': GymLog.objects.aggregate(avg=Avg('instinct'))['avg'],
+        'mystic_pct': mystic / total * 100,
+        'valor_pct': valor / total * 100,
+        'instinct_pct': instinct / total * 100,
     }
     return render(request, 'gyms/gyms.html', context)

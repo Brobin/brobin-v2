@@ -1,8 +1,11 @@
 import csv
 
+from datetime import timedelta
+
 from django.db.models import Avg
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.utils import timezone
 from django.utils.timezone import localtime
 
 import pygal
@@ -25,9 +28,9 @@ def lincoln_gyms(request):
     return response
 
 
-def gyms_graph(request):
+def get_chart(**kwargs):
     labels, mystic, valor, instinct = [], [], [], []
-    for log in GymLog.objects.order_by('created'):
+    for log in GymLog.objects.filter(**kwargs).order_by('created'):
         labels.append(log.created)
         mystic.append(log.mystic)
         valor.append(log.valor)
@@ -38,12 +41,25 @@ def gyms_graph(request):
     chart.add("Mystic", mystic)
     chart.add("Valor", valor)
     chart.add("Instinct", instinct)
+    return chart
+
+
+def gyms_graph(request):
+    all_time = get_chart(**{})
+    last_day = get_chart(**{'created__gte': timezone.now() - timedelta(days=1)})
+    last_three = get_chart(**{'created__gte': timezone.now() - timedelta(days=3)})
+    last_week = get_chart(**{'created__gte': timezone.now() - timedelta(days=7)})
+
     mystic = GymLog.objects.aggregate(avg=Avg('mystic'))['avg']
     valor = GymLog.objects.aggregate(avg=Avg('valor'))['avg']
     instinct = GymLog.objects.aggregate(avg=Avg('instinct'))['avg']
     total = mystic + valor + instinct
+
     context = {
-        'chart': chart.render(is_unicode=True),
+        'all_time': all_time.render(is_unicode=True),
+        'last_day': last_day.render(is_unicode=True),
+        'last_three': last_three.render(is_unicode=True),
+        'last_week': last_week.render(is_unicode=True),
         'recent': GymLog.objects.order_by('-created')[:12],
         'mystic_pct': mystic / total * 100,
         'valor_pct': valor / total * 100,

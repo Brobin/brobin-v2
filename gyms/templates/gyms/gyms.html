@@ -27,6 +27,9 @@
     hr {
         border-color: #eee;
     }
+    .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover  {
+        background-color: rgba(249,249,249,1);
+    }
     </style>
         
     <div style="background-color:#eee;">
@@ -37,12 +40,34 @@
 
     <div class="container content" style="max-width:1200px">
         <br/>
-        <h3>All-Time</h3>
-        <i>Since August 25, 2017</i>
-        <hr/>
-        <figure type="image/svg+xml">
-            {{ chart | safe }}
-        </figure>
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#last_day" data-toggle="tab">Last Day</a></li>
+          <li><a href="#last_three" data-toggle="tab">Last 3 Days</a></li>
+          <li><a href="#last_week" data-toggle="tab">Last Week</a></li>
+          <li><a href="#all_time" data-toggle="tab">All Time</a></li>
+        </ul>
+        <div id="myTabContent" class="tab-content">
+          <div class="tab-pane fade active in" id="last_day">
+            <figure type="image/svg+xml">
+                {{ last_day | safe }}
+            </figure>
+          </div>
+          <div class="tab-pane fade" id="last_three">
+            <figure type="image/svg+xml">
+                {{ last_three | safe }}
+            </figure>
+          </div>
+          <div class="tab-pane fade" id="last_week">
+            <figure type="image/svg+xml">
+                {{ last_week | safe }}
+            </figure>
+          </div>
+          <div class="tab-pane fade" id="all_time">
+            <figure type="image/svg+xml">
+                {{ all_time | safe }}
+            </figure>
+          </div>
+        </div>
 
         <br/>
 

@@ -1,0 +1,28 @@
+
+<figure type="image/svg+xml">
+    {{ period.chart | safe }}
+</figure>
+<br/>
+<div class="row text-center">
+  <div class="col-sm-4">
+      <div class="well">
+          <h5 class="text-info">Mystic</h5>
+          <p style="font-size:40px;">{{ period.data.mystic_pct|floatformat:2 }}%</p>
+          <span>Min: <b class="text-danger">{{ period.data.mystic_min }}</b>&nbsp;Max: <b class="text-success">{{ period.data.mystic_max }}</b></span>
+      </div>
+  </div>
+  <div class="col-sm-4">
+      <div class="well" >
+          <h5 class="text-danger">Valor</h5>
+          <p style="font-size:40px;">{{ period.data.valor_pct|floatformat:2 }}%</p>
+          <span>Min: <b class="text-danger">{{ period.data.valor_min }}</b>&nbsp;Max: <b class="text-success">{{ period.data.valor_max }}</b></span>
+      </div>
+  </div>
+  <div class="col-sm-4">
+      <div class="well">
+          <h5 class="text-warning">Instinct</h5>
+          <p style="font-size:40px;">{{ period.data.instinct_pct|floatformat:2 }}%</p>
+          <span>Min: <b class="text-danger">{{ period.data.instinct_min }}</b>&nbsp;Max: <b class="text-success">{{ period.data.instinct_max }}</b></span>
+      </div>
+  </div>
+</div>

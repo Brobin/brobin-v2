@@ -28,9 +28,9 @@
                 <tr {% if forloop.counter <= 3 %}class="success"{% endif %}>
                     <th><a href="{% url 'nhl-team' team=team.team.abbreviation %}"><img src="http://cdn.nhle.com/nhl/images/logos/teams/{{ team.team.abbreviation }}_logo.svgz" style="max-height:20px;padding-right:5px"/> {{ team.team.abbreviation }}</a></th>
                     <td>{{ team.gamesPlayed }}</td>
+                    <td>{{ team.leagueRecord.wins }}</td>
                     <td>{{ team.leagueRecord.losses }}</td>
                     <td>{{ team.leagueRecord.ot }}</td>
-                    <td>{{ team.leagueRecord.wins }}</td>
                     <td>{{ team.points }}</td>
                     <td>{{ team.streak.streakCode }}</td>
                 </tr>

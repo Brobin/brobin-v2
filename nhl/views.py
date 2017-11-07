@@ -10,7 +10,7 @@ from .enums import TEAMS
 
 STANDINGS_URL = 'http://statsapi.web.nhl.com/api/v1/standings?expand=standings.record,standings.team,standings.division,standings.conference,team.stats'  # NOQA
 ROSTER_URL = 'https://statsapi.web.nhl.com/api/v1/teams?teamId={0}&expand=team.roster,roster.person,person.stats&stats=statsSingleSeason'  # NOQA
-GAMES_URL = 'http://www.nhl.com/stats/rest/grouped/team/basic/game/teamsummary?cayenneExp=gameDate>="{0}" and gameDate<="{1}" and gameTypeId={2} and teamId={3}&sort=gameId'  # NOQA
+GAMES_URL = 'http://www.nhl.com/stats/rest/team?isAggregate=false&reportType=basic&isGame=true&reportName=teamsummary&cayenneExp=gameDate>="{0}" and gameDate<="{1}" and gameTypeId={2} and teamId={3}&sort=gameId'  # NOQA
 
 
 class NHLView(TemplateView):

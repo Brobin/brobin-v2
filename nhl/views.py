@@ -64,7 +64,7 @@ class NHLTeamView(TemplateView):
     def get_points_chart(self):
         format = '%Y-%m-%dT%H:%M:%S.000Z'
         url = GAMES_URL.format(
-            datetime(2017, 10, 4).strftime(format),
+            datetime(2018, 10, 4).strftime(format),
             datetime.now().strftime(format),
             2, self.team_id
         )

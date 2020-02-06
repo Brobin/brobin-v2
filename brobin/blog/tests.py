@@ -1,7 +1,7 @@
 from django.test import TestCase, Client
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from datetime import date, datetime
 
 from .feeds import BlogPostRssFeed
@@ -44,9 +44,10 @@ class BlogRequestTestCase(TestCase):
         self.client = Client()
         programming = Category.objects.create(title='Programming')
         user = User.objects.create(username='tobin')
-        Post.objects.create(title='test', content='', visible=True,
-                            author=user, category=programming,
-                            created=datetime.now())
+        self.post = Post.objects.create(
+            title='test', content='', visible=True,
+            author=user, category=programming,
+            created=datetime.now())
 
     def test_blog_index(self):
         response = self.client.get(reverse('blog_index'))
@@ -64,8 +65,7 @@ class BlogRequestTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_blog_post(self):
-        url = reverse('blog_post', kwargs={'slug': 'test'})
-        response = self.client.get(url)
+        response = self.client.get(self.post.url)
         self.assertEqual(response.status_code, 200)
 
     def test_blog_search(self):

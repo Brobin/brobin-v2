@@ -2,7 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 from django.utils.html import strip_tags
-from blog.managers import PostManager, VisiblePostManager
+
+from .managers import PostManager, VisiblePostManager
 
 
 class Category(models.Model):

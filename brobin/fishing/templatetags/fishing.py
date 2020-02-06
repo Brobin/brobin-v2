@@ -1,5 +1,5 @@
 from django import template
-from fishing.models import Year
+from ..models import Year
 
 
 register = template.Library()

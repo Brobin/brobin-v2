@@ -1,6 +1,7 @@
 from django.contrib.syndication.views import Feed
 from django.utils.feedgenerator import Atom1Feed
-from blog.models import Post
+
+from .models import Post
 
 
 class BlogPostRssFeed(Feed):

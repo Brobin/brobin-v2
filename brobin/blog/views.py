@@ -2,7 +2,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, get_object_or_404
 from django.views.decorators.cache import cache_page
 
-from blog.models import Category, Post
+from .models import Category, Post
 
 
 def posts(request, filter_kwargs={}, search=None):

@@ -1,5 +1,6 @@
 from django.test import TestCase
-from navigation.models import MenuItem, SubMenuItem
+
+from .models import MenuItem, SubMenuItem
 
 
 class NavigationTestCase(TestCase):

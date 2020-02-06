@@ -38,10 +38,10 @@ INSTALLED_APPS = [
     'compressor',
     'debug_toolbar',
 
-    'blog',
-    'navigation',
-    'fishing',
-    'nhl',
+    'brobin.blog',
+    'brobin.navigation',
+    'brobin.fishing',
+    'brobin.nhl',
 ]
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
@@ -72,7 +72,6 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             os.path.join(BASE_DIR, 'brobin/templates'),
-            os.path.join(BASE_DIR, 'blog/templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {

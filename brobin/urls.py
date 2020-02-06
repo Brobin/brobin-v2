@@ -4,7 +4,7 @@ from django.contrib.sitemaps.views import sitemap
 from django.conf.urls import url, include
 from django.contrib import admin
 
-from blog.sitemaps import BlogPostSitemap, BlogCategorySitemap
+from .blog.sitemaps import BlogPostSitemap, BlogCategorySitemap
 
 
 sitemaps = {
@@ -16,9 +16,9 @@ sitemaps = {
 
 urlpatterns = [
     url(r'^$', views.flatpage, {'url': '/'}),
-    url(r'^blog/', include('blog.urls')),
-    url(r'^fishing/', include('fishing.urls')),
-    url(r'^nhl/', include('nhl.urls')),
+    url(r'^blog/', include('brobin.blog.urls')),
+    url(r'^fishing/', include('brobin.fishing.urls')),
+    url(r'^nhl/', include('brobin.nhl.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps},
         name='django.contrib.sitemaps.views.sitemap'),

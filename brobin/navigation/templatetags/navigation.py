@@ -1,5 +1,5 @@
 from django import template
-from navigation.models import MenuItem, SubMenuItem
+from ..models import MenuItem, SubMenuItem
 
 
 register = template.Library()

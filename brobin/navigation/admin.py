@@ -1,5 +1,6 @@
 from django.contrib import admin
-from navigation.models import MenuItem, SubMenuItem
+
+from .models import MenuItem, SubMenuItem
 
 
 class SubMenuItemInline(admin.TabularInline):

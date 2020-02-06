@@ -3,8 +3,9 @@ from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from datetime import date, datetime
-from blog.feeds import BlogPostRssFeed
-from blog.models import Category, Post
+
+from .feeds import BlogPostRssFeed
+from .models import Category, Post
 
 
 class BlogTestCase(TestCase):

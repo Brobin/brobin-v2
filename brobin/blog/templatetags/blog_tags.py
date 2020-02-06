@@ -1,5 +1,5 @@
 from django import template
-from blog.models import Post, Category
+from ..models import Post, Category
 
 
 register = template.Library()

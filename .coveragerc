@@ -1,0 +1,21 @@
+[run]
+branch = True
+source = brobin
+omit =
+    **/__init__.py
+    brobin/settings.py
+    brobin/test_settings.py
+    brobin/wsgi.py
+    brobin/*/admin.py
+    brobin/*/apps.py
+    brobin/*/urls.py
+    brobin/*/tests.py
+    brobin/*/migrations/*.py
+
+[report]
+exclude_lines =
+    coverage: omit
+    NOQA
+    def __str__
+fail_under = 60
+show_missing = True

@@ -19,83 +19,63 @@
 <body>
 
     <nav class="navbar navbar-default">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                {% load staticfiles %}
-                <a class="navbar-brand" href="/"><span id="brand-name">Brobin</span></a>
-            </div>
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          {% load staticfiles %}
+          <a class="navbar-brand" href="/"><span id="brand-name">Brobin</span></a>
+        </div>
 
-            <div class="collapse navbar-collapse"  id="bs-example-navbar-collapse-1">
-                {% load navigation %}
-                {% build_navigation %}
-                <form class="navbar-form navbar-right" action="{% url 'blog_search' %}">
-                    <div class="form-group">
-                        <input type="text" name="q" class="form-control" x-webkit-speech="">
-                    </div>
-                    <button type="submit" class="btn btn-default">Search</button>
-                </form>
+        <div class="collapse navbar-collapse"  id="bs-example-navbar-collapse-1">
+          {% load navigation %}
+          {% build_navigation %}
+          <form class="navbar-form navbar-right" action="{% url 'blog_search' %}">
+            <div class="form-group">
+              <input type="text" name="q" class="form-control" x-webkit-speech="">
             </div>
+            <button type="submit" class="btn btn-default">Search</button>
+          </form>
         </div>
+      </div>
     </nav>
-    {% if request.path == '/' %}
-    <img src="{% static 'img/brobin.jpg' %}" style="width:100%;margin-top:-20px">
-    <div class="skills-container">
-        <div class="container">
-            <div id="skills">
-                <span class="devicons devicons-python"></span>
-                <span class="devicons devicons-django"></span>
-                <span class="devicons devicons-jquery"></span>
-                <span class="devicons devicons-sass"></span>
-                <span class="devicons devicons-mysql"></span>
-                <span class="devicons devicons-javascript"></span>
-                <span class="devicons devicons-php"></span>
-                <span class="devicons devicons-linux"></span>
-                <span class="devicons devicons-dotnet"></span>
-                <span class="devicons devicons-magento"></span>
-            </div>
-        </div>
-    </div>
-    {% endif %}
 
     <div class="container content">
-        {% for message in messages %}
-        <div class="alert alert-dismissible alert-{{ message.tags }}">
-          <button type="button" class="close" data-dismiss="alert">&times;</button>
-          <p>{{ message|safe }}</p>
-        </div>
-        {% endfor %}
-        {% block content %}
-        {% endblock %}
+      {% for message in messages %}
+      <div class="alert alert-dismissible alert-{{ message.tags }}">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <p>{{ message|safe }}</p>
+      </div>
+      {% endfor %}
+      {% block content %}
+      {% endblock %}
     </div>
 
     <footer class="footer-primary">
+      <div class="skills-container">
         <div class="container">
-            <div class="row">
-               {% load blog_tags %}
-                <div class="col-sm-5 col-xs-12">
-                   {% blog_recent %}
-                </div>
-                <div class="col-sm-4 col-xs-6">
-                    {% blog_categories %}
-                </div>
-                <div class="col-sm-3 col-xs-6">
-                   {% blog_archive %}
-                </div>
-            </div>
+          <div id="skills">
+            <span class="devicons devicons-python"></span>
+            <span class="devicons devicons-django"></span>
+            <span class="devicons devicons-mysql"></span>
+            <span class="devicons devicons-javascript"></span>
+            <span class="devicons devicons-sass"></span>
+            <span class="devicons devicons-dotnet"></span>
+            <span class="devicons devicons-terminal_badge"></span>
+          </div>
         </div>
-    </footer>
+      </div>
+      </footer>
 
     <footer class="footer-secondary">
         <div class="container">
             <div class="row">
                 <div class="col-sm-6 text-left" style="padding-top:10px">
-                    <span>&copy; 2013-2017 Tobin Brown</span>
+                    <span>&copy; 2013-{% now 'Y' %} Tobin Brown</span>
                 </div>
                 <div class="col-sm-6 text-right" id="social-links">
                     {% load staticfiles %}

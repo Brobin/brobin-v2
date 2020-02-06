@@ -1,4 +1,4 @@
-from django.conf.urls import url
+from django.urls import path
 from .views import (
     index,
     year,
@@ -7,7 +7,7 @@ from .views import (
 
 
 urlpatterns = [
-    url(r'^(?P<year>[0-9]{4})$', year, name='fishing-year'),
-    url(r'^add$', AddFishView.as_view(), name='fishing-add'),
-    url(r'^$', index, name='fishing-index'),
+    path('<int:year>/', year, name='fishing-year'),
+    path('add/', AddFishView.as_view(), name='fishing-add'),
+    path('', index, name='fishing-index'),
 ]

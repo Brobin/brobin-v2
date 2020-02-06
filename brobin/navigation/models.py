@@ -40,7 +40,7 @@ class MenuItem(BaseMenuItem):
 
 
 class SubMenuItem(BaseMenuItem):
-    menu = models.ForeignKey(MenuItem)
+    menu = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
 
     def __str__(self):
         return '{0} {1}'.format(self.menu.title, self.title)

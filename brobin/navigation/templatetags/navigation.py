@@ -9,7 +9,7 @@ register = template.Library()
 def build_navigation(context):
     request = context['request']
     items = MenuItem.objects.all()
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         items = items.filter(anonymous_only=False)
     else:
         items = items.filter(login_required=False)

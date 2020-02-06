@@ -1,4 +1,4 @@
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.db import models
 
 
@@ -13,7 +13,7 @@ class BigFish(models.Model):
         (NORTHERN, "Northern"),
         (WALLEYE, "Walleye"),
     )
-    year = models.ForeignKey('Year', related_name="big_fish")
+    year = models.ForeignKey('Year', related_name="big_fish", on_delete=models.CASCADE)
     species = models.IntegerField(choices=SPECIES, default=NORTHERN)
     length = models.FloatField()
     weight = models.FloatField()
@@ -50,7 +50,7 @@ class Day(models.Model):
         (FRIDAY, "Friday"),
     )
     day = models.IntegerField(choices=DAYS)
-    year = models.ForeignKey('Year', related_name="days")
+    year = models.ForeignKey('Year', related_name="days", on_delete=models.CASCADE)
     bass = models.IntegerField(default=0)
     crappie = models.IntegerField(default=0)
     northern = models.IntegerField(default=0)

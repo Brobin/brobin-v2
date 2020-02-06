@@ -6,7 +6,7 @@ from .models import Category, Post
 
 
 def posts(request, filter_kwargs={}, search=None):
-    objects = Post.objects.filter(**filter_kwargs)
+    objects = Post.visible_posts.filter(**filter_kwargs)
     paginator = Paginator(objects, 10)
     try:
         objects = paginator.page(request.GET.get('page'))
@@ -18,17 +18,14 @@ def posts(request, filter_kwargs={}, search=None):
     return render(request, 'blog/blog.html', context)
 
 
-@cache_page(60 * 15)
 def blog(request):
     return posts(request)
 
 
-@cache_page(60 * 15)
 def archive(request, year):
     return posts(request, {'created__year': year})
 
 
-@cache_page(60 * 15)
 def category(request, slug):
     categories = get_object_or_404(Category, slug=slug).get_children()
     return posts(request, {'category__in': categories})
@@ -41,7 +38,6 @@ def search(request):
     return posts(request, search=query)
 
 
-@cache_page(60 * 60)
-def blog_post(request, slug):
+def blog_post(request, year, month, slug):
     post = get_object_or_404(Post, slug=slug)
     return render(request, 'blog/post.html', {'post': post})

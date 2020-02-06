@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'brobin.blog',
     'brobin.navigation',
     'brobin.fishing',
-    'brobin.nhl',
 ]
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
@@ -51,13 +50,12 @@ NOSE_ARGS = [
     '--cover-package=blog,navigation',
 ]
 
-MIDDLEWARE_CLASSES = [
+MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
@@ -137,3 +135,5 @@ COMPRESS_PRECOMPILERS = (
 LIBSASS_OUTPUT_STYLE = 'compressed'
 
 LIBSASS_SOURCE_COMMENTS = False
+
+APPEND_SLASH = True

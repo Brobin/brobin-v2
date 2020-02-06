@@ -1,4 +1,4 @@
-from django.conf.urls import url
+from django.urls import path
 from .feeds import BlogPostRssFeed, BlogPostAtomFeed
 from .views import(
     blog,
@@ -10,11 +10,11 @@ from .views import(
 
 
 urlpatterns = [
-    url(r'^$', blog, name='blog_index'),
-    url(r'^feed/rss/$', BlogPostRssFeed()),
-    url(r'^feed/atom/$', BlogPostAtomFeed()),
-    url(r'^search/$', search, name='blog_search'),
-    url(r'^([a-zA-Z\-]*)/$', category, name='blog_category'),
-    url(r'^archive/([0-9]{4})/$', archive, name='blog_archive'),
-    url(r'^[0-9]{4}/[0-9]{2}/(?P<slug>.*)/$', blog_post, name='blog_post'),
+    path('feed/rss/', BlogPostRssFeed()),
+    path('feed/atom/', BlogPostAtomFeed()),
+    path('search/', search, name='blog_search'),
+    path('<slug>/', category, name='blog_category'),
+    path('archive/<year>/', archive, name='blog_archive'),
+    path('<int:year>/<int:month>/<slug>/', blog_post, name='blog_post'),
+    path('', blog, name='blog_index'),
 ]

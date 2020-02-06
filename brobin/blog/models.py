@@ -9,7 +9,7 @@ from .managers import PostManager, VisiblePostManager
 class Category(models.Model):
     title = models.CharField(max_length=32)
     slug = models.SlugField(default='', blank=True, max_length=64)
-    parent = models.ForeignKey("self", null=True, blank=True)
+    parent = models.ForeignKey("self", null=True, blank=True, on_delete=models.CASCADE)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
@@ -42,8 +42,8 @@ class Post(models.Model):
     updated = models.DateTimeField(auto_now=True)
     visible = models.BooleanField(default=True)
     content = models.TextField()
-    author = models.ForeignKey(User)
-    category = models.ForeignKey(Category)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
     objects = PostManager()
     visible_posts = VisiblePostManager()

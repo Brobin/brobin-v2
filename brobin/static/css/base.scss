@@ -6,7 +6,7 @@ html, body {
 }
 
 .container {
-  max-width: 800px;
+  max-width: 1000px;
 }
 
 
@@ -22,6 +22,13 @@ pre, code {
   overflow: auto;
   word-wrap: normal;
   white-space: pre;
+}
+
+code {
+  margin: 2px;
+  padding: 2px;
+  color: $link;
+  background-color: darken($base, 10%);
 }
 
 hr {
@@ -42,6 +49,7 @@ img {
 
 /** Navbar Styles **/
 .navbar-default {
+  font-size: 16px;
   background-color: $dark-base;
   border-color: $dark-base;
   border-radius: 0;
@@ -49,9 +57,10 @@ img {
     border-color: $dark-base;
   }
   .navbar-brand {
-    color: $text;
+    font-size: 22px;
+    color: $base;
     &:hover {
-      color: $text-hover;
+      color: $base;
     }
   }
   .navbar-toggle {
@@ -63,24 +72,23 @@ img {
   .navbar-nav {
     li {
       .dropdown-menu {
-        border-shadow: none;
         border-top: none;
         background-color: $dark-base;
         li > a:hover {
-          color: $link-hover;
+          color: lighten($base, 10%);
         }
       }
       a {
-        color: $text;
+        color: $base;
       }
       a:hover {
-        color: $text-hover;
+        color: $base;
       }
     }
     .open  {
       a, a:hover, a:focus, a:active {
         background-color: $dark-base;
-        color: $text-hover;
+        color: $base;
       }
     }
   }
@@ -91,9 +99,11 @@ img {
 .footer-primary {
   background: $dark-base;
   padding-bottom: 10px;
+  color: darken($base, 20%);
 }
 
 .footer-secondary {
+  color: darken($base, 20%);
   background: $darker-base;
   padding-bottom: 10px;
   padding-top: 10px;
@@ -103,8 +113,8 @@ img {
 }
 
 .badge {
-  background-color: $darker-base;
-  color: $text;
+  background-color: $link-hover;
+  color: $base;
 }
 
 #social-links {
@@ -119,10 +129,10 @@ img {
   li {
     a {
       border-color: $darker-base;
-      background-color: $dark-base;
+      background-color: $base;
       color: $link-hover;
       &:hover, &:focus, &:active {
-        background-color: lighten($dark-base, 10%);
+        background-color: darken($base, 10%);
         border-color: $darker-base;
         color: $link;
       }
@@ -130,19 +140,21 @@ img {
   }
   .active {
     a {
+      border-color: $darker-base;
       background-color: $link;
-      color: $darker-base;
+      color: $base;
       &:hover {
-        color: $dark-base;
+        color: $base;
+        background-color: $link-hover;
       }
     }
   }
   .disabled {
     a {
-      background-color: $dark-base;
+      background-color: $base;
       border-color: $darker-base;
       &:hover {
-        background-color: $dark-base;
+        background-color: $base;
         border-color: $darker-base;
       }
     }
@@ -169,7 +181,7 @@ input.form-control{
   &.active {
     background-color: $darker-base;
     border-color: $darker-base;
-    color: $text;
+    color: $base;
   }
 }
 

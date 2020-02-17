@@ -1,5 +1,6 @@
 <h2>Recent Posts</h2>
 {% for post in recent %}
-    <a href="{{ post.url }}">{{ post.title }}</a>
-    <br/>
+    <div style="margin-bottom:10px;">
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    </div>
 {% endfor %}

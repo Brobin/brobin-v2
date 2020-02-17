@@ -9,6 +9,10 @@ html, body {
   max-width: 1000px;
 }
 
+.sidebar {
+  background-color: #eee;
+}
+
 
 /** Common Element Styles **/
 p {
@@ -217,4 +221,12 @@ text {
 
 .skills-container > .container {
   padding: 10px 40px 10px 40px;
+}
+
+.prettyprint {
+  font-family: $font-code;
+}
+
+.post {
+  padding-bottom: 20px;
 }

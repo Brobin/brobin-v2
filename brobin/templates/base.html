@@ -44,7 +44,7 @@
       </div>
     </nav>
 
-    <div class="container content">
+    <div class="container content" style="min-height:80vh;">
       {% for message in messages %}
       <div class="alert alert-dismissible alert-{{ message.tags }}">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -69,37 +69,37 @@
           </div>
         </div>
       </div>
-      </footer>
+    </footer>
 
     <footer class="footer-secondary">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6 text-left" style="padding-top:10px">
-                    <span>&copy; 2013-{% now 'Y' %} Tobin Brown</span>
-                </div>
-                <div class="col-sm-6 text-right" id="social-links">
-                    {% load staticfiles %}
-                    <a href="//www.facebook.com/tobinjbrown" target="_blank" title="Tobin on Facebook">
-                        <img src="{% static "img/icons/facebook.png" %}">
-                    </a>
-                    <a href="//twitter.com/RobinWithaT" target="_blank" title="@RobinWithaT">
-                        <img src="{% static "img/icons/twitter.png" %}">
-                    </a>
-                    <a href="//github.com/Brobin" title="Brobin on Github">
-                        <img src="{% static "img/icons/github.png" %}">
-                    </a>
-                    <a href="//www.linkedin.com/pub/tobin-brown/91/393/720" target="_blank" title="LinkedIn Profile">
-                        <img src="{% static "img/icons/linkedin.png" %}">
-                    </a>
-                    <a href="//stackoverflow.com/users/3703613/brobin" target="_blank" title="StackOverflow">
-                        <img src="{% static "img/icons/stackoverflow.png" %}">
-                    </a>
-                    <a href="mailto:tobin@brobin.me" title="Contact Me">
-                        <img src="{% static "img/icons/email.png" %}">
-                    </a>
-                </div>
-            </div>
-        <div>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6 text-left" style="padding-top:10px">
+            <span>&copy; 2013-{% now 'Y' %} Tobin Brown</span>
+          </div>
+          <div class="col-sm-6 text-right" id="social-links">
+            {% load staticfiles %}
+            <a href="//www.facebook.com/tobinjbrown" target="_blank" title="Tobin on Facebook">
+              <img src="{% static "img/icons/facebook.png" %}">
+            </a>
+            <a href="//twitter.com/RobinWithaT" target="_blank" title="@RobinWithaT">
+              <img src="{% static "img/icons/twitter.png" %}">
+            </a>
+            <a href="//github.com/Brobin" title="Brobin on Github">
+              <img src="{% static "img/icons/github.png" %}">
+            </a>
+            <a href="//www.linkedin.com/pub/tobin-brown/91/393/720" target="_blank" title="LinkedIn Profile">
+              <img src="{% static "img/icons/linkedin.png" %}">
+            </a>
+            <a href="//stackoverflow.com/users/3703613/brobin" target="_blank" title="StackOverflow">
+              <img src="{% static "img/icons/stackoverflow.png" %}">
+            </a>
+            <a href="mailto:tobin@brobin.me" title="Contact Me">
+              <img src="{% static "img/icons/email.png" %}">
+            </a>
+          </div>
+        </div>
+      <div>
     </footer>
     <script src="{% static "js/jquery.min.js" %}"></script>
     <script src="{% static "js/bootstrap.min.js" %}"></script>

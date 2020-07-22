@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
 
     'brobin.blog',
+    'brobin.cookbook',
     'brobin.navigation',
     'brobin.fishing',
 ]

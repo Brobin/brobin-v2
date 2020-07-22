@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Cookbook{% endblock %}
+
+{% block content %}
+<h1>Tobin's Cookbook</h1>
+<p>Just some recipes that I like and don't want to have to keep searching and scrolling through Karen's life stories to get to the details. (Yes, I do have one of those recipe card holders, but my writing looks better on a webpage :P)</p>
+<div class="row">
+  <div class="col-md-9">
+    {% for object in object_list %}
+      <div class="post">
+        <h3><a href="{{ object.url }}">{{ object.title }}</a></h3>
+        <span>{{ object.created | date  }}</span>
+        <p>{{ object.notes | safe }}</p>
+      </div>
+    {% endfor %}
+    </div>
+ 
+  <div class="col-md-3 sidebar">
+  </div>
+</div>
+{% endblock %}

@@ -18,6 +18,7 @@ sitemaps = {
 
 urlpatterns = [
     path('blog/', include('brobin.blog.urls')),
+    path('cookbook/', include('brobin.cookbook.urls')),
     path('fishing/', include('brobin.fishing.urls')),
     path('admin/', admin.site.urls),
     path('sitemap\.xml', sitemap, {'sitemaps': sitemaps},

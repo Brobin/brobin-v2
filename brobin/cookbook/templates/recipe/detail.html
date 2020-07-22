@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}{{ object.title }}{% endblock %}
+
+{% block content %}
+<div class="recipe">
+  <h1>{{ object.title }}</h1>
+  <p>{{ object.created }}</p>
+  <p>{{ object.notes }}</p>
+  
+  <div class="row">
+    <div class="col-sm-5">
+      <div class="well">
+        <ul class="ingredient-list">
+          {% for ia in recipe.ingredients.all %}
+          <li>{{ ia }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    <div class="col-sm-7">
+      <ol class="step-list">
+        {% for step in recipe.steps.all %}
+        <li>{{ step.text }}</li>
+        {% endfor %}
+      </ol>
+    </div>
+  </div>
+</div>
+
+
+<br/>
+<br/>
+{% endblock %}

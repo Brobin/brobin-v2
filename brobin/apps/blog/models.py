@@ -43,7 +43,7 @@ class Post(models.Model):
     visible = models.BooleanField(default=True)
     content = models.TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="posts")
 
     objects = PostManager()
     visible_posts = VisiblePostManager()

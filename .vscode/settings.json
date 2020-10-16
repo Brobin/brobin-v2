@@ -4,10 +4,21 @@
     "editor.codeActionsOnSave": {
         "source.fixAll": true
     },
-    "editor.tabSize": 2,
+    "editor.formatOnSave": true,
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
     "files.exclude": {
         "**/__pycache__": true,
         "**/node_modules": true,
         "**/build": true,
+    },
+    "[javascript]": {
+        "editor.tabSize": 2,
+    },
+    "[typescript]": {
+        "editor.tabSize": 2,
+    },
+    "[python]": {
+        "editor.tabSize": 4
     }
 }

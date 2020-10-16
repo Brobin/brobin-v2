@@ -38,10 +38,12 @@ INSTALLED_APPS = [
     'compressor',
     'debug_toolbar',
 
-    'brobin.blog',
-    'brobin.cookbook',
-    'brobin.navigation',
-    'brobin.fishing',
+    'brobin.api',
+    'brobin.apps.blog',
+    'brobin.apps.cookbook',
+    'brobin.apps.navigation',
+    'brobin.apps.fishing',
+    'brobin.website',
 ]
 
 MIDDLEWARE = [
@@ -64,6 +66,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             os.path.join(BASE_DIR, 'brobin/templates'),
+            os.path.join(BASE_DIR, 'brobin/website/build'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -115,6 +118,10 @@ USE_TZ = True
 SITE_ID = 1
 
 DATE_FORMAT = "F j, Y"
+
+STATICFILES_DIRS = [
+    "brobin/website/build/static/"
+]
 
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',

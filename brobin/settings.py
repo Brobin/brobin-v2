@@ -120,7 +120,7 @@ SITE_ID = 1
 DATE_FORMAT = "F j, Y"
 
 STATICFILES_DIRS = [
-    "brobin/website/build/static/"
+    os.path.join(BASE_DIR, 'brobin/website/build/static/')
 ]
 
 STATICFILES_FINDERS = [

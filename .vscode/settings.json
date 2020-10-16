@@ -1,4 +1,13 @@
 {
     "python.linting.pylintEnabled": false,
-    "python.pythonPath": "/home/tobin/Projects/brobin.me/venv/bin/python3.6"
+    "python.pythonPath": "./venv/bin/python3.6",
+    "editor.codeActionsOnSave": {
+        "source.fixAll": true
+    },
+    "editor.tabSize": 2,
+    "files.exclude": {
+        "**/__pycache__": true,
+        "**/node_modules": true,
+        "**/build": true,
+    }
 }

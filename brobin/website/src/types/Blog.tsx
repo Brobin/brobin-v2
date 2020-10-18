@@ -1,4 +1,5 @@
 import { Dayjs } from "dayjs";
+import { StringLiteral } from "typescript";
 
 export type BlogPost = {
   id: number;
@@ -24,6 +25,8 @@ export type BlogArchive = {
 
 export type BlogPostListParams = {
   page: number;
+  year?: string;
+  category?: string;
 };
 
 export type BlogPostListResponse = {
@@ -31,6 +34,12 @@ export type BlogPostListResponse = {
   next: string;
   previous: string;
   results: Array<BlogPost>;
+};
+
+export type BlogPostDetailParams = {
+  year: string;
+  month: string;
+  slug: string;
 };
 
 export type BlogSidebarResponse = {

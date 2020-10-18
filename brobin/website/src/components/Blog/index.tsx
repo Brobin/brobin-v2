@@ -1,4 +1,4 @@
-import BlogPage from "./BlogPage";
+import BlogPage, { BlogArchivePage, BlogCategoryPage } from "./BlogPage";
 import PostPage from "./PostPage";
 
-export { BlogPage, PostPage };
+export { BlogPage, BlogArchivePage, BlogCategoryPage, PostPage };

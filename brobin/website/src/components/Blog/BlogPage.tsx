@@ -1,4 +1,5 @@
 import React, { useCallback, useState } from "react";
+import { RouteComponentProps } from "react-router-dom";
 import { LinearProgress } from "@material-ui/core";
 import Pagination from "@material-ui/lab/Pagination";
 import BlogContainer from "./BlogContainer";
@@ -7,16 +8,28 @@ import { BlogPostListResponse, BlogPost } from "../../types/Blog";
 import { useLoader } from "../../utils/hooks";
 import api from "../../utils/api";
 
-const BlogPage: React.FC = () => {
+type BlogPageProps = {
+  year?: string;
+  category?: string;
+};
+
+const BaseBlogPage: React.FC<BlogPageProps> = (props) => {
+  const year = props.year;
+  const category = props.category;
+
   const [posts, setPosts] = useState<Array<BlogPost>>([]);
   const [count, setCount] = useState<number>();
   const [page, setPage] = useState<number>(1);
 
   const loadBlogPosts = useCallback(async () => {
-    const data: BlogPostListResponse = await api.listPosts({ page });
+    const data: BlogPostListResponse = await api.listPosts({
+      page,
+      year,
+      category,
+    });
     setPosts(data.results);
     setCount(Math.ceil(data.count / 10));
-  }, [page]);
+  }, [page, year, category]);
 
   const { loaded, setLoaded } = useLoader(loadBlogPosts);
 
@@ -42,4 +55,29 @@ const BlogPage: React.FC = () => {
   );
 };
 
+interface ArchiveProps {
+  year: string;
+}
+
+const BlogArchivePage: React.FC<RouteComponentProps<ArchiveProps>> = ({
+  match,
+}) => {
+  const year = match.params.year;
+  return <BaseBlogPage year={year} key={year} />;
+};
+
+interface CategoryProps {
+  category: string;
+}
+
+const BlogCategoryPage: React.FC<RouteComponentProps<CategoryProps>> = ({
+  match,
+}) => {
+  const category = match.params.category;
+  return <BaseBlogPage category={category} key={category} />;
+};
+
+const BlogPage: React.FC = () => <BaseBlogPage key={"base"} />;
+
 export default BlogPage;
+export { BlogArchivePage, BlogCategoryPage };

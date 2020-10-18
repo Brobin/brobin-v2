@@ -1,5 +1,7 @@
 import request from "request-promise-native";
 import {
+  BlogPost,
+  BlogPostDetailParams,
   BlogPostListParams,
   BlogPostListResponse,
   BlogSidebarResponse,
@@ -12,12 +14,23 @@ const baseUrl =
 
 interface ApiInterface {
   listPosts: (params: BlogPostListParams) => Promise<BlogPostListResponse>;
+  getPost: (params: BlogPostDetailParams) => Promise<BlogPost>;
   getBlogSidebar: () => Promise<BlogSidebarResponse>;
 }
 
 class Api implements ApiInterface {
   async listPosts(params: BlogPostListParams): Promise<BlogPostListResponse> {
-    return this.get(`/blog?page=${params.page}`);
+    let route = "/blog";
+    if (params.category) {
+      route = `/blog/${params.category}`;
+    } else if (params.year) {
+      route = `/blog/archive/${params.year}`;
+    }
+    return this.get(`${route}?page=${params.page}`);
+  }
+
+  async getPost(params: BlogPostDetailParams): Promise<BlogPost> {
+    return this.get(`/blog/${params.year}/${params.month}/${params.slug}`);
   }
 
   async getBlogSidebar(): Promise<BlogSidebarResponse> {

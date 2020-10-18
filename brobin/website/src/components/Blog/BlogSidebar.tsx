@@ -6,6 +6,7 @@ import {
   makeStyles,
   Theme,
   Typography,
+  withStyles,
 } from "@material-ui/core";
 import React, { useState } from "react";
 import {
@@ -18,6 +19,17 @@ import api from "../../utils/api";
 import PostLink from "./PostLink";
 import Link from "../Link";
 import { useLoader } from "../../utils/hooks";
+
+const YearBadge = withStyles((theme: Theme) =>
+  createStyles({
+    badge: {
+      right: -15,
+      top: 10,
+      border: `2px solid ${theme.palette.background.paper}`,
+      padding: "0 4px",
+    },
+  })
+)(Badge);
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -71,10 +83,14 @@ const BlogSidebar: React.FC = () => {
         {loaded &&
           archiveYears.map((year) => {
             return (
-              <Link to={`/blog/archive/${year.year}`} key={year.year}>
-                {year.year}&nbsp;
-                <Badge badgeContent={year.posts} color="secondary" />
-              </Link>
+              <>
+                <Link to={`/blog/archive/${year.year}`} key={year.year}>
+                  <YearBadge badgeContent={year.posts} color="secondary">
+                    {year.year}
+                  </YearBadge>
+                </Link>
+                <br />
+              </>
             );
           })}
       </CardContent>

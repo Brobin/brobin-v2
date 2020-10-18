@@ -7,7 +7,7 @@ import {
   Theme,
   Typography,
 } from "@material-ui/core";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   BlogArchive,
   BlogCategory,
@@ -17,6 +17,7 @@ import {
 import api from "../../utils/api";
 import PostLink from "./PostLink";
 import Link from "../Link";
+import { useLoader } from "../../utils/hooks";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -29,30 +30,18 @@ const useStyles = makeStyles((theme: Theme) =>
 const BlogSidebar: React.FC = () => {
   const classes = useStyles();
 
-  const [loaded, setLoaded] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(false);
-
   const [recentPosts, setRecentPosts] = useState<Array<BlogPost>>([]);
   const [categories, setCategories] = useState<Array<BlogCategory>>([]);
   const [archiveYears, setArchiveYears] = useState<Array<BlogArchive>>([]);
 
   const loadSidebar = async () => {
-    setLoading(true);
     const data: BlogSidebarResponse = await api.getBlogSidebar();
-
     setRecentPosts(data.recent);
     setCategories(data.categories);
     setArchiveYears(data.archive);
-
-    setLoaded(true);
-    setLoading(false);
   };
 
-  useEffect(() => {
-    if (!loaded && !loading) {
-      loadSidebar();
-    }
-  }, [loaded, loading]);
+  const { loaded } = useLoader(loadSidebar);
 
   return (
     <Card className={classes.card}>

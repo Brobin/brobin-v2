@@ -8,8 +8,8 @@ import {
   Theme,
   Typography,
 } from "@material-ui/core";
-import PostLink from "./PostLink";
 import { BlogPost } from "../../types/Blog";
+import PostLink from "./PostLink";
 
 interface PostPreviewProps {
   post: BlogPost;
@@ -19,13 +19,13 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     card: {
       margin: theme.spacing(3),
+      marginRight: 0,
     },
   })
 );
 
 const PostPreview: React.FC<PostPreviewProps> = (props) => {
   const classes = useStyles();
-
   return (
     <Card className={classes.card}>
       <CardContent>

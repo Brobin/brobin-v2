@@ -35,6 +35,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     card: {
       margin: theme.spacing(3),
+      marginLeft: 0,
     },
   })
 );
@@ -83,14 +84,14 @@ const BlogSidebar: React.FC = () => {
         {loaded &&
           archiveYears.map((year) => {
             return (
-              <>
-                <Link to={`/blog/archive/${year.year}`} key={year.year}>
+              <div key={year.year}>
+                <Link to={`/blog/archive/${year.year}`}>
                   <YearBadge badgeContent={year.posts} color="secondary">
                     {year.year}
                   </YearBadge>
                 </Link>
                 <br />
-              </>
+              </div>
             );
           })}
       </CardContent>

@@ -5,6 +5,7 @@ import Container from "@material-ui/core/Container";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -22,7 +23,7 @@ const NavBar: React.FC = () => {
           <Typography variant="h6" className={classes.title}>
             Brobin
           </Typography>
-          <Button color="inherit" href="/blog">
+          <Button color="inherit" to="/blog" component={Link}>
             Blog
           </Button>
           <Button color="inherit" href="https://github.com/Brobin">

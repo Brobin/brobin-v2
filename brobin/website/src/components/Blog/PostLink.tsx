@@ -1,6 +1,6 @@
 import React from "react";
 import dayjs from "dayjs";
-import { Link } from "@material-ui/core";
+import Link from "../Link";
 import { BlogPost } from "../../types/Blog";
 
 interface PostLinkProps {
@@ -12,10 +12,7 @@ const PostLink: React.FC<PostLinkProps> = (props) => {
   const date = dayjs(post.created);
 
   return (
-    <Link
-      href={`/blog/${date.format("YYYY/MM")}/${post.slug}`}
-      color="secondary"
-    >
+    <Link to={`/blog/${date.format("YYYY/MM")}/${post.slug}`}>
       {post.title}
     </Link>
   );

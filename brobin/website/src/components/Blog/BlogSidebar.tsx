@@ -3,7 +3,6 @@ import {
   Card,
   CardContent,
   createStyles,
-  Link,
   makeStyles,
   Theme,
   Typography,
@@ -17,6 +16,7 @@ import {
 } from "../../types/Blog";
 import api from "../../utils/api";
 import PostLink from "./PostLink";
+import Link from "../Link";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -60,7 +60,11 @@ const BlogSidebar: React.FC = () => {
         <Typography variant="h6">Recent Posts</Typography>
         {loaded &&
           recentPosts.map((post) => {
-            return <PostLink post={post} key={post.id} />;
+            return (
+              <p key={post.id}>
+                <PostLink post={post} />
+              </p>
+            );
           })}
         <Typography variant="h6">Categories</Typography>
         <p>
@@ -69,9 +73,7 @@ const BlogSidebar: React.FC = () => {
               return (
                 <span key={category.slug}>
                   {index > 0 ? ", " : ""}
-                  <Link href={`/blog/${category.slug}`} color="secondary">
-                    {category.title}
-                  </Link>
+                  <Link to={`/blog/${category.slug}`}>{category.title}</Link>
                 </span>
               );
             })}
@@ -80,10 +82,10 @@ const BlogSidebar: React.FC = () => {
         {loaded &&
           archiveYears.map((year) => {
             return (
-              <p key={year.year}>
+              <Link to={`/blog/archive/${year.year}`} key={year.year}>
                 {year.year}&nbsp;
                 <Badge badgeContent={year.posts} color="secondary" />
-              </p>
+              </Link>
             );
           })}
       </CardContent>

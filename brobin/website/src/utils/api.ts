@@ -20,13 +20,14 @@ interface ApiInterface {
 
 class Api implements ApiInterface {
   async listPosts(params: BlogPostListParams): Promise<BlogPostListResponse> {
-    let route = "/blog";
     if (params.category) {
-      route = `/blog/${params.category}`;
+      return this.get(`/blog/${params.category}?page=${params.page}`);
     } else if (params.year) {
-      route = `/blog/archive/${params.year}`;
+      return this.get(`/blog/archive/${params.year}`);
+    } else if (params.query) {
+      return this.get(`/blog/search?page${params.page}&query=${params.query}`);
     }
-    return this.get(`${route}?page=${params.page}`);
+    return this.get(`/blog?page=${params.page}`);
   }
 
   async getPost(params: BlogPostDetailParams): Promise<BlogPost> {

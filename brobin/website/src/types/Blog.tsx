@@ -25,6 +25,7 @@ export type BlogArchive = {
 
 export type BlogPostListParams = {
   page: number;
+  query?: string;
   year?: string;
   category?: string;
 };

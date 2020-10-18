@@ -1,4 +1,4 @@
-from django.db.models import Count, IntegerField, Value
+from django.db.models import Count, IntegerField, Q, Value
 from django.shortcuts import get_object_or_404
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
@@ -44,6 +44,18 @@ class PostCategoryListView(PostListView):
         category = get_object_or_404(Category, slug=self.kwargs.get('slug'))
         categories = category.get_children()
         return super().get_queryset().filter(category__in=categories)
+
+
+class PostSearchListView(PostListView):
+
+    def get_queryset(self, *args, **kwargs):
+        query = self.request.GET.get('query')
+        return super().get_queryset().filter(
+            Q(content__icontains=query) |
+            Q(title__icontains=query) |
+            Q(category__title__icontains=query) |
+            Q(category__parent__title__icontains=query)
+        )
 
 
 class SidebarAPIView(APIView):

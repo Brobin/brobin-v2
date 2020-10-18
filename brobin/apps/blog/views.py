@@ -1,10 +1,16 @@
+from django.db.models import Count, IntegerField, Value
 from django.shortcuts import get_object_or_404
+from rest_framework.views import APIView
 from rest_framework.generics import ListAPIView, RetrieveAPIView
 from rest_framework.response import Response
 from rest_framework import viewsets
 
 from .models import Category, Post
-from .serializers import CategorySerializer, PostSerializer
+from .serializers import (
+    CategorySerializer,
+    PostSerializer,
+    SidebarSerializer
+)
 
 
 class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
@@ -35,3 +41,19 @@ class PostCategoryListView(PostListView):
         category = get_object_or_404(Category, slug=self.kwargs.get('slug'))
         categories = category.get_children()
         return super().get_queryset().filter(category__in=categories)
+
+
+class SidebarAPIView(APIView):
+
+    def get_archive(self, *args):
+        return Post.visible_posts.values('created__year').annotate(
+            posts=Count('created__year')
+        ).order_by('-created__year')
+
+    def get(self, request, *args, **kwargs):
+        serializer = SidebarSerializer({
+            'recent': Post.visible_posts.all()[:5],
+            'categories': Category.objects.order_by('title'),
+            'archive': self.get_archive()
+        })
+        return Response(serializer.data)

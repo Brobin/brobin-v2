@@ -1,19 +1,27 @@
 import request from "request-promise-native";
-import { BlogPostListParams, BlogPostList } from "../types/Blog";
+import {
+  BlogPostListParams,
+  BlogPostListResponse,
+  BlogSidebarResponse,
+} from "../types/Blog";
 
-console.log(process.env.NODE_ENV);
 const baseUrl =
   process.env.NODE_ENV === "production"
     ? `${window.location.origin}/api`
     : "http://127.0.0.1:8000/api";
 
 interface ApiInterface {
-  listPosts: (params: BlogPostListParams) => Promise<BlogPostList>;
+  listPosts: (params: BlogPostListParams) => Promise<BlogPostListResponse>;
+  getBlogSidebar: () => Promise<BlogSidebarResponse>;
 }
 
 class Api implements ApiInterface {
-  async listPosts(params: BlogPostListParams): Promise<BlogPostList> {
+  async listPosts(params: BlogPostListParams): Promise<BlogPostListResponse> {
     return this.get(`/blog?page=${params.page}`);
+  }
+
+  async getBlogSidebar(): Promise<BlogSidebarResponse> {
+    return this.get("/blog/sidebar");
   }
 
   async post(route: string, params = {}) {
@@ -34,7 +42,6 @@ class Api implements ApiInterface {
       headers: { "Content-Type": "application/json" },
     };
     const response = await request(requestOptions);
-    console.log(response);
     if (parseJson) {
       return JSON.parse(response);
     }

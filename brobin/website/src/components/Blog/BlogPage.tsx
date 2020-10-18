@@ -3,7 +3,7 @@ import { LinearProgress } from "@material-ui/core";
 import Pagination from "@material-ui/lab/Pagination";
 import BlogContainer from "./BlogContainer";
 import PostPreview from "./PostPreview";
-import { BlogPostList, BlogPost } from "../../types/Blog";
+import { BlogPostListResponse, BlogPost } from "../../types/Blog";
 import api from "../../utils/api";
 
 const BlogPage: React.FC = () => {
@@ -16,7 +16,7 @@ const BlogPage: React.FC = () => {
 
   const loadPage = useCallback(async () => {
     setLoading(true);
-    const data: BlogPostList = await api.listPosts({ page });
+    const data: BlogPostListResponse = await api.listPosts({ page });
 
     setPosts(data.results);
     setCount(Math.ceil(data.count / 10));

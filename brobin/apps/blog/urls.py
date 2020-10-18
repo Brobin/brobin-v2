@@ -1,20 +1,15 @@
 from django.urls import path
-from .feeds import BlogPostRssFeed, BlogPostAtomFeed
-from .views import(
-    blog,
-    search,
-    category,
-    archive,
-    blog_post
+
+from .views import (
+    PostListView,
+    PostArchiveListView,
+    PostCategoryListView,
+    PostDetailView
 )
 
-
 urlpatterns = [
-    path('feed/rss/', BlogPostRssFeed()),
-    path('feed/atom/', BlogPostAtomFeed()),
-    path('search/', search, name='blog_search'),
-    path('<slug>/', category, name='blog_category'),
-    path('archive/<year>/', archive, name='blog_archive'),
-    path('<int:year>/<int:month>/<slug>/', blog_post, name='blog_post'),
-    path('', blog, name='blog_index'),
+    path('blog/<int:year>/<int:month>/<str:slug>', PostDetailView.as_view()),
+    path('blog/<str:slug>', PostCategoryListView.as_view()),
+    path('blog/archive/<int:year>', PostArchiveListView.as_view()),
+    path('blog', PostListView.as_view())
 ]

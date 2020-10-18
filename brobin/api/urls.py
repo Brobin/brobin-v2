@@ -1,13 +1,9 @@
 
+from django.urls import path
 from rest_framework.routers import DefaultRouter
 
-from brobin.apps.blog.views import CategoryViewSet, PostViewSet
+from brobin.apps.blog.urls import urlpatterns as blog_urls
 
 
-router = DefaultRouter()
-
-router.register('blog/categories', CategoryViewSet, basename='category')
-router.register('blog/posts', PostViewSet, basename='post')
-
-urlpatterns = router.urls
+urlpatterns = blog_urls
 

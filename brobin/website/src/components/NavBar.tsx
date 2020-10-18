@@ -58,7 +58,16 @@ const NavBar: React.FC = () => {
     <AppBar position="static">
       <Container>
         <Toolbar>
-          <Typography variant="h6" className={classes.title}>
+          <Typography
+            variant="h6"
+            className={classes.title}
+            to="/"
+            component={Link}
+            color="inherit"
+            style={{
+              textDecoration: "none",
+            }}
+          >
             Brobin
           </Typography>
           <div className={classes.search}>

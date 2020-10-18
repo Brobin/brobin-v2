@@ -48,7 +48,7 @@ const BaseBlogPage: React.FC<BlogPageProps> = (props) => {
     });
     setPosts(data.results);
     setCount(Math.ceil(data.count / 10));
-  }, [page, year, category]);
+  }, [page, query, year, category]);
 
   const { loaded, setLoaded } = useLoader(loadBlogPosts);
 

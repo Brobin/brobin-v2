@@ -4,7 +4,7 @@ module.exports = {
   },
   parser: "@typescript-eslint/parser",
   parserOptions: {
-    project: "./tsconfig.eslint.json",
+    project: "../tsconfig.eslint.json",
   },
   extends: [
     "airbnb-base",
@@ -28,7 +28,7 @@ module.exports = {
       { exceptAfterSingleLine: true },
     ],
     "no-use-before-define": "off",
-    "@typescript-eslint/no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": ["warn"],
   },
   settings: {
     "import/resolver": {
@@ -37,7 +37,7 @@ module.exports = {
       },
     },
     "import/parsers": {
-      "@typescript-eslint/parser": [".ts"],
+      "@typescript-eslint/parser": [".ts", ".tsx"],
     },
   },
 };

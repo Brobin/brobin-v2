@@ -1,5 +1,8 @@
 from django.db.models import Count, IntegerField, Value
 from django.shortcuts import get_object_or_404
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
+
 from rest_framework.views import APIView
 from rest_framework.generics import ListAPIView, RetrieveAPIView
 from rest_framework.response import Response
@@ -50,6 +53,7 @@ class SidebarAPIView(APIView):
             posts=Count('created__year')
         ).order_by('-created__year')
 
+    @method_decorator(cache_page(60*60*24))
     def get(self, request, *args, **kwargs):
         serializer = SidebarSerializer({
             'recent': Post.visible_posts.all()[:5],

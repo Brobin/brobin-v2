@@ -22,8 +22,12 @@ const NavBar: React.FC = () => {
           <Typography variant="h6" className={classes.title}>
             Brobin
           </Typography>
-          <Button color="inherit">Blog</Button>
-          <Button color="inherit">Projects</Button>
+          <Button color="inherit" href="/blog">
+            Blog
+          </Button>
+          <Button color="inherit" href="https://github.com/Brobin">
+            Projects
+          </Button>
           <Button color="inherit">Cookbook</Button>
         </Toolbar>
       </Container>

@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect, useState } from "react";
-import request from "request-promise-native";
 import { LinearProgress } from "@material-ui/core";
 import Pagination from "@material-ui/lab/Pagination";
 import BlogContainer from "./BlogContainer";
 import PostPreview from "./PostPreview";
-import { BlogListResponse, BlogPost } from "../../types/Blog";
+import { BlogPostList, BlogPost } from "../../types/Blog";
+import api from "../../utils/api";
 
 const BlogPage: React.FC = () => {
   const [loaded, setLoaded] = useState<boolean>(false);
@@ -16,13 +16,7 @@ const BlogPage: React.FC = () => {
 
   const loadPage = useCallback(async () => {
     setLoading(true);
-    const requestOptions = {
-      url: `http://127.0.0.1:8000/api/blog/posts/?page=${page}`,
-      mehtod: "GET",
-      headers: { "Content-Type": "application/json" },
-    };
-    const response = await request(requestOptions);
-    const data: BlogListResponse = JSON.parse(response);
+    const data: BlogPostList = await api.listPosts({ page });
 
     setPosts(data.results);
     setCount(Math.ceil(data.count / 10));

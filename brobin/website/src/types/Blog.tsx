@@ -12,7 +12,11 @@ export type BlogPost = {
   author: number;
 };
 
-export type BlogListResponse = {
+export type BlogPostListParams = {
+  page: number;
+};
+
+export type BlogPostList = {
   count: number;
   next: string;
   previous: string;

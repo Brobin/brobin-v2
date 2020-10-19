@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'brobin.api',
     'brobin.apps.blog',
     'brobin.apps.cookbook',
-    'brobin.apps.navigation',
     'brobin.apps.fishing',
     'brobin.website',
 ]

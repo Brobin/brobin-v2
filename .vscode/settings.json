@@ -1,6 +1,6 @@
 {
   "python.linting.pylintEnabled": false,
-  "python.pythonPath": "./venv/bin/python3.6",
+  "python.pythonPath": "venv/bin/python",
   "editor.codeActionsOnSave": {
       "source.fixAll": true
   },

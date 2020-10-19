@@ -14,6 +14,7 @@ import PostPreview from "./PostPreview";
 import { BlogPostListResponse, BlogPost } from "../../types/Blog";
 import { useLoader } from "../../utils/hooks";
 import api from "../../utils/api";
+import { startCase } from "../../utils";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -103,7 +104,7 @@ const BlogCategoryPage: React.FC<RouteComponentProps<{ category: string }>> = ({
     <BaseBlogPage
       category={category}
       key={category}
-      heading={`Posts in ${category}`}
+      heading={`Posts in ${startCase(category)}`}
     />
   );
 };
@@ -114,7 +115,7 @@ const BlogSearchPage: React.FC = () => {
     <BaseBlogPage
       query={query || undefined}
       key={query}
-      heading={`Search results for ${query}`}
+      heading={`Search results for "${query}"`}
     />
   );
 };

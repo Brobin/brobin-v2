@@ -1,3 +1,5 @@
+import React, { useState } from "react";
+import dayjs from "dayjs";
 import {
   Badge,
   Card,
@@ -8,7 +10,6 @@ import {
   Typography,
   withStyles,
 } from "@material-ui/core";
-import React, { useState } from "react";
 import {
   BlogArchive,
   BlogCategory,
@@ -86,8 +87,8 @@ const BlogSidebar: React.FC = () => {
             return (
               <div key={year.year}>
                 <Link to={`/blog/archive/${year.year}`}>
-                  <YearBadge badgeContent={year.posts} color="secondary">
-                    {year.year}
+                  <YearBadge badgeContent={year.posts} color="primary">
+                    <span color="secondary">{year.year}</span>
                   </YearBadge>
                 </Link>
                 <br />

@@ -1,11 +1,11 @@
 from django.urls import path
 from .views import(
-    RecipeList,
-    RecipeDetail,
+    RecipeDetailView,
+    RecipeListView,
 )
 
 
 urlpatterns = [
-    path('<slug>/', RecipeDetail.as_view(), name='recipe'),
-    path('', RecipeList.as_view(), name='cookbook'),
+    path('<str:slug>', RecipeDetailView.as_view()),
+    path('', RecipeListView.as_view()),
 ]

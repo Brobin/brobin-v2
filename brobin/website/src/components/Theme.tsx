@@ -1,15 +1,15 @@
-import React from 'react';
-import { ThemeProvider, createMuiTheme } from '@material-ui/core';
+import React from "react";
+import { ThemeProvider, createMuiTheme } from "@material-ui/core";
 
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#212121'
+      main: "#1b1b1b",
     },
     secondary: {
-      main: '#507391'
-    }
-  }
+      main: "#a11919",
+    },
+  },
 });
 
 const Theme: React.FC = ({ children }) => {

@@ -10,10 +10,10 @@ from .views import (
 )
 
 urlpatterns = [
-    path('blog/search', PostSearchListView.as_view()),
-    path('blog/sidebar', SidebarAPIView.as_view()),
-    path('blog/archive/<int:year>', PostArchiveListView.as_view()),
-    path('blog/<int:year>/<int:month>/<str:slug>', PostDetailView.as_view()),
-    path('blog/<str:slug>', PostCategoryListView.as_view()),
-    path('blog', PostListView.as_view())
+    path('search', PostSearchListView.as_view()),
+    path('sidebar', SidebarAPIView.as_view()),
+    path('archive/<int:year>', PostArchiveListView.as_view()),
+    path('<int:year>/<int:month>/<str:slug>', PostDetailView.as_view()),
+    path('<str:slug>', PostCategoryListView.as_view()),
+    path('', PostListView.as_view())
 ]

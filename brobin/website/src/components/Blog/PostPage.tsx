@@ -20,6 +20,10 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: theme.spacing(3),
       marginRight: 0,
     },
+    hr: {
+      border: "none",
+      borderBottom: "1px solid #888",
+    },
   })
 );
 
@@ -58,7 +62,7 @@ const PostPage: React.FC<RouteComponentProps<BlogPostDetailParams>> = ({
             <>
               <Typography variant="h5">{post.title}</Typography>
               <p>{dayjs(post.created).format("MMMM D, YYYY")}</p>
-              <hr />
+              <hr className={classes.hr} />
             </>
           )}
           <span id="post-content" />

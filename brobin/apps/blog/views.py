@@ -10,15 +10,9 @@ from rest_framework import viewsets
 
 from .models import Category, Post
 from .serializers import (
-    CategorySerializer,
     PostSerializer,
     SidebarSerializer
 )
-
-
-class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
-    serializer_class = CategorySerializer
-    queryset = Category.objects.all()
 
 
 class PostDetailView(RetrieveAPIView):
@@ -26,6 +20,7 @@ class PostDetailView(RetrieveAPIView):
 
     def get_object(self, *args, **kwargs):
         return get_object_or_404(Post, slug=self.kwargs.get('slug'))
+
 
 class PostListView(ListAPIView):
     serializer_class = PostSerializer
@@ -69,7 +64,7 @@ class SidebarAPIView(APIView):
     def get(self, request, *args, **kwargs):
         serializer = SidebarSerializer({
             'recent': Post.visible_posts.all()[:5],
-            'categories': Category.objects.order_by('title'),
+            'categories': Category.objects.annotate(cnt=Count('posts')).filter(cnt__gt=0),
             'archive': self.get_archive()
         })
         return Response(serializer.data)

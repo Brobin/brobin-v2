@@ -6,6 +6,7 @@ import {
   BlogPostListResponse,
   BlogSidebarResponse,
 } from "../types/Blog";
+import { RecipeListResponse } from "../types/Cookbook";
 
 const baseUrl =
   process.env.NODE_ENV === "production"
@@ -16,6 +17,7 @@ interface ApiInterface {
   listPosts: (params: BlogPostListParams) => Promise<BlogPostListResponse>;
   getPost: (params: BlogPostDetailParams) => Promise<BlogPost>;
   getBlogSidebar: () => Promise<BlogSidebarResponse>;
+  listRecipes: () => Promise<RecipeListResponse>;
 }
 
 class Api implements ApiInterface {
@@ -27,7 +29,7 @@ class Api implements ApiInterface {
     } else if (params.query) {
       return this.get(`/blog/search?page${params.page}&query=${params.query}`);
     }
-    return this.get(`/blog?page=${params.page}`);
+    return this.get(`/blog/?page=${params.page}`);
   }
 
   async getPost(params: BlogPostDetailParams): Promise<BlogPost> {
@@ -36,6 +38,10 @@ class Api implements ApiInterface {
 
   async getBlogSidebar(): Promise<BlogSidebarResponse> {
     return this.get("/blog/sidebar");
+  }
+
+  async listRecipes(): Promise<RecipeListResponse> {
+    return this.get(`/cookbook/`);
   }
 
   async post(route: string, params = {}) {

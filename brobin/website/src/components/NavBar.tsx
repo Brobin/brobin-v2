@@ -91,7 +91,9 @@ const NavBar: React.FC = () => {
           <Button color="inherit" href="https://github.com/Brobin">
             Projects
           </Button>
-          <Button color="inherit">Cookbook</Button>
+          <Button color="inherit" to="/cookbook" component={Link}>
+            Cookbook
+          </Button>
         </Toolbar>
       </Container>
     </AppBar>

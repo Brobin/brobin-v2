@@ -1,5 +1,4 @@
 import { Dayjs } from "dayjs";
-import { StringLiteral } from "typescript";
 
 export type BlogPost = {
   id: number;

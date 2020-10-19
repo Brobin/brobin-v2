@@ -8,25 +8,30 @@ import BlogPage, {
 } from "./Blog/BlogPage";
 import CookbookPage from "./Cookbook/CookbookPage";
 import RecipePage from "./Cookbook/RecipePage";
+import ErrorBoundary from "./Error/ErrorBoundary";
+import { Error404 } from "./Error/Error";
 
 const Routes: React.FC = () => {
   return (
-    <Switch>
-      <Route
-        exact
-        path="/blog/:year/:month/:slug"
-        render={(props) => {
-          return <PostPage {...props} key={props.match.params.slug} />;
-        }}
-      />
-      <Route exact path="/blog/archive/:year" component={BlogArchivePage} />
-      <Route exact path="/blog/search" component={BlogSearchPage} />
-      <Route exact path="/blog/:category" component={BlogCategoryPage} />
-      <Route exact path="/blog" component={BlogPage} />
-      <Route exact path="/cookbook" component={CookbookPage} />
-      <Route exact path="/recipe/:slug" component={RecipePage} />
-      <Route path="/" component={BlogPage} />
-    </Switch>
+    <ErrorBoundary>
+      <Switch>
+        <Route
+          exact
+          path="/blog/:year/:month/:slug"
+          render={(props) => {
+            return <PostPage {...props} key={props.match.params.slug} />;
+          }}
+        />
+        <Route exact path="/blog/archive/:year" component={BlogArchivePage} />
+        <Route exact path="/blog/search" component={BlogSearchPage} />
+        <Route exact path="/blog/:category" component={BlogCategoryPage} />
+        <Route exact path="/blog" component={BlogPage} />
+        <Route exact path="/cookbook" component={CookbookPage} />
+        <Route exact path="/recipe/:slug" component={RecipePage} />
+        <Route exact path="/" component={BlogPage} />
+        <Route component={Error404} />
+      </Switch>
+    </ErrorBoundary>
   );
 };
 

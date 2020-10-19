@@ -5,6 +5,7 @@ import {
   useEffect,
   useState,
 } from "react";
+import { useHistory } from "react-router-dom";
 
 interface IUseLoader {
   loaded: boolean;
@@ -14,6 +15,7 @@ interface IUseLoader {
 }
 
 export const useLoader = (loadFunction: Function): IUseLoader => {
+  const history = useHistory();
   /**
    * useState implementation that takes an async function and tells
    * you when its running (loading) and complete (loaded). Defaults
@@ -24,11 +26,17 @@ export const useLoader = (loadFunction: Function): IUseLoader => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const load = useCallback(async () => {
-    setLoading(true);
-    await loadFunction();
-    setLoaded(true);
-    setLoading(false);
-  }, [loadFunction]);
+    try {
+      setLoading(true);
+      await loadFunction();
+      setLoaded(true);
+      setLoading(false);
+    } catch (err) {
+      history.replace(history.location.pathname, {
+        errorStatusCode: err.statusCode || 500,
+      });
+    }
+  }, [loadFunction, history]);
 
   useEffect(() => {
     // Use dual booleans in case the loadFunction takes a long time.

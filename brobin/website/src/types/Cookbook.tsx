@@ -31,3 +31,7 @@ export type RecipeListResponse = {
   previous: string;
   results: Array<Recipe>;
 };
+
+export type RecipeDetailParams = {
+  slug: string;
+};

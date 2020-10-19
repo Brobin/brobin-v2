@@ -1,4 +1,4 @@
-import { Grid, LinearProgress } from "@material-ui/core";
+import { Container, Grid, LinearProgress } from "@material-ui/core";
 import React, { useState } from "react";
 import { Recipe, RecipeListResponse } from "../../types/Cookbook";
 import api from "../../utils/api";
@@ -18,13 +18,15 @@ const CookbookPage: React.FC = () => {
   return !loaded ? (
     <LinearProgress color="secondary" />
   ) : (
-    <Grid container>
-      <Grid item sm={8}>
-        {recipes.map((recipe) => {
-          return <RecipePreview recipe={recipe} />;
-        })}
+    <Container>
+      <Grid container>
+        <Grid item sm={8}>
+          {recipes.map((recipe) => {
+            return <RecipePreview recipe={recipe} />;
+          })}
+        </Grid>
       </Grid>
-    </Grid>
+    </Container>
   );
 };
 

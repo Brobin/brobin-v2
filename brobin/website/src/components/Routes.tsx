@@ -7,6 +7,7 @@ import BlogPage, {
   BlogSearchPage,
 } from "./Blog/BlogPage";
 import CookbookPage from "./Cookbook/CookbookPage";
+import RecipePage from "./Cookbook/RecipePage";
 
 const Routes: React.FC = () => {
   return (
@@ -23,6 +24,7 @@ const Routes: React.FC = () => {
       <Route exact path="/blog/:category" component={BlogCategoryPage} />
       <Route exact path="/blog" component={BlogPage} />
       <Route exact path="/cookbook" component={CookbookPage} />
+      <Route exact path="/recipe/:slug" component={RecipePage} />
       <Route path="/" component={BlogPage} />
     </Switch>
   );

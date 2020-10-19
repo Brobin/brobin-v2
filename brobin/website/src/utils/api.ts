@@ -6,7 +6,11 @@ import {
   BlogPostListResponse,
   BlogSidebarResponse,
 } from "../types/Blog";
-import { RecipeListResponse } from "../types/Cookbook";
+import {
+  Recipe,
+  RecipeListResponse,
+  RecipeDetailParams,
+} from "../types/Cookbook";
 
 const baseUrl =
   process.env.NODE_ENV === "production"
@@ -18,6 +22,7 @@ interface ApiInterface {
   getPost: (params: BlogPostDetailParams) => Promise<BlogPost>;
   getBlogSidebar: () => Promise<BlogSidebarResponse>;
   listRecipes: () => Promise<RecipeListResponse>;
+  getRecipe: (arams: RecipeDetailParams) => Promise<Recipe>;
 }
 
 class Api implements ApiInterface {
@@ -42,6 +47,10 @@ class Api implements ApiInterface {
 
   async listRecipes(): Promise<RecipeListResponse> {
     return this.get(`/cookbook/`);
+  }
+
+  async getRecipe(params: RecipeDetailParams): Promise<Recipe> {
+    return this.get(`/cookbook/${params.slug}`);
   }
 
   async post(route: string, params = {}) {

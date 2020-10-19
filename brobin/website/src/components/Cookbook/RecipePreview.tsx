@@ -29,9 +29,9 @@ const RecipePreview: React.FC<RecipePreviewProps> = (props) => {
     <Card className={classes.card}>
       <CardContent>
         <Typography variant="h6">
-          <Link to="">{props.recipe.title}</Link>
+          <Link to={`/recipe/${props.recipe.slug}`}>{props.recipe.title}</Link>
         </Typography>
-        <Typography variant="body2">{props.recipe.notes}</Typography>
+        <p>{props.recipe.notes}</p>
       </CardContent>
     </Card>
   );

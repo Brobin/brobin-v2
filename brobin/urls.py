@@ -6,9 +6,20 @@ from django.urls import path, include, re_path
 from django.views.generic import TemplateView
 
 
+from .apps.blog.sitemaps import BlogPostSitemap, BlogCategorySitemap
+
+
+sitemaps = {
+    'blog_post': BlogPostSitemap,
+    'blog_category': BlogCategorySitemap,
+}
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('brobin.api.urls')),
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
+         name='django.contrib.sitemaps.views.sitemap'),
     re_path(r'^(?:.*)/?$', TemplateView.as_view(template_name='index.html')),
 ]
 

@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 type BlogPageProps = {
+  heading?: string;
   query?: string;
   year?: string;
   category?: string;
@@ -56,19 +57,9 @@ const BaseBlogPage: React.FC<BlogPageProps> = (props) => {
     <LinearProgress color="secondary" />
   ) : (
     <BlogContainer>
-      {year && (
+      {props.heading && (
         <Typography variant="h5" className={classes.heading}>
-          Posts from {year}
-        </Typography>
-      )}
-      {category && (
-        <Typography variant="h5" className={classes.heading}>
-          Posts in "{category}"
-        </Typography>
-      )}
-      {query && (
-        <Typography variant="h5" className={classes.heading}>
-          Search results for "{query}"
+          {props.heading}
         </Typography>
       )}
       {posts.map((post, index) => {
@@ -97,35 +88,35 @@ const BaseBlogPage: React.FC<BlogPageProps> = (props) => {
   );
 };
 
-interface ArchiveProps {
-  year: string;
-}
-
-const BlogArchivePage: React.FC<RouteComponentProps<ArchiveProps>> = ({
+const BlogArchivePage: React.FC<RouteComponentProps<{ year: string }>> = ({
   match,
 }) => {
   const year = match.params.year;
-  return <BaseBlogPage year={year} key={year} />;
+  return <BaseBlogPage year={year} key={year} heading={`Posts from ${year}`} />;
 };
 
-interface CategoryProps {
-  category: string;
-}
-
-const BlogCategoryPage: React.FC<RouteComponentProps<CategoryProps>> = ({
+const BlogCategoryPage: React.FC<RouteComponentProps<{ category: string }>> = ({
   match,
 }) => {
   const category = match.params.category;
-  return <BaseBlogPage category={category} key={category} />;
+  return (
+    <BaseBlogPage
+      category={category}
+      key={category}
+      heading={`Posts in ${category}`}
+    />
+  );
 };
 
-interface SearchProps {
-  category: string;
-}
-
-const BlogSearchPage: React.FC<RouteComponentProps<SearchProps>> = () => {
+const BlogSearchPage: React.FC = () => {
   const query = new URLSearchParams(window.location.search).get("q");
-  return <BaseBlogPage query={query || undefined} key={query} />;
+  return (
+    <BaseBlogPage
+      query={query || undefined}
+      key={query}
+      heading={`Search results for ${query}`}
+    />
+  );
 };
 
 const BlogPage: React.FC = () => <BaseBlogPage key={"base"} />;

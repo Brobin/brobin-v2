@@ -11,6 +11,10 @@ import {
   RecipeListResponse,
   RecipeDetailParams,
 } from "../types/Cookbook";
+import {
+  FishingStatsResponse,
+  FishingYearStatsResponse,
+} from "../types/Fishing";
 
 const baseUrl =
   process.env.NODE_ENV === "production"
@@ -22,7 +26,9 @@ interface ApiInterface {
   getPost: (params: BlogPostDetailParams) => Promise<BlogPost>;
   getBlogSidebar: () => Promise<BlogSidebarResponse>;
   listRecipes: () => Promise<RecipeListResponse>;
-  getRecipe: (arams: RecipeDetailParams) => Promise<Recipe>;
+  getRecipe: (params: RecipeDetailParams) => Promise<Recipe>;
+  getFishingStats: () => Promise<FishingStatsResponse>;
+  getFishingYearStats: (year: number) => Promise<FishingYearStatsResponse>;
 }
 
 class Api implements ApiInterface {
@@ -51,6 +57,14 @@ class Api implements ApiInterface {
 
   async getRecipe(params: RecipeDetailParams): Promise<Recipe> {
     return this.get(`/cookbook/${params.slug}`);
+  }
+
+  async getFishingStats(): Promise<FishingStatsResponse> {
+    return this.get(`/fishing/`);
+  }
+
+  async getFishingYearStats(year: number): Promise<FishingYearStatsResponse> {
+    return this.get(`/fishing/${year}/`);
   }
 
   async post(route: string, params = {}) {

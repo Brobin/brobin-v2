@@ -1,13 +1,8 @@
 from django.urls import path
-from .views import (
-    index,
-    year,
-    AddFishView
-)
+from .views import FishingStatsView, FishingYearView
 
 
 urlpatterns = [
-    path('<int:year>/', year, name='fishing-year'),
-    path('add/', AddFishView.as_view(), name='fishing-add'),
-    path('', index, name='fishing-index'),
+    path('<int:year>/', FishingYearView.as_view()),
+    path('', FishingStatsView.as_view()),
 ]

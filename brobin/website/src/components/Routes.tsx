@@ -8,6 +8,7 @@ import BlogPage, {
 } from "./Blog/BlogPage";
 import CookbookPage from "./Cookbook/CookbookPage";
 import RecipePage from "./Cookbook/RecipePage";
+import StatsPage from "./Fishing/StatsPage";
 import ErrorBoundary from "./Error/ErrorBoundary";
 import { Error404 } from "./Error/Error";
 
@@ -28,6 +29,7 @@ const Routes: React.FC = () => {
         <Route exact path="/blog" component={BlogPage} />
         <Route exact path="/cookbook" component={CookbookPage} />
         <Route exact path="/recipe/:slug" component={RecipePage} />
+        <Route exact path="/fishing" component={StatsPage} />
         <Route exact path="/" component={BlogPage} />
         <Route component={Error404} />
       </Switch>

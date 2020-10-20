@@ -122,7 +122,7 @@ SITE_ID = 1
 DATE_FORMAT = "F j, Y"
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'brobin/website/build/static/')
+    os.path.join(BASE_DIR, 'brobin/website/build/static')
 ]
 
 STATICFILES_FINDERS = [
@@ -157,3 +157,6 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:8000"
 ]
+
+from .local import *
+

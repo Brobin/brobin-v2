@@ -1,3 +1,5 @@
+from collections import Counter
+
 from django.db.models import Count, IntegerField, Q, Value
 from django.shortcuts import get_object_or_404
 from django.utils.decorators import method_decorator
@@ -56,11 +58,12 @@ class PostSearchListView(PostListView):
 class SidebarAPIView(APIView):
 
     def get_archive(self, *args):
-        return Post.visible_posts.values('created__year').annotate(
-            posts=Count('created__year')
-        ).order_by('-created__year')
+        posts = Post.visible_posts.values('created')
+        counter = Counter([p['created'].year for p in posts])
+        print(counter)
+        return sorted(counter.items(), reverse=True)
 
-    @method_decorator(cache_page(60*60*24))
+    @ method_decorator(cache_page(60*60*24))
     def get(self, request, *args, **kwargs):
         serializer = SidebarSerializer({
             'recent': Post.visible_posts.all()[:5],

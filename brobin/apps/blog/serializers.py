@@ -31,14 +31,16 @@ class SidebarPostSerializer(PostSerializer):
 
 class ArchiveSerializer(serializers.Serializer):
     year = serializers.SerializerMethodField()
-    posts = serializers.IntegerField()
+    posts = serializers.SerializerMethodField()
 
     def get_year(self, obj):
-        return obj.get('created__year')
+        return obj[0]
+
+    def get_posts(self, obj):
+        return obj[1]
 
 
 class SidebarSerializer(serializers.Serializer):
     recent = SidebarPostSerializer(many=True)
     categories = CategorySerializer(many=True)
     archive = ArchiveSerializer(many=True)
-

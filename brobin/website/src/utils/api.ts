@@ -34,21 +34,21 @@ interface ApiInterface {
 class Api implements ApiInterface {
   async listPosts(params: BlogPostListParams): Promise<BlogPostListResponse> {
     if (params.category) {
-      return this.get(`/blog/${params.category}?page=${params.page}`);
+      return this.get(`/blog/${params.category}/?page=${params.page}`);
     } else if (params.year) {
-      return this.get(`/blog/archive/${params.year}`);
+      return this.get(`/blog/archive/${params.year}/`);
     } else if (params.query) {
-      return this.get(`/blog/search?page${params.page}&query=${params.query}`);
+      return this.get(`/blog/search/?page${params.page}&query=${params.query}`);
     }
     return this.get(`/blog/?page=${params.page}`);
   }
 
   async getPost(params: BlogPostDetailParams): Promise<BlogPost> {
-    return this.get(`/blog/${params.year}/${params.month}/${params.slug}`);
+    return this.get(`/blog/${params.year}/${params.month}/${params.slug}/`);
   }
 
   async getBlogSidebar(): Promise<BlogSidebarResponse> {
-    return this.get("/blog/sidebar");
+    return this.get("/blog/sidebar/");
   }
 
   async listRecipes(): Promise<RecipeListResponse> {

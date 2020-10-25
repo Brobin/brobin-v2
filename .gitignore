@@ -14,4 +14,3 @@ static/CACHE
 .coverage
 .logs
 local.py
-static

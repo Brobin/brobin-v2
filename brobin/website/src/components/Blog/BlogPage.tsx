@@ -13,7 +13,7 @@ import BlogContainer from "./BlogContainer";
 import PostPreview from "./PostPreview";
 import { BlogPostListResponse, BlogPost } from "../../types/Blog";
 import { useLoader } from "../../utils/hooks";
-import api from "../../utils/api";
+import * as api from "../../utils/api";
 import { startCase } from "../../utils";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -63,7 +63,7 @@ const BaseBlogPage: React.FC<BlogPageProps> = (props) => {
           {props.heading}
         </Typography>
       )}
-      {posts.map((post, index) => {
+      {posts.map((post, _index) => {
         return <PostPreview key={post.id} post={post} />;
       })}
 
@@ -78,8 +78,8 @@ const BaseBlogPage: React.FC<BlogPageProps> = (props) => {
           <Pagination
             count={count}
             page={page}
-            onChange={(event, page: number) => {
-              setPage(page);
+            onChange={(_event, newPage: number): void => {
+              setPage(newPage);
               setLoaded(false);
             }}
           />
@@ -120,7 +120,7 @@ const BlogSearchPage: React.FC = () => {
   );
 };
 
-const BlogPage: React.FC = () => <BaseBlogPage key={"base"} />;
+const BlogPage: React.FC = () => <BaseBlogPage key="base" />;
 
 export default BlogPage;
 export { BlogArchivePage, BlogCategoryPage, BlogSearchPage };

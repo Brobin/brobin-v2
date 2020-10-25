@@ -15,7 +15,7 @@ import {
   BlogPost,
   BlogSidebarResponse,
 } from "../../types/Blog";
-import api from "../../utils/api";
+import * as api from "../../utils/api";
 import PostLink from "./PostLink";
 import Link from "../Link";
 import { useLoader } from "../../utils/hooks";
@@ -47,7 +47,7 @@ const BlogSidebar: React.FC = () => {
   const [categories, setCategories] = useState<Array<BlogCategory>>([]);
   const [archiveYears, setArchiveYears] = useState<Array<BlogArchive>>([]);
 
-  const loadSidebar = async () => {
+  const loadSidebar = async (): Promise<void> => {
     const data: BlogSidebarResponse = await api.getBlogSidebar();
     setRecentPosts(data.recent);
     setCategories(data.categories);

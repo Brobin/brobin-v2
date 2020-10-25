@@ -12,7 +12,7 @@ import {
 import React, { useState } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { Recipe, RecipeDetailParams } from "../../types/Cookbook";
-import api from "../../utils/api";
+import * as api from "../../utils/api";
 import { useLoader } from "../../utils/hooks";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -31,9 +31,9 @@ const RecipePage: React.FC<RouteComponentProps<RecipeDetailParams>> = ({
 
   const [recipe, setRecipe] = useState<Recipe>();
 
-  const loadRecipe = async () => {
-    const _recipe = await api.getRecipe({ slug });
-    setRecipe(_recipe);
+  const loadRecipe = async (): Prmise<void> => {
+    const thisRecipe = await api.getRecipe({ slug });
+    setRecipe(thisRecipe);
   };
 
   const { loaded } = useLoader(loadRecipe);

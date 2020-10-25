@@ -7,14 +7,14 @@ import {
 } from "react";
 import { useHistory } from "react-router-dom";
 
-interface IUseLoader {
+interface UseLoader {
   loaded: boolean;
   setLoaded: Dispatch<SetStateAction<boolean>>;
   loading: boolean;
   setLoading: Dispatch<SetStateAction<boolean>>;
 }
 
-export const useLoader = (loadFunction: Function): IUseLoader => {
+export const useLoader = (loadFunction: Function): UseLoader => {
   const history = useHistory();
   /**
    * useState implementation that takes an async function and tells
@@ -47,4 +47,8 @@ export const useLoader = (loadFunction: Function): IUseLoader => {
   }, [loaded, loading, load]);
 
   return { loaded, setLoaded, loading, setLoading };
+};
+
+export default {
+  useLoader,
 };

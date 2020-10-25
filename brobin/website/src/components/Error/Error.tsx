@@ -18,21 +18,21 @@ const Error: React.FC<ErrorProps> = ({ code, message }) => (
 );
 
 export const Error400: React.FC = () => (
-  <Error code={404} message={"Bad Request"} />
+  <Error code={404} message="Bad Request" />
 );
 
 export const Error401: React.FC = () => (
-  <Error code={404} message={"Unauthorized"} />
+  <Error code={404} message="Unauthorized" />
 );
 
 export const Error403: React.FC = () => (
-  <Error code={404} message={"Forbidden"} />
+  <Error code={404} message="Forbidden" />
 );
 
 export const Error404: React.FC = () => (
-  <Error code={404} message={"Page Not Found"} />
+  <Error code={404} message="Page Not Found" />
 );
 
 export const Error500: React.FC = () => (
-  <Error code={500} message={"Internal Server Error"} />
+  <Error code={500} message="Internal Server Error" />
 );

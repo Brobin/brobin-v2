@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import dayjs from "dayjs";
 import { RouteComponentProps } from "react-router-dom";
-import BlogContainer from "./BlogContainer";
-import { BlogPost, BlogPostDetailParams } from "../../types/Blog";
-import api from "../../utils/api";
-import { useLoader } from "../../utils/hooks";
 import {
   Card,
   CardContent,
@@ -13,6 +9,10 @@ import {
   Theme,
   Typography,
 } from "@material-ui/core";
+import BlogContainer from "./BlogContainer";
+import { BlogPost, BlogPostDetailParams } from "../../types/Blog";
+import * as api from "../../utils/api";
+import { useLoader } from "../../utils/hooks";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -33,17 +33,17 @@ const PostPage: React.FC<RouteComponentProps<BlogPostDetailParams>> = ({
   const classes = useStyles();
   const [post, setPost] = useState<BlogPost>();
 
-  const loadPost = async () => {
-    const _post: BlogPost = await api.getPost(match.params);
-    setPost(_post);
+  const loadPost = async (): Promise<void> => {
+    const thisPost: BlogPost = await api.getPost(match.params);
+    setPost(thisPost);
 
     // Yes, this is all quite janky, but we have to do this in
     // order to run the code prettifier on the blog posts.
-    var postContent = document.getElementById("post-content");
-    if (postContent && _post) {
-      postContent.innerHTML = _post.content;
+    const postContent = document.getElementById("post-content");
+    if (postContent && thisPost) {
+      postContent.innerHTML = thisPost.content;
 
-      var addScript = document.createElement("script");
+      const addScript = document.createElement("script");
       addScript.setAttribute(
         "src",
         "//cdnjs.cloudflare.com/ajax/libs/prettify/r298/run_prettify.min.js"

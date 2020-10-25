@@ -1,14 +1,14 @@
 import { Container, Grid, LinearProgress } from "@material-ui/core";
 import React, { useState } from "react";
 import { Recipe, RecipeListResponse } from "../../types/Cookbook";
-import api from "../../utils/api";
+import * as api from "../../utils/api";
 import { useLoader } from "../../utils/hooks";
 import RecipePreview from "./RecipePreview";
 
 const CookbookPage: React.FC = () => {
   const [recipes, setRecipes] = useState<Array<Recipe>>([]);
 
-  const loadRecipes = async () => {
+  const loadRecipes = async (): Promise<void> => {
     const data: RecipeListResponse = await api.listRecipes();
     setRecipes(data.results);
   };

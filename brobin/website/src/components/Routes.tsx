@@ -19,7 +19,7 @@ const Routes: React.FC = () => {
         <Route
           exact
           path="/blog/:year/:month/:slug"
-          render={(props) => {
+          render={(props): React.ReactNode => {
             return <PostPage {...props} key={props.match.params.slug} />;
           }}
         />

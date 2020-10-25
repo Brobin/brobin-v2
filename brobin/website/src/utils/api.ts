@@ -21,77 +21,54 @@ const baseUrl =
     ? `${window.location.origin}/api`
     : "http://127.0.0.1:8000/api";
 
-interface ApiInterface {
-  listPosts: (params: BlogPostListParams) => Promise<BlogPostListResponse>;
-  getPost: (params: BlogPostDetailParams) => Promise<BlogPost>;
-  getBlogSidebar: () => Promise<BlogSidebarResponse>;
-  listRecipes: () => Promise<RecipeListResponse>;
-  getRecipe: (params: RecipeDetailParams) => Promise<Recipe>;
-  getFishingStats: () => Promise<FishingStatsResponse>;
-  getFishingYearStats: (year: number) => Promise<FishingYearStatsResponse>;
-}
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const get = async (route: string): Promise<any> => {
+  const requestOptions = {
+    url: `${baseUrl}${route}`,
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  };
+  const response = await request(requestOptions);
+  return JSON.parse(response);
+};
 
-class Api implements ApiInterface {
-  async listPosts(params: BlogPostListParams): Promise<BlogPostListResponse> {
-    if (params.category) {
-      return this.get(`/blog/${params.category}/?page=${params.page}`);
-    } else if (params.year) {
-      return this.get(`/blog/archive/${params.year}/`);
-    } else if (params.query) {
-      return this.get(`/blog/search/?page${params.page}&query=${params.query}`);
-    }
-    return this.get(`/blog/?page=${params.page}`);
+export const listPosts = async (
+  params: BlogPostListParams
+): Promise<BlogPostListResponse> => {
+  if (params.category) {
+    return get(`/blog/${params.category}/?page=${params.page}`);
   }
-
-  async getPost(params: BlogPostDetailParams): Promise<BlogPost> {
-    return this.get(`/blog/${params.year}/${params.month}/${params.slug}/`);
+  if (params.year) {
+    return get(`/blog/archive/${params.year}/`);
   }
-
-  async getBlogSidebar(): Promise<BlogSidebarResponse> {
-    return this.get("/blog/sidebar/");
+  if (params.query) {
+    return get(`/blog/search/?page${params.page}&query=${params.query}`);
   }
+  return get(`/blog/?page=${params.page}`);
+};
 
-  async listRecipes(): Promise<RecipeListResponse> {
-    return this.get(`/cookbook/`);
-  }
+export const getPost = (params: BlogPostDetailParams): Promise<BlogPost> => {
+  return get(`/blog/${params.year}/${params.month}/${params.slug}/`);
+};
 
-  async getRecipe(params: RecipeDetailParams): Promise<Recipe> {
-    return this.get(`/cookbook/${params.slug}`);
-  }
+export const getBlogSidebar = (): Promise<BlogSidebarResponse> => {
+  return get("/blog/sidebar/");
+};
 
-  async getFishingStats(): Promise<FishingStatsResponse> {
-    return this.get(`/fishing/`);
-  }
+export const listRecipes = (): Promise<RecipeListResponse> => {
+  return get(`/cookbook/`);
+};
 
-  async getFishingYearStats(year: number): Promise<FishingYearStatsResponse> {
-    return this.get(`/fishing/${year}/`);
-  }
+export const getRecipe = (params: RecipeDetailParams): Promise<Recipe> => {
+  return get(`/cookbook/${params.slug}`);
+};
 
-  async post(route: string, params = {}) {
-    const requestOptions = {
-      url: `${baseUrl}${route}`,
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(params),
-    };
-    const response = await request(requestOptions);
-    return JSON.parse(response);
-  }
+export const getFishingStats = (): Promise<FishingStatsResponse> => {
+  return get(`/fishing/`);
+};
 
-  async get(route: string, parseJson = true) {
-    const requestOptions = {
-      url: `${baseUrl}${route}`,
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    };
-    const response = await request(requestOptions);
-    if (parseJson) {
-      return JSON.parse(response);
-    }
-    return response;
-  }
-}
-
-const api = new Api();
-
-export default api;
+export const getFishingYearStats = (
+  year: number
+): Promise<FishingYearStatsResponse> => {
+  return get(`/fishing/${year}/`);
+};

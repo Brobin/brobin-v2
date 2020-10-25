@@ -2,6 +2,13 @@
   "name": "website",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "start": "NODE_ENV=development react-scripts start",
+    "build": "NODE_ENV=production react-scripts build",
+    "test": "NODE_ENV=test react-scripts test",
+    "lint": "eslint src --ext .ts,.tsx",
+    "eject": "react-scripts eject"
+  },
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
@@ -25,21 +32,32 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
-    "@typescript-eslint/eslint-plugin": "^4.0.1",
-    "@typescript-eslint/parser": "^4.0.1",
-    "eslint": "^6.6.0",
-    "eslint-config-airbnb-base": "^14.2.0",
-    "eslint-plugin-prettier": "^3.1.4",
+    "@typescript-eslint/eslint-plugin": "2.34.0",
+    "@typescript-eslint/parser": "2.34.0",
+    "eslint": "6.8.0",
+    "eslint-config-airbnb-typescript-prettier": "3.1.0",
+    "eslint-plugin-react": "7.21.5",
     "prettier": "^2.1.2"
   },
-  "scripts": {
-    "start": "NODE_ENV=development react-scripts start",
-    "build": "NODE_ENV=production react-scripts build",
-    "test": "NODE_ENV=test react-scripts test",
-    "eject": "react-scripts eject"
-  },
   "eslintConfig": {
-    "extends": "react-app"
+    "root": true,
+    "extends": [
+      "react-app",
+      "airbnb-typescript-prettier"
+    ],
+    "rules": {
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        {
+          "argsIgnorePattern": "^_.+",
+          "varsIgnorePattern": "^_.+"
+        }
+      ],
+      "prefer-destructuring": "off",
+      "react/jsx-props-no-spreading": "off",
+      "react/destructuring-assignment": "off",
+      "react/require-default-props": "off"
+    }
   },
   "browserslist": {
     "production": [

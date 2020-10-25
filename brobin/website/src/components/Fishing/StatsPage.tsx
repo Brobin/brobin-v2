@@ -1,13 +1,14 @@
+/* eslint-disable react/no-danger */
 import { Container, Typography } from "@material-ui/core";
 import React, { useState } from "react";
 import { FishingStatsResponse } from "../../types/Fishing";
-import api from "../../utils/api";
+import * as api from "../../utils/api";
 import { useLoader } from "../../utils/hooks";
 
 const StatsPage: React.FC = () => {
   const [graphs, setGraphs] = useState<FishingStatsResponse>();
 
-  const loadStats = async () => {
+  const loadStats = async (): Promise<void> => {
     const data = await api.getFishingStats();
     setGraphs(data);
   };

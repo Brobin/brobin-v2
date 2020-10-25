@@ -4,6 +4,7 @@
   "editor.codeActionsOnSave": {
       "source.fixAll": true
   },
+  "eslint.workingDirectories": ["brobin/website"],
   "editor.detectIndentation": false,
   "editor.formatOnSave": true,
   "files.trimTrailingWhitespace": true,

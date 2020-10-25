@@ -1,4 +1,0 @@
-<h2>Categories</h2>
-{% for cat in categories %}
-    <a href="{{ cat.url }}">{{ cat.title }}</a>{% if not forloop.last %}, {% endif %}
-{% endfor %}

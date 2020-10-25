@@ -1,30 +1,26 @@
 from django.contrib import admin
 from django.contrib.flatpages import views
-from django.contrib.flatpages.sitemaps import FlatPageSitemap
 from django.contrib.sitemaps.views import sitemap
 from django.conf import settings
-from django.urls import path, include
+from django.urls import path, include, re_path
+from django.views.generic import TemplateView
 
-from .blog.sitemaps import BlogPostSitemap, BlogCategorySitemap
-from .blog.views import blog 
+
+from .apps.blog.sitemaps import BlogPostSitemap, BlogCategorySitemap
 
 
 sitemaps = {
-    'page': FlatPageSitemap,
     'blog_post': BlogPostSitemap,
     'blog_category': BlogCategorySitemap,
 }
 
 
 urlpatterns = [
-    path('blog/', include('brobin.blog.urls')),
-    path('cookbook/', include('brobin.cookbook.urls')),
-    path('fishing/', include('brobin.fishing.urls')),
     path('admin/', admin.site.urls),
-    path('sitemap\.xml', sitemap, {'sitemaps': sitemaps},
-        name='django.contrib.sitemaps.views.sitemap'),
-    path('<url>/', views.flatpage),
-    path('', blog),
+    path('api/', include('brobin.api.urls')),
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
+         name='django.contrib.sitemaps.views.sitemap'),
+    re_path(r'^(?:.*)/?$', TemplateView.as_view(template_name='index.html')),
 ]
 
 

@@ -1,0 +1,73 @@
+from collections import Counter
+
+from django.db.models import Count, IntegerField, Q, Value
+from django.shortcuts import get_object_or_404
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
+
+from rest_framework.views import APIView
+from rest_framework.generics import ListAPIView, RetrieveAPIView
+from rest_framework.response import Response
+from rest_framework import viewsets
+
+from .models import Category, Post
+from .serializers import (
+    PostSerializer,
+    SidebarSerializer
+)
+
+
+class PostDetailView(RetrieveAPIView):
+    serializer_class = PostSerializer
+
+    def get_object(self, *args, **kwargs):
+        return get_object_or_404(Post, slug=self.kwargs.get('slug'))
+
+
+class PostListView(ListAPIView):
+    serializer_class = PostSerializer
+    queryset = Post.visible_posts.all()
+
+
+class PostArchiveListView(PostListView):
+
+    def get_queryset(self, *args, **kwargs):
+        return super().get_queryset().filter(created__year=self.kwargs.get('year'))
+
+
+class PostCategoryListView(PostListView):
+
+    def get_queryset(self, *args, **kwargs):
+        category = get_object_or_404(Category, slug=self.kwargs.get('slug'))
+        categories = category.get_children()
+        return super().get_queryset().filter(category__in=categories)
+
+
+class PostSearchListView(PostListView):
+
+    def get_queryset(self, *args, **kwargs):
+        query = self.request.GET.get('query')
+        return super().get_queryset().filter(
+            Q(content__icontains=query) |
+            Q(title__icontains=query) |
+            Q(category__title__icontains=query) |
+            Q(category__parent__title__icontains=query)
+        )
+
+
+class SidebarAPIView(APIView):
+
+    def get_archive(self, *args):
+        posts = Post.visible_posts.values('created')
+        counter = Counter([p['created'].year for p in posts])
+        print(counter)
+        return sorted(counter.items(), reverse=True)
+
+    @ method_decorator(cache_page(60*60*24))
+    def get(self, request, *args, **kwargs):
+        serializer = SidebarSerializer({
+            'recent': Post.visible_posts.all()[:5],
+            'categories': Category.objects.annotate(cnt=Count('posts')).filter(cnt__gt=0),
+            'archive': self.get_archive()
+        })
+        return Response(serializer.data)

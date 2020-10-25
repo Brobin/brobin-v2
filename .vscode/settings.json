@@ -1,4 +1,29 @@
 {
-    "python.linting.pylintEnabled": false,
-    "python.pythonPath": "/home/tobin/Projects/brobin.me/venv/bin/python3.6"
+  "python.linting.pylintEnabled": false,
+  "python.pythonPath": "venv/bin/python",
+  "editor.codeActionsOnSave": {
+      "source.fixAll": true
+  },
+  "eslint.workingDirectories": ["brobin/website"],
+  "editor.detectIndentation": false,
+  "editor.formatOnSave": true,
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "files.exclude": {
+      "**/__pycache__": true,
+      "**/node_modules": true,
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.detectIndentation": false,
+    "editor.tabSize": 2,
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.detectIndentation": false,
+    "editor.tabSize": 2,
+  },
+  "[python]": {
+    "editor.tabSize": 4
+  }
 }

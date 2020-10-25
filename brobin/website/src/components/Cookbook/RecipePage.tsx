@@ -31,7 +31,7 @@ const RecipePage: React.FC<RouteComponentProps<RecipeDetailParams>> = ({
 
   const [recipe, setRecipe] = useState<Recipe>();
 
-  const loadRecipe = async (): Prmise<void> => {
+  const loadRecipe = async (): Promise<void> => {
     const thisRecipe = await api.getRecipe({ slug });
     setRecipe(thisRecipe);
   };

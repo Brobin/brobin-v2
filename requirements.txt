@@ -3,7 +3,7 @@ chardet==3.0.4
 Django==2.2.13
 django-appconf==1.0.3
 django-compressor==2.4
-django-debug-toolbar==2.2
+django-debug-toolbar==2.2.1
 django-libsass==0.8
 django-nose==1.4.6
 idna==2.8
